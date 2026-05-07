@@ -236,5 +236,3 @@ function buildSession(cards: Card[], progress: Progress): string[] {
   return [...first, ...rest];
 }
 
-// avoid unused import warning if toast not used elsewhere
-void toast;
