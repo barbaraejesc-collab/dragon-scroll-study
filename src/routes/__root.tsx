@@ -72,14 +72,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "中文学习 — Estudo de Mandarim" },
+      { name: "description", content: "Sistema pessoal de estudo de mandarim com flashcards, repetição espaçada e progresso." },
+      { property: "og:title", content: "中文学习 — Estudo de Mandarim" },
+      { property: "og:description", content: "Aprenda mandarim com flashcards inteligentes." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -108,12 +106,18 @@ function RootShell({ children }: { children: React.ReactNode }) {
   );
 }
 
+import { AuthProvider } from "@/lib/auth-context";
+import { SonnerHost } from "@/components/ui/sonner-host";
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <AuthProvider>
+        <Outlet />
+        <SonnerHost />
+      </AuthProvider>
     </QueryClientProvider>
   );
 }
