@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, Check, X, RotateCw } from "lucide-react";
-import { toast } from "sonner";
+
 
 export const Route = createFileRoute("/flashcards")({
   component: FlashcardsPage,
