@@ -14,7 +14,110 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      card_progress: {
+        Row: {
+          card_id: string
+          correct_count: number
+          id: string
+          last_seen_at: string | null
+          updated_at: string
+          user_id: string
+          wrong_count: number
+        }
+        Insert: {
+          card_id: string
+          correct_count?: number
+          id?: string
+          last_seen_at?: string | null
+          updated_at?: string
+          user_id: string
+          wrong_count?: number
+        }
+        Update: {
+          card_id?: string
+          correct_count?: number
+          id?: string
+          last_seen_at?: string | null
+          updated_at?: string
+          user_id?: string
+          wrong_count?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "card_progress_card_id_fkey"
+            columns: ["card_id"]
+            isOneToOne: false
+            referencedRelation: "cards"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cards: {
+        Row: {
+          category: string
+          created_at: string
+          hanzi: string
+          id: string
+          meaning: string
+          pinyin: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          hanzi: string
+          id?: string
+          meaning: string
+          pinyin: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          hanzi?: string
+          id?: string
+          meaning?: string
+          pinyin?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          id: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
+      study_sessions: {
+        Row: {
+          created_at: string
+          id: string
+          study_date: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          study_date?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          study_date?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
