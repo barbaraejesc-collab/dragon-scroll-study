@@ -117,16 +117,6 @@ function StatCard({ icon, label, value, highlight }: { icon: React.ReactNode; la
   );
 }
 
-function ModuleSoon({ hanzi, title, wide }: { hanzi: string; title: string; wide?: boolean }) {
-  return (
-    <div className={`bg-card border border-border rounded-2xl p-6 opacity-60 ${wide ? "md:col-span-3" : ""}`}>
-      <div className="hanzi text-4xl text-muted-foreground mb-2">{hanzi}</div>
-      <h3 className="font-serif text-lg">{title}</h3>
-      <p className="text-xs text-muted-foreground mt-1">Em breve · Fase 2</p>
-    </div>
-  );
-}
-
 function computeStreak(dates: string[]): number {
   if (dates.length === 0) return 0;
   const days = new Set(dates);
