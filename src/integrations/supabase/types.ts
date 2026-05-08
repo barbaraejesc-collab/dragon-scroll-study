@@ -79,6 +79,39 @@ export type Database = {
         }
         Relationships: []
       }
+      curiosidades_favoritas: {
+        Row: {
+          conteudo: string
+          created_at: string
+          hanzi: string | null
+          id: string
+          pinyin: string | null
+          significado: string | null
+          titulo: string
+          user_id: string
+        }
+        Insert: {
+          conteudo: string
+          created_at?: string
+          hanzi?: string | null
+          id?: string
+          pinyin?: string | null
+          significado?: string | null
+          titulo: string
+          user_id: string
+        }
+        Update: {
+          conteudo?: string
+          created_at?: string
+          hanzi?: string | null
+          id?: string
+          pinyin?: string | null
+          significado?: string | null
+          titulo?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
