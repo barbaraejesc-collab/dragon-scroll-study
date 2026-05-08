@@ -82,12 +82,24 @@ function Dashboard() {
             <p className="text-cream/80 text-sm">Repetição espaçada com todos os ideogramas embaralhados</p>
           </div>
         </Link>
-        <ModuleSoon hanzi="话" title="Conversa com IA" />
-        <ModuleSoon hanzi="文" title="Curiosidades da China" wide />
-      </section>
-    </main>
-  );
-}
+        <Link to="/conversa" className="group">
+          <div className="bg-card border border-border rounded-2xl p-6 h-full transition-all group-hover:border-accent/50 group-hover:shadow-[var(--shadow-gold)]">
+            <div className="hanzi text-5xl text-accent mb-3">话</div>
+            <h3 className="text-xl font-serif text-cream mb-1">Conversa com 小红</h3>
+            <p className="text-muted-foreground text-xs">Pratique mandarim com uma amiga IA de Xangai</p>
+          </div>
+        </Link>
+        <Link to="/curiosidades" className="md:col-span-3 group">
+          <div className="bg-card border border-border rounded-2xl p-6 transition-all group-hover:border-accent/50">
+            <div className="flex items-center gap-4">
+              <div className="hanzi text-5xl text-accent">文</div>
+              <div>
+                <h3 className="text-xl font-serif text-cream mb-1">Curiosidades da China</h3>
+                <p className="text-muted-foreground text-xs">Descubra histórias, cultura e ideogramas</p>
+              </div>
+            </div>
+          </div>
+        </Link>
 
 function StatCard({ icon, label, value, highlight }: { icon: React.ReactNode; label: string; value: string; highlight?: boolean }) {
   return (
