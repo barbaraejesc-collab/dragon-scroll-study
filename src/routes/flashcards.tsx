@@ -148,7 +148,6 @@ function FlashcardView({
         <div className="flip-card-inner">
           {/* Frente */}
           <div className="flip-face bg-gradient-to-br from-card to-secondary border border-border rounded-3xl shadow-[var(--shadow-elegant)] flex flex-col">
-            <div className="p-5 text-xs uppercase tracking-widest text-accent/70">{card.category}</div>
             <div className="flex-1 flex items-center justify-center p-6">
               <span className="hanzi text-[22vw] md:text-[180px] leading-none text-cream drop-shadow-[0_0_40px_rgba(255,215,0,0.1)]">
                 {card.hanzi}
@@ -201,38 +200,14 @@ function FinishedView({ total, onRestart }: { total: number; onRestart: () => vo
   );
 }
 
-// Spaced repetition simples: cards com mais erros aparecem com peso maior
-function buildSession(cards: Card[], progress: Progress): string[] {
-  const weighted: string[] = [];
-  for (const c of cards) {
-    const p = progress[c.id] ?? { correct: 0, wrong: 0 };
-    const seen = p.correct + p.wrong;
-    // weight: novos = 1, errados = 1 + min(3, wrong - correct)
-    let weight = 1;
-    if (seen > 0) {
-      const diff = p.wrong - p.correct;
-      if (diff > 0) weight = 1 + Math.min(3, diff);
-    }
-    for (let i = 0; i < weight; i++) weighted.push(c.id);
-  }
-  // shuffle (Fisher-Yates)
-  for (let i = weighted.length - 1; i > 0; i--) {
+// Embaralha todos os cards uma única vez (Fisher-Yates).
+// Cada card aparece exatamente uma vez por sessão.
+function buildSession(cards: Card[], _progress: Progress): string[] {
+  const ids = cards.map((c) => c.id);
+  for (let i = ids.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [weighted[i], weighted[j]] = [weighted[j], weighted[i]];
+    [ids[i], ids[j]] = [ids[j], ids[i]];
   }
-  // ensure every card appears at least once before repeats by putting one of each first
-  const seen = new Set<string>();
-  const first: string[] = [];
-  const rest: string[] = [];
-  for (const id of weighted) {
-    if (!seen.has(id)) { first.push(id); seen.add(id); }
-    else rest.push(id);
-  }
-  // shuffle first too
-  for (let i = first.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [first[i], first[j]] = [first[j], first[i]];
-  }
-  return [...first, ...rest];
+  return ids;
 }
 
