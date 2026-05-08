@@ -13,6 +13,8 @@ import { Route as FlashcardsRouteImport } from './routes/flashcards'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiCuriosidadeRouteImport } from './routes/api/curiosidade'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 
 const FlashcardsRoute = FlashcardsRouteImport.update({
   id: '/flashcards',
@@ -34,18 +36,32 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiCuriosidadeRoute = ApiCuriosidadeRouteImport.update({
+  id: '/api/curiosidade',
+  path: '/api/curiosidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/flashcards': typeof FlashcardsRoute
+  '/api/chat': typeof ApiChatRoute
+  '/api/curiosidade': typeof ApiCuriosidadeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/flashcards': typeof FlashcardsRoute
+  '/api/chat': typeof ApiChatRoute
+  '/api/curiosidade': typeof ApiCuriosidadeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +69,34 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/flashcards': typeof FlashcardsRoute
+  '/api/chat': typeof ApiChatRoute
+  '/api/curiosidade': typeof ApiCuriosidadeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/dashboard' | '/flashcards'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/flashcards'
+    | '/api/chat'
+    | '/api/curiosidade'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/dashboard' | '/flashcards'
-  id: '__root__' | '/' | '/auth' | '/dashboard' | '/flashcards'
+  to:
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/flashcards'
+    | '/api/chat'
+    | '/api/curiosidade'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/flashcards'
+    | '/api/chat'
+    | '/api/curiosidade'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +104,8 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   DashboardRoute: typeof DashboardRoute
   FlashcardsRoute: typeof FlashcardsRoute
+  ApiChatRoute: typeof ApiChatRoute
+  ApiCuriosidadeRoute: typeof ApiCuriosidadeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +138,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/curiosidade': {
+      id: '/api/curiosidade'
+      path: '/api/curiosidade'
+      fullPath: '/api/curiosidade'
+      preLoaderRoute: typeof ApiCuriosidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +160,8 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   DashboardRoute: DashboardRoute,
   FlashcardsRoute: FlashcardsRoute,
+  ApiChatRoute: ApiChatRoute,
+  ApiCuriosidadeRoute: ApiCuriosidadeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
