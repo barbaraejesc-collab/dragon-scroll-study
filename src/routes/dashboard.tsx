@@ -100,6 +100,10 @@ function Dashboard() {
             </div>
           </div>
         </Link>
+      </section>
+    </main>
+  );
+}
 
 function StatCard({ icon, label, value, highlight }: { icon: React.ReactNode; label: string; value: string; highlight?: boolean }) {
   return (
