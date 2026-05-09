@@ -58,9 +58,9 @@ function ConversaPage() {
         <ConversationContent>
           {messages.length === 0 && (
             <div className="text-center py-16 px-6">
-              <div className="hanzi text-6xl text-accent mb-4">你好！</div>
+              <div className="hanzi text-6xl text-accent mb-4">开始！</div>
               <p className="text-muted-foreground italic">
-                Diga "olá" ou pergunte qualquer coisa para começar
+                Diga "começar" para a 小红 propor o primeiro exercício usando seu vocabulário.
               </p>
             </div>
           )}
