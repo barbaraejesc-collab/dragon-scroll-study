@@ -50,7 +50,7 @@ function ConversaPage() {
         </Link>
         <div className="text-right">
           <div className="hanzi text-2xl text-accent">小红</div>
-          <div className="text-xs text-muted-foreground">Sua amiga de Xangai</div>
+          <div className="text-xs text-muted-foreground">Sua tutora de mandarim</div>
         </div>
       </header>
 
