@@ -1,10 +1,10 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { useAuth } from "@/lib/auth-context";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, Check, X, RotateCw } from "lucide-react";
+import { ArrowLeft, Check, X, RotateCw, Volume2 } from "lucide-react";
 
 
 export const Route = createFileRoute("/flashcards")({
@@ -14,12 +14,25 @@ export const Route = createFileRoute("/flashcards")({
 type Card = { id: string; hanzi: string; pinyin: string; meaning: string; category: string };
 type Progress = Record<string, { correct: number; wrong: number }>;
 
+function speakHanzi(text: string) {
+  if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+  try {
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "zh-CN";
+    u.rate = 0.8;
+    window.speechSynthesis.speak(u);
+  } catch {
+    // silently ignore
+  }
+}
+
 function FlashcardsPage() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
   const [cards, setCards] = useState<Card[]>([]);
   const [progress, setProgress] = useState<Progress>({});
-  const [queue, setQueue] = useState<string[]>([]); // card ids in study order
+  const [queue, setQueue] = useState<string[]>([]);
   const [idx, setIdx] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -28,13 +41,14 @@ function FlashcardsPage() {
     if (!loading && !user) navigate({ to: "/auth" });
   }, [user, loading, navigate]);
 
-  // Load cards + progress
+  // Load cards + progress + saved session position
   useEffect(() => {
     if (!user) return;
     (async () => {
-      const [{ data: cardsData }, { data: progressData }] = await Promise.all([
+      const [{ data: cardsData }, { data: progressData }, { data: stateData }] = await Promise.all([
         supabase.from("cards").select("*"),
         supabase.from("card_progress").select("card_id,correct_count,wrong_count").eq("user_id", user.id),
+        supabase.from("flashcard_session_state").select("queue,current_index").eq("user_id", user.id).maybeSingle(),
       ]);
       const c = cardsData ?? [];
       const p: Progress = {};
@@ -43,17 +57,44 @@ function FlashcardsPage() {
       });
       setCards(c);
       setProgress(p);
-      setQueue(buildSession(c, p));
+
+      const cardIds = new Set(c.map((x) => x.id));
+      const savedQueue = (stateData?.queue ?? []).filter((id: string) => cardIds.has(id));
+      const savedIdx = stateData?.current_index ?? 0;
+
+      if (savedQueue.length === c.length && savedQueue.length > 0) {
+        setQueue(savedQueue);
+        setIdx(Math.min(savedIdx, savedQueue.length));
+      } else {
+        const fresh = buildSession(c);
+        setQueue(fresh);
+        setIdx(0);
+        await supabase.from("flashcard_session_state").upsert(
+          { user_id: user.id, queue: fresh, current_index: 0, updated_at: new Date().toISOString() },
+          { onConflict: "user_id" }
+        );
+      }
+
       setLoaded(true);
-      // log study session for streak (one per day)
       const today = new Date().toISOString().slice(0, 10);
-      await supabase.from("study_sessions").insert({ user_id: user.id, study_date: today }).then(() => {});
+      supabase.from("study_sessions").insert({ user_id: user.id, study_date: today }).then(() => {});
     })();
   }, [user]);
 
   const current = useMemo(() => cards.find((c) => c.id === queue[idx]) ?? null, [cards, queue, idx]);
   const total = queue.length;
   const done = idx;
+
+  const persistIndex = useCallback(
+    async (newIdx: number) => {
+      if (!user) return;
+      await supabase.from("flashcard_session_state").upsert(
+        { user_id: user.id, queue, current_index: newIdx, updated_at: new Date().toISOString() },
+        { onConflict: "user_id" }
+      );
+    },
+    [user, queue]
+  );
 
   async function answer(correct: boolean) {
     if (!current || !user) return;
@@ -64,7 +105,6 @@ function FlashcardsPage() {
     };
     setProgress((p) => ({ ...p, [current.id]: next }));
 
-    // Upsert
     await supabase.from("card_progress").upsert(
       {
         user_id: user.id,
@@ -77,17 +117,28 @@ function FlashcardsPage() {
       { onConflict: "user_id,card_id" }
     );
 
+    const nextIdx = idx + 1;
     setFlipped(false);
-    setTimeout(() => setIdx((i) => i + 1), 250);
+    setTimeout(() => setIdx(nextIdx), 250);
+    persistIndex(nextIdx);
   }
 
-  function restart() {
-    setProgress((cur) => {
-      setQueue(buildSession(cards, cur));
-      return cur;
-    });
+  // Auto-speak when card is flipped
+  useEffect(() => {
+    if (flipped && current?.hanzi) speakHanzi(current.hanzi);
+  }, [flipped, current?.hanzi]);
+
+  async function restart() {
+    const fresh = buildSession(cards);
+    setQueue(fresh);
     setIdx(0);
     setFlipped(false);
+    if (user) {
+      await supabase.from("flashcard_session_state").upsert(
+        { user_id: user.id, queue: fresh, current_index: 0, updated_at: new Date().toISOString() },
+        { onConflict: "user_id" }
+      );
+    }
   }
 
   if (!user) return null;
@@ -156,7 +207,15 @@ function FlashcardView({
             <div className="p-5 text-center text-xs text-muted-foreground italic">toque para virar</div>
           </div>
           {/* Verso */}
-          <div className="flip-face flip-back bg-gradient-to-br from-primary/90 to-primary/60 border border-accent/30 rounded-3xl shadow-[var(--shadow-gold)] flex flex-col items-center justify-center p-8 text-center">
+          <div className="flip-face flip-back bg-gradient-to-br from-primary/90 to-primary/60 border border-accent/30 rounded-3xl shadow-[var(--shadow-gold)] flex flex-col items-center justify-center p-8 text-center relative">
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); speakHanzi(card.hanzi); }}
+              aria-label="Ouvir pronúncia"
+              className="absolute top-4 right-4 p-2 rounded-full bg-background/20 hover:bg-background/40 text-cream transition-colors"
+            >
+              <Volume2 className="w-5 h-5" />
+            </button>
             <div className="text-accent text-2xl md:text-3xl mb-3 font-serif italic">{card.pinyin}</div>
             <div className="text-cream text-2xl md:text-3xl font-serif">{card.meaning}</div>
             <div className="hanzi text-5xl text-accent/30 mt-6">{card.hanzi}</div>
@@ -200,9 +259,7 @@ function FinishedView({ total, onRestart }: { total: number; onRestart: () => vo
   );
 }
 
-// Embaralha todos os cards uma única vez (Fisher-Yates).
-// Cada card aparece exatamente uma vez por sessão.
-function buildSession(cards: Card[], _progress: Progress): string[] {
+function buildSession(cards: Card[]): string[] {
   const ids = cards.map((c) => c.id);
   for (let i = ids.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -210,4 +267,3 @@ function buildSession(cards: Card[], _progress: Progress): string[] {
   }
   return ids;
 }
-
