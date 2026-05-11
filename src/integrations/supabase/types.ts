@@ -112,6 +112,27 @@ export type Database = {
         }
         Relationships: []
       }
+      flashcard_session_state: {
+        Row: {
+          current_index: number
+          queue: string[]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          current_index?: number
+          queue?: string[]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          current_index?: number
+          queue?: string[]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
