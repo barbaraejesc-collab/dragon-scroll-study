@@ -35,15 +35,15 @@ function Dashboard() {
         supabase.from("study_sessions").select("study_date").eq("user_id", user.id).order("study_date", { ascending: false }),
         supabase.from("profiles").select("display_name").eq("id", user.id).maybeSingle(),
       ]);
-      const totalCorrect = (progress ?? []).reduce((s, p) => s + p.correct_count, 0);
-      const totalWrong = (progress ?? []).reduce((s, p) => s + p.wrong_count, 0);
-      const total = totalCorrect + totalWrong;
-      const accuracy = total ? Math.round((totalCorrect / total) * 100) : 0;
+      const answeredRows = (progress ?? []).filter((p) => p.correct_count + p.wrong_count > 0);
+      const totalCorrect = answeredRows.reduce((s, p) => s + p.correct_count, 0);
+      const totalWrong = answeredRows.reduce((s, p) => s + p.wrong_count, 0);
+      const totalAnswers = totalCorrect + totalWrong;
+      const accuracy = totalAnswers > 0 ? Math.round((totalCorrect / totalAnswers) * 100) : null;
       const streak = computeStreak((sessions ?? []).map((s) => s.study_date));
-      const studied = (progress ?? []).filter((p) => p.correct_count + p.wrong_count > 0).length;
       setStats({
         totalCards: totalCards ?? 0,
-        studiedCards: studied,
+        studiedCards: answeredRows.length,
         accuracy,
         streak,
         displayName: profile?.display_name ?? user.email ?? "",
