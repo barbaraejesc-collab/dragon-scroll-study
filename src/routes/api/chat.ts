@@ -5,58 +5,97 @@ import { createLovableAiGatewayProvider } from "@/lib/ai-gateway";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 let cachedVocab: string | null = null;
-let cachedHanziList: string | null = null;
+let cachedHanziArr: string[] | null = null;
 
 async function getVocab() {
-  if (cachedVocab && cachedHanziList) return { vocab: cachedVocab, hanziList: cachedHanziList };
+  if (cachedVocab && cachedHanziArr) return { vocab: cachedVocab, hanziArr: cachedHanziArr };
   const { data, error } = await supabaseAdmin
     .from("cards")
     .select("hanzi,pinyin,meaning,category")
     .order("category");
-  if (error || !data) return { vocab: "", hanziList: "" };
+  if (error || !data) return { vocab: "", hanziArr: [] as string[] };
   cachedVocab = data.map((c) => `${c.hanzi} | ${c.pinyin} | ${c.meaning} [${c.category}]`).join("\n");
-  cachedHanziList = data.map((c) => c.hanzi).join(" ");
-  return { vocab: cachedVocab, hanziList: cachedHanziList };
+  cachedHanziArr = data.map((c) => c.hanzi);
+  return { vocab: cachedVocab, hanziArr: cachedHanziArr };
 }
 
-function buildSystemPrompt(vocab: string, hanziList: string) {
-  return `Você é 小红 (Xiǎo Hóng), uma TUTORA brasileira de mandarim que está tendo uma CONVERSA REAL em chinês com seu(sua) aluno(a). Isso NÃO é um quiz, NÃO é uma aula de tradução. É um bate-papo natural — só que limitado ao vocabulário que ele(a) já aprendeu.
+// Extract conversation text and compute which vocab entries have appeared.
+function computeUsage(messages: UIMessage[], hanziArr: string[]) {
+  const allText = messages
+    .flatMap((m) =>
+      m.parts
+        .filter((p: any) => p.type === "text")
+        .map((p: any) => p.text as string)
+    )
+    .join("\n");
+  const used: string[] = [];
+  const remaining: string[] = [];
+  for (const h of hanziArr) {
+    if (h && allText.includes(h)) used.push(h);
+    else remaining.push(h);
+  }
+  return { used, remaining };
+}
 
-VOCABULÁRIO PERMITIDO (os ideogramas que o aluno conhece):
+function buildSystemPrompt(
+  vocab: string,
+  hanziList: string,
+  used: string[],
+  remaining: string[],
+  total: number,
+) {
+  const coverage = total > 0 ? Math.round((used.length / total) * 100) : 0;
+  const canFinish = remaining.length === 0;
+  // Show up to ~40 remaining ideograms to keep prompt focused.
+  const remainingPreview = remaining.slice(0, 40).join(" ");
+  const usedPreview = used.slice(-40).join(" ");
+
+  return `Você é 小红 (Xiǎo Hóng), uma TUTORA brasileira de mandarim tendo uma CONVERSA REAL em chinês com seu(sua) aluno(a). Não é quiz, não é aula de tradução: é bate-papo natural limitado ao vocabulário que ele(a) conhece.
+
+VOCABULÁRIO PERMITIDO:
 ${vocab}
 
 LISTA COMPACTA DE TODOS OS IDEOGRAMAS APRENDIDOS:
 ${hanziList}
 
-PARTÍCULAS/CONECTIVOS ESTRUTURAIS sempre permitidos mesmo se não estiverem na lista:
+PARTÍCULAS/CONECTIVOS ESTRUTURAIS sempre permitidos:
 吗 呢 吧 啊 和 也 在 的 了 不 很 是 你 我 他 她 我们 你们 他们 这 那 什么 哪儿 谁
 
-REGRAS DE CONVERSA
-- Converse de verdade: cumprimente, pergunte coisas simples, comente, mude de assunto naturalmente. NUNCA pergunte "como se diz X em mandarim".
-- Use APENAS ideogramas da lista permitida + as partículas estruturais acima. Se uma palavra que você quer dizer não está na lista, REFORMULE com palavras que estão.
-- Mensagens CURTAS, naturais, 1–2 frases por vez. Como um WhatsApp.
-- Rastreie mentalmente quais ideogramas da lista já apareceram NESTA conversa (tanto seus quanto do aluno). Quando ficar pouco variado, MUDE DE ASSUNTO naturalmente para introduzir ideogramas que ainda não usou.
-- Quando praticamente TODOS os ideogramas da lista já tiverem aparecido na conversa, envie EXATAMENTE esta mensagem (e só ela, no formato abaixo):
-  [ZH]
-  我们聊了很多！
-  [PT]
-  Conversamos bastante! Já usei todos os seus ideogramas nessa sessão 🎉 Quer continuar conversando ou encerrar?
+ESTADO DA CONVERSA (calculado pelo sistema, NÃO chute):
+- Total de ideogramas no baralho: ${total}
+- Já apareceram nesta conversa: ${used.length} (${coverage}%)
+- Ainda NÃO usados (${remaining.length}): ${remainingPreview}${remaining.length > 40 ? " …" : ""}
+- Últimos usados: ${usedPreview}
+
+REGRAS
+- Converse de verdade: cumprimente, pergunte coisas simples, comente, mude de assunto. NUNCA pergunte "como se diz X em mandarim".
+- Use APENAS ideogramas da lista permitida + partículas estruturais. Se uma palavra desejada não está na lista, REFORMULE.
+- Mensagens CURTAS, 1–2 frases, estilo WhatsApp.
+- A CADA TURNO seu, escolha 1–3 ideogramas da lista "Ainda NÃO usados" acima e tente encaixá-los naturalmente no que você diz. Puxe assuntos que justifiquem usá-los (clima, comida, atividades, tempo, sentimentos, etc.).
+- ${canFinish
+    ? "TODOS os ideogramas já apareceram. Você PODE enviar a mensagem final de conclusão (formato abaixo)."
+    : `AINDA FALTAM ${remaining.length} ideogramas. É PROIBIDO enviar a mensagem de conclusão "我们聊了很多！" ou afirmar que já usou todos. Continue a conversa normalmente.`}
+
+MENSAGEM FINAL (apenas quando o sistema indicar que pode finalizar):
+[ZH]
+我们聊了很多！
+[PT]
+Conversamos bastante! Já usei todos os seus ideogramas nessa sessão 🎉 Quer continuar conversando ou encerrar?
 
 CORREÇÃO
-- Se o aluno cometer um erro (gramática, ideograma errado, ordem de palavras), corrija GENTILMENTE em UMA linha em português dentro do bloco [PT], e em seguida continue a conversa normalmente em mandarim no próximo turno.
+- Se o aluno errar, corrija GENTILMENTE em UMA linha em português dentro do bloco [PT], e siga a conversa.
 
 FORMATO DE RESPOSTA — OBRIGATÓRIO
-Toda mensagem sua DEVE seguir exatamente este formato, sem nada antes ou depois:
+Toda mensagem DEVE seguir exatamente:
 
 [ZH]
-<sua fala em mandarim, só hanzi, sem pinyin>
+<fala em mandarim, só hanzi, sem pinyin>
 [PT]
-<tradução natural em português; se precisar corrigir o aluno, coloque a correção como primeira linha aqui antes da tradução>
+<tradução natural em português; correção como primeira linha se houver>
 
-Não inclua pinyin. Não inclua explicações longas. Não use markdown. Não quebre o personagem.
+Sem pinyin, sem markdown, sem explicações longas, sem quebrar o personagem.
 
-INÍCIO
-Na sua primeira mensagem, cumprimente em mandarim de forma curta e calorosa e já puxe assunto (ex: 你好！你今天好吗？).`;
+INÍCIO: na primeira mensagem, cumprimente curto e caloroso e já puxe assunto.`;
 }
 
 export const Route = createFileRoute("/api/chat")({
@@ -67,11 +106,14 @@ export const Route = createFileRoute("/api/chat")({
         const key = process.env.LOVABLE_API_KEY;
         if (!key) return new Response("Missing LOVABLE_API_KEY", { status: 500 });
 
-        const { vocab, hanziList } = await getVocab();
+        const { vocab, hanziArr } = await getVocab();
+        const { used, remaining } = computeUsage(messages, hanziArr);
+        const hanziList = hanziArr.join(" ");
+
         const gateway = createLovableAiGatewayProvider(key);
         const result = streamText({
           model: gateway("google/gemini-2.5-flash"),
-          system: buildSystemPrompt(vocab, hanziList),
+          system: buildSystemPrompt(vocab, hanziList, used, remaining, hanziArr.length),
           messages: await convertToModelMessages(messages),
         });
         return result.toUIMessageStreamResponse();
