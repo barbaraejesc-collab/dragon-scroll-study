@@ -40,6 +40,7 @@ function ConversaPage() {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const [input, setInput] = useState("");
   const [showTranslation, setShowTranslation] = useState<Record<string, boolean>>({});
+  const [showPinyin, setShowPinyin] = useState<Record<string, boolean>>({});
   const spokenIdsRef = useRef<Set<string>>(new Set());
 
   useEffect(() => {
