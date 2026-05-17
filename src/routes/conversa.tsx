@@ -2,7 +2,8 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
-import { ArrowLeft, Send, Volume2, Eye, EyeOff } from "lucide-react";
+import { ArrowLeft, Send, Volume2, Eye, EyeOff, Languages } from "lucide-react";
+import { pinyin } from "pinyin-pro";
 import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -39,6 +40,7 @@ function ConversaPage() {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const [input, setInput] = useState("");
   const [showTranslation, setShowTranslation] = useState<Record<string, boolean>>({});
+  const [showPinyin, setShowPinyin] = useState<Record<string, boolean>>({});
   const spokenIdsRef = useRef<Set<string>>(new Set());
 
   useEffect(() => {
@@ -128,22 +130,37 @@ function ConversaPage() {
           }
           const { zh, pt } = parseAssistantText(raw);
           const show = !!showTranslation[m.id];
+          const showPy = !!showPinyin[m.id];
           return (
             <div key={m.id} className="flex justify-start">
               <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-muted text-foreground px-4 py-2">
                 <div className="hanzi text-xl leading-relaxed">{zh}</div>
+                {showPy && (
+                  <div className="mt-1 text-sm text-accent">
+                    {pinyin(zh, { toneType: "symbol", nonZh: "consecutive" })}
+                  </div>
+                )}
                 {show && pt && (
                   <div className="mt-2 pt-2 border-t border-border/50 text-sm text-muted-foreground italic">
                     {pt}
                   </div>
                 )}
-                <div className="mt-1.5 flex items-center gap-1 -ml-1">
+                <div className="mt-1.5 flex items-center gap-1 flex-wrap -ml-1">
                   <button
                     onClick={() => speakZh(zh)}
                     className="p-1 rounded hover:bg-foreground/10 text-muted-foreground hover:text-foreground transition"
                     title="Ouvir"
                   >
                     <Volume2 className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    onClick={() =>
+                      setShowPinyin((s) => ({ ...s, [m.id]: !s[m.id] }))
+                    }
+                    className="flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] text-muted-foreground hover:text-foreground hover:bg-foreground/10 transition"
+                  >
+                    <Languages className="w-3 h-3" />
+                    {showPy ? "ocultar pinyin" : "ver pinyin"}
                   </button>
                   {pt && (
                     <button
