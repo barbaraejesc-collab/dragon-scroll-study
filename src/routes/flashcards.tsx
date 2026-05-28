@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, Check, X, RotateCw, Volume2 } from "lucide-react";
+import { playCorrect, playWrong } from "@/lib/sounds";
 
 
 export const Route = createFileRoute("/flashcards")({
@@ -98,6 +99,7 @@ function FlashcardsPage() {
 
   async function answer(correct: boolean) {
     if (!current || !user) return;
+    if (correct) playCorrect(); else playWrong();
     const prev = progress[current.id] ?? { correct: 0, wrong: 0 };
     const next = {
       correct: prev.correct + (correct ? 1 : 0),
