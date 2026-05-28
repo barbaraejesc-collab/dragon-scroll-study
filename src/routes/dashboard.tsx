@@ -70,7 +70,7 @@ function Dashboard() {
       </section>
 
       <section className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-        <StatCard icon={<BookOpen />} label="Cards" value={stats ? `${stats.studiedCards}/${stats.totalCards}` : "—"} />
+        <StatCard icon={<BookOpen />} label="Acertos" value={stats ? `${stats.correctCards}/${stats.totalCards}` : "—"} />
         <StatCard icon={<Target />} label="Acerto" value={stats ? (stats.accuracy === null ? "--" : `${stats.accuracy}%`) : "—"} />
         <StatCard icon={<Flame />} label="Streak" value={stats ? `${stats.streak}d` : "—"} highlight />
         <StatCard icon={<Sparkles />} label="Total" value={stats ? `${stats.totalCards}` : "—"} />
