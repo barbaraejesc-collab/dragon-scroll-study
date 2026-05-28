@@ -12,6 +12,7 @@ export const Route = createFileRoute("/dashboard")({
 type Stats = {
   totalCards: number;
   studiedCards: number;
+  correctCards: number;
   accuracy: number | null;
   streak: number;
   displayName: string;
