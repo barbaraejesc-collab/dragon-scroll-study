@@ -12,6 +12,7 @@ export const Route = createFileRoute("/dashboard")({
 type Stats = {
   totalCards: number;
   studiedCards: number;
+  correctCards: number;
   accuracy: number | null;
   streak: number;
   displayName: string;
@@ -44,6 +45,7 @@ function Dashboard() {
       setStats({
         totalCards: totalCards ?? 0,
         studiedCards: answeredRows.length,
+        correctCards: totalCorrect,
         accuracy,
         streak,
         displayName: profile?.display_name ?? user.email ?? "",
@@ -68,7 +70,7 @@ function Dashboard() {
       </section>
 
       <section className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-        <StatCard icon={<BookOpen />} label="Cards" value={stats ? `${stats.studiedCards}/${stats.totalCards}` : "—"} />
+        <StatCard icon={<BookOpen />} label="Acertos" value={stats ? `${stats.correctCards}/${stats.totalCards}` : "—"} />
         <StatCard icon={<Target />} label="Acerto" value={stats ? (stats.accuracy === null ? "--" : `${stats.accuracy}%`) : "—"} />
         <StatCard icon={<Flame />} label="Streak" value={stats ? `${stats.streak}d` : "—"} highlight />
         <StatCard icon={<Sparkles />} label="Total" value={stats ? `${stats.totalCards}` : "—"} />
