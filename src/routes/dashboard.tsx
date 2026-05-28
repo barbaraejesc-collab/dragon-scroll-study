@@ -45,6 +45,7 @@ function Dashboard() {
       setStats({
         totalCards: totalCards ?? 0,
         studiedCards: answeredRows.length,
+        correctCards: totalCorrect,
         accuracy,
         streak,
         displayName: profile?.display_name ?? user.email ?? "",
