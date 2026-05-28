@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, Check, X, RotateCw, Volume2 } from "lucide-react";
+import { playCorrect, playWrong } from "@/lib/sounds";
 
 
 export const Route = createFileRoute("/flashcards")({
