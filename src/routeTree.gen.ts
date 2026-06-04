@@ -9,6 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VocabularioRouteImport } from './routes/vocabulario'
+import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as FlashcardsRouteImport } from './routes/flashcards'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CuriosidadesRouteImport } from './routes/curiosidades'
@@ -18,6 +20,16 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiCuriosidadeRouteImport } from './routes/api/curiosidade'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 
+const VocabularioRoute = VocabularioRouteImport.update({
+  id: '/vocabulario',
+  path: '/vocabulario',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuizRoute = QuizRouteImport.update({
+  id: '/quiz',
+  path: '/quiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FlashcardsRoute = FlashcardsRouteImport.update({
   id: '/flashcards',
   path: '/flashcards',
@@ -66,6 +78,8 @@ export interface FileRoutesByFullPath {
   '/curiosidades': typeof CuriosidadesRoute
   '/dashboard': typeof DashboardRoute
   '/flashcards': typeof FlashcardsRoute
+  '/quiz': typeof QuizRoute
+  '/vocabulario': typeof VocabularioRoute
   '/api/chat': typeof ApiChatRoute
   '/api/curiosidade': typeof ApiCuriosidadeRoute
 }
@@ -76,6 +90,8 @@ export interface FileRoutesByTo {
   '/curiosidades': typeof CuriosidadesRoute
   '/dashboard': typeof DashboardRoute
   '/flashcards': typeof FlashcardsRoute
+  '/quiz': typeof QuizRoute
+  '/vocabulario': typeof VocabularioRoute
   '/api/chat': typeof ApiChatRoute
   '/api/curiosidade': typeof ApiCuriosidadeRoute
 }
@@ -87,6 +103,8 @@ export interface FileRoutesById {
   '/curiosidades': typeof CuriosidadesRoute
   '/dashboard': typeof DashboardRoute
   '/flashcards': typeof FlashcardsRoute
+  '/quiz': typeof QuizRoute
+  '/vocabulario': typeof VocabularioRoute
   '/api/chat': typeof ApiChatRoute
   '/api/curiosidade': typeof ApiCuriosidadeRoute
 }
@@ -99,6 +117,8 @@ export interface FileRouteTypes {
     | '/curiosidades'
     | '/dashboard'
     | '/flashcards'
+    | '/quiz'
+    | '/vocabulario'
     | '/api/chat'
     | '/api/curiosidade'
   fileRoutesByTo: FileRoutesByTo
@@ -109,6 +129,8 @@ export interface FileRouteTypes {
     | '/curiosidades'
     | '/dashboard'
     | '/flashcards'
+    | '/quiz'
+    | '/vocabulario'
     | '/api/chat'
     | '/api/curiosidade'
   id:
@@ -119,6 +141,8 @@ export interface FileRouteTypes {
     | '/curiosidades'
     | '/dashboard'
     | '/flashcards'
+    | '/quiz'
+    | '/vocabulario'
     | '/api/chat'
     | '/api/curiosidade'
   fileRoutesById: FileRoutesById
@@ -130,12 +154,28 @@ export interface RootRouteChildren {
   CuriosidadesRoute: typeof CuriosidadesRoute
   DashboardRoute: typeof DashboardRoute
   FlashcardsRoute: typeof FlashcardsRoute
+  QuizRoute: typeof QuizRoute
+  VocabularioRoute: typeof VocabularioRoute
   ApiChatRoute: typeof ApiChatRoute
   ApiCuriosidadeRoute: typeof ApiCuriosidadeRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/vocabulario': {
+      id: '/vocabulario'
+      path: '/vocabulario'
+      fullPath: '/vocabulario'
+      preLoaderRoute: typeof VocabularioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quiz': {
+      id: '/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof QuizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/flashcards': {
       id: '/flashcards'
       path: '/flashcards'
@@ -202,9 +242,21 @@ const rootRouteChildren: RootRouteChildren = {
   CuriosidadesRoute: CuriosidadesRoute,
   DashboardRoute: DashboardRoute,
   FlashcardsRoute: FlashcardsRoute,
+  QuizRoute: QuizRoute,
+  VocabularioRoute: VocabularioRoute,
   ApiChatRoute: ApiChatRoute,
   ApiCuriosidadeRoute: ApiCuriosidadeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
