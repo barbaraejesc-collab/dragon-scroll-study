@@ -39,13 +39,14 @@ function Dashboard() {
       const answeredRows = (progress ?? []).filter((p) => p.correct_count + p.wrong_count > 0);
       const totalCorrect = answeredRows.reduce((s, p) => s + p.correct_count, 0);
       const totalWrong = answeredRows.reduce((s, p) => s + p.wrong_count, 0);
+      const correctCards = (progress ?? []).filter((p) => p.correct_count > 0).length;
       const totalAnswers = totalCorrect + totalWrong;
       const accuracy = totalAnswers > 0 ? Math.round((totalCorrect / totalAnswers) * 100) : null;
       const streak = computeStreak((sessions ?? []).map((s) => s.study_date));
       setStats({
         totalCards: totalCards ?? 0,
         studiedCards: answeredRows.length,
-        correctCards: totalCorrect,
+        correctCards,
         accuracy,
         streak,
         displayName: profile?.display_name ?? user.email ?? "",
