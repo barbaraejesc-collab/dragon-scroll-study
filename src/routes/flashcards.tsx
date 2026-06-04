@@ -9,6 +9,9 @@ import { playCorrect, playWrong } from "@/lib/sounds";
 
 
 export const Route = createFileRoute("/flashcards")({
+  validateSearch: (s: Record<string, unknown>) => ({
+    mode: s.mode === "errors" ? ("errors" as const) : undefined,
+  }),
   component: FlashcardsPage,
 });
 
@@ -31,6 +34,8 @@ function speakHanzi(text: string) {
 function FlashcardsPage() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
+  const { mode } = Route.useSearch();
+  const errorsMode = mode === "errors";
   const [cards, setCards] = useState<Card[]>([]);
   const [progress, setProgress] = useState<Progress>({});
   const [queue, setQueue] = useState<string[]>([]);
@@ -59,28 +64,45 @@ function FlashcardsPage() {
       setCards(c);
       setProgress(p);
 
-      const cardIds = new Set(c.map((x) => x.id));
-      const savedQueue = (stateData?.queue ?? []).filter((id: string) => cardIds.has(id));
-      const savedIdx = stateData?.current_index ?? 0;
-
-      if (savedQueue.length === c.length && savedQueue.length > 0) {
-        setQueue(savedQueue);
-        setIdx(Math.min(savedIdx, savedQueue.length));
-      } else {
-        const fresh = buildSession(c);
-        setQueue(fresh);
+      if (errorsMode) {
+        // Build session from cards with most wrongs (top 20, min 1 wrong)
+        const ranked = c
+          .map((card) => ({ card, wrong: p[card.id]?.wrong ?? 0 }))
+          .filter((x) => x.wrong > 0)
+          .sort((a, b) => b.wrong - a.wrong)
+          .slice(0, 20)
+          .map((x) => x.card.id);
+        // Shuffle for variety
+        for (let i = ranked.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [ranked[i], ranked[j]] = [ranked[j], ranked[i]];
+        }
+        setQueue(ranked);
         setIdx(0);
-        await supabase.from("flashcard_session_state").upsert(
-          { user_id: user.id, queue: fresh, current_index: 0, updated_at: new Date().toISOString() },
-          { onConflict: "user_id" }
-        );
+      } else {
+        const cardIds = new Set(c.map((x) => x.id));
+        const savedQueue = (stateData?.queue ?? []).filter((id: string) => cardIds.has(id));
+        const savedIdx = stateData?.current_index ?? 0;
+
+        if (savedQueue.length === c.length && savedQueue.length > 0) {
+          setQueue(savedQueue);
+          setIdx(Math.min(savedIdx, savedQueue.length));
+        } else {
+          const fresh = buildSession(c);
+          setQueue(fresh);
+          setIdx(0);
+          await supabase.from("flashcard_session_state").upsert(
+            { user_id: user.id, queue: fresh, current_index: 0, updated_at: new Date().toISOString() },
+            { onConflict: "user_id" }
+          );
+        }
       }
 
       setLoaded(true);
       const today = new Date().toISOString().slice(0, 10);
       supabase.from("study_sessions").insert({ user_id: user.id, study_date: today }).then(() => {});
     })();
-  }, [user]);
+  }, [user, errorsMode]);
 
   const current = useMemo(() => cards.find((c) => c.id === queue[idx]) ?? null, [cards, queue, idx]);
   const total = queue.length;
@@ -88,16 +110,16 @@ function FlashcardsPage() {
 
   const persistIndex = useCallback(
     async (newIdx: number) => {
-      if (!user) return;
+      if (!user || errorsMode) return;
       await supabase.from("flashcard_session_state").upsert(
         { user_id: user.id, queue, current_index: newIdx, updated_at: new Date().toISOString() },
         { onConflict: "user_id" }
       );
     },
-    [user, queue]
+    [user, queue, errorsMode]
   );
 
-  async function answer(correct: boolean) {
+  const answer = useCallback(async (correct: boolean) => {
     if (!current || !user) return;
     if (correct) playCorrect(); else playWrong();
     const prev = progress[current.id] ?? { correct: 0, wrong: 0 };
@@ -123,14 +145,18 @@ function FlashcardsPage() {
     setFlipped(false);
     setTimeout(() => setIdx(nextIdx), 250);
     persistIndex(nextIdx);
-  }
+  }, [current, user, progress, idx, persistIndex]);
 
   // Auto-speak when card is flipped
   useEffect(() => {
     if (flipped && current?.hanzi) speakHanzi(current.hanzi);
   }, [flipped, current?.hanzi]);
 
-  async function restart() {
+  const restart = useCallback(async () => {
+    if (errorsMode) {
+      navigate({ to: "/flashcards", search: {} });
+      return;
+    }
     const fresh = buildSession(cards);
     setQueue(fresh);
     setIdx(0);
@@ -141,7 +167,28 @@ function FlashcardsPage() {
         { onConflict: "user_id" }
       );
     }
-  }
+  }, [errorsMode, cards, user, navigate]);
+
+  // Keyboard shortcuts: Space=flip, ←=errei, →=acertei
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      const t = e.target as HTMLElement | null;
+      if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
+      if (!current) return;
+      if (e.code === "Space") {
+        e.preventDefault();
+        setFlipped((f) => !f);
+      } else if (flipped && e.key === "ArrowLeft") {
+        e.preventDefault();
+        answer(false);
+      } else if (flipped && e.key === "ArrowRight") {
+        e.preventDefault();
+        answer(true);
+      }
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [flipped, current, answer]);
 
   if (!user) return null;
 
@@ -149,6 +196,17 @@ function FlashcardsPage() {
     return (
       <main className="min-h-screen flex items-center justify-center px-6">
         <p className="text-muted-foreground">Nenhum card disponível.</p>
+      </main>
+    );
+  }
+
+  if (loaded && errorsMode && total === 0) {
+    return (
+      <main className="min-h-screen flex flex-col items-center justify-center px-6 text-center space-y-4">
+        <div className="hanzi text-7xl text-accent">好</div>
+        <h2 className="text-2xl font-serif">Nenhum erro registrado ainda!</h2>
+        <p className="text-muted-foreground text-sm">Continue estudando para construir seu histórico.</p>
+        <Button asChild><Link to="/flashcards" search={{}}>Sessão normal</Link></Button>
       </main>
     );
   }
@@ -161,6 +219,9 @@ function FlashcardsPage() {
         <Button variant="ghost" size="sm" asChild>
           <Link to="/dashboard"><ArrowLeft className="w-4 h-4 mr-1" /> Voltar</Link>
         </Button>
+        {errorsMode && (
+          <span className="text-xs uppercase tracking-widest text-accent font-serif">Revisão de erros</span>
+        )}
         <Button variant="ghost" size="sm" onClick={restart} className="text-accent">
           <RotateCw className="w-4 h-4 mr-1" /> Recomeçar
         </Button>
@@ -183,6 +244,10 @@ function FlashcardsPage() {
       ) : current ? (
         <FlashcardView card={current} flipped={flipped} onFlip={() => setFlipped((f) => !f)} onAnswer={answer} />
       ) : null}
+
+      <p className="text-[10px] text-center text-muted-foreground/60 mt-4 hidden md:block">
+        Atalhos: Espaço = virar · ← = errei · → = acertei
+      </p>
     </main>
   );
 }
