@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/lib/auth-context";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Flame, BookOpen, Target, LogOut, Sparkles } from "lucide-react";
+import { Flame, BookOpen, Target, LogOut, Sparkles, AlertTriangle, Zap, List } from "lucide-react";
 
 export const Route = createFileRoute("/dashboard")({
   component: Dashboard,
@@ -77,7 +77,7 @@ function Dashboard() {
       </section>
 
       <section className="grid md:grid-cols-3 gap-4">
-        <Link to="/flashcards" className="md:col-span-2 group">
+        <Link to="/flashcards" search={{}} className="md:col-span-2 group">
           <div className="bg-gradient-to-br from-primary to-primary/70 rounded-2xl p-8 h-full shadow-[var(--shadow-elegant)] transition-transform group-hover:scale-[1.01]">
             <div className="hanzi text-7xl text-accent mb-4">卡</div>
             <h3 className="text-2xl font-serif text-cream mb-1">Flashcards</h3>
@@ -91,6 +91,29 @@ function Dashboard() {
             <p className="text-muted-foreground text-xs">Pratique mandarim com uma amiga IA de Xangai</p>
           </div>
         </Link>
+
+        <Link to="/flashcards" search={{ mode: "errors" }} className="group">
+          <div className="bg-card border border-destructive/40 rounded-2xl p-6 h-full transition-all group-hover:border-destructive group-hover:shadow-[0_0_24px_-8px_hsl(var(--destructive)/0.5)]">
+            <AlertTriangle className="w-6 h-6 text-destructive mb-3" />
+            <h3 className="text-lg font-serif text-cream mb-1">Revisar erros</h3>
+            <p className="text-muted-foreground text-xs">Os ideogramas que você mais errou</p>
+          </div>
+        </Link>
+        <Link to="/quiz" className="group">
+          <div className="bg-card border border-accent/40 rounded-2xl p-6 h-full transition-all group-hover:border-accent group-hover:shadow-[var(--shadow-gold)]">
+            <Zap className="w-6 h-6 text-accent mb-3" />
+            <h3 className="text-lg font-serif text-cream mb-1">Quiz rápido</h3>
+            <p className="text-muted-foreground text-xs">10 perguntas com múltipla escolha</p>
+          </div>
+        </Link>
+        <Link to="/vocabulario" className="group">
+          <div className="bg-card border border-border rounded-2xl p-6 h-full transition-all group-hover:border-accent/50">
+            <List className="w-6 h-6 text-accent mb-3" />
+            <h3 className="text-lg font-serif text-cream mb-1">Vocabulário</h3>
+            <p className="text-muted-foreground text-xs">Explore todos os cards com busca</p>
+          </div>
+        </Link>
+
         <Link to="/curiosidades" className="md:col-span-3 group">
           <div className="bg-card border border-border rounded-2xl p-6 transition-all group-hover:border-accent/50">
             <div className="flex items-center gap-4">
