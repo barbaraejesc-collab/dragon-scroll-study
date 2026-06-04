@@ -84,9 +84,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6e2ca454-eda6-4456-b8a4-d50b7c4ff9ee/id-preview-7bc662bd--a0f3a2ff-d827-4310-82a6-b50ebbc1c742.lovable.app-1778157719833.png" },
     ],
     links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: appCss,
+        href: "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap",
       },
     ],
   }),
