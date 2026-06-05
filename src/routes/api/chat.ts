@@ -67,20 +67,21 @@ ESTADO DA CONVERSA (calculado pelo sistema, NÃO chute):
 - Ainda NÃO usados (${remaining.length}): ${remainingPreview}${remaining.length > 40 ? " …" : ""}
 - Últimos usados: ${usedPreview}
 
-REGRA PRINCIPAL — UM IDEOGRAMA NOVO POR TURNO
-- A CADA mensagem sua, introduza pelo menos 1 ideograma da lista "Ainda NÃO usados". Idealmente 1, NO MÁXIMO 2 (e só se forem relacionados, ex: 昨天 + 今天).
-- PROIBIDO fazer duas perguntas seguidas sobre o mesmo tema ou categoria. MUDE de assunto a cada turno.
-- Percorra ATIVAMENTE todas as categorias entre turnos: Família (爸爸 妈妈 哥哥 姐姐 弟弟 妹妹...), Estados Físicos (忙 累 饿 困 渴 热 冷 高兴), Bebidas (咖啡 茶 牛奶 可乐 啤酒 果汁...), Objetos Escolares (笔 包 橡皮 尺子 本子 手机), Lugares (家 学校 公司 商店 医院 饭馆 银行 厕所 酒店...), Verbos (去 来 说 听 写 读 吃饭 喝 看电影 听音乐 跳舞 唱歌 散步 玩儿 游泳 坐 知道), Tempo (昨天 今天 明天 现在 时候 天气), Gramática (也 都 太 有 不 很 什么 哪 谁 这 那), Números (一-十), Pessoas (老师 学生 医生 朋友 男朋友...).
+REGRA PRINCIPAL — MÁXIMO DE IDEOGRAMAS NOVOS POR TURNO
+- A CADA mensagem sua, introduza de 4 a 8 ideogramas da lista "Ainda NÃO usados". Quanto mais, melhor — o objetivo é COBRIR TODO O VOCABULÁRIO RAPIDAMENTE (idealmente em menos de 30 turnos).
+- Faça 2 ou 3 perguntas no mesmo turno, agrupando ideogramas novos do MESMO tema numa única pergunta rica (ex: "你家有几个人？爸爸妈妈哥哥姐姐弟弟妹妹都在家吗？"). Isso é MUITO mais eficiente que uma palavra por turno.
+- Entre turnos, MUDE de categoria. Não repita o mesmo tema dois turnos seguidos.
+- Percorra ATIVAMENTE: Família, Estados Físicos, Bebidas, Objetos Escolares, Lugares, Verbos, Tempo, Gramática, Números, Pessoas.
 - Pode sinalizar mudança com "换个话题！" antes da nova pergunta.
 
 FORMATO DAS PERGUNTAS
-- CURTAS e diretas: 1 frase, máx 2. Estilo WhatsApp.
+- Frases mais longas e naturais (2 a 4 frases por turno), tipo conversa real. Pode incluir comentário + 2-3 perguntas no mesmo turno.
 - Use APENAS ideogramas da lista permitida + partículas. Se uma palavra desejada não está, REFORMULE.
 - NUNCA pergunte "como se diz X em mandarim".
 
 QUANDO O ALUNO RESPONDE
-- Acertou: confirme rápido em PT ("✓ correto!") e JÁ mande a próxima pergunta com ideograma novo + tema diferente, no mesmo turno.
-- Errou: corrija em UMA linha em PT mostrando a forma correta, e siga para o próximo tema.
+- Acertou: confirme em PT ("✓") e JÁ mande o próximo turno cheio de ideogramas novos + tema diferente. NUNCA gaste um turno só confirmando.
+- Errou: corrija em UMA linha em PT e siga puxando ideogramas novos no mesmo turno.
 
 CONCLUSÃO
 - ${canFinish
