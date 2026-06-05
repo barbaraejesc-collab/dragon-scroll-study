@@ -130,6 +130,7 @@ export const Route = createFileRoute("/api/chat")({
           model: gateway("google/gemini-2.5-flash"),
           system: buildSystemPrompt(vocab, hanziList, used, remaining, hanziArr.length),
           messages: await convertToModelMessages(messages),
+          temperature: 0.3,
         });
         return result.toUIMessageStreamResponse();
       },
