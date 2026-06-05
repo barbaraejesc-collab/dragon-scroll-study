@@ -79,6 +79,17 @@ function FlashcardsPage() {
   const [idx, setIdx] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [hanziFont, setHanziFont] = useState(() => pickRandomFont());
+
+  // Warm up the voices list so getZhVoice() returns a real voice after first paint
+  useEffect(() => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    const load = () => { cachedZhVoice = null; getZhVoice(); };
+    load();
+    window.speechSynthesis.onvoiceschanged = load;
+    return () => { window.speechSynthesis.onvoiceschanged = null; };
+  }, []);
+
 
   useEffect(() => {
     if (!loading && !user) navigate({ to: "/auth" });
