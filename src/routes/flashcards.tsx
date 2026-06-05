@@ -302,9 +302,10 @@ function FlashcardsPage() {
 }
 
 function FlashcardView({
-  card, flipped, onFlip, onAnswer,
+  card, flipped, onFlip, onAnswer, hanziFont,
 }: {
   card: Card; flipped: boolean; onFlip: () => void; onAnswer: (c: boolean) => void;
+  hanziFont: { name: string; family: string };
 }) {
   return (
     <div className="flex-1 flex flex-col">
@@ -314,9 +315,15 @@ function FlashcardView({
       >
         <div className="flip-card-inner">
           {/* Frente */}
-          <div className="flip-face bg-gradient-to-br from-card to-secondary border border-border rounded-3xl shadow-[var(--shadow-elegant)] flex flex-col">
+          <div className="flip-face bg-gradient-to-br from-card to-secondary border border-border rounded-3xl shadow-[var(--shadow-elegant)] flex flex-col relative">
+            <span className="absolute top-3 left-4 text-[10px] uppercase tracking-widest text-muted-foreground/60 font-serif">
+              {hanziFont.name}
+            </span>
             <div className="flex-1 flex items-center justify-center p-6">
-              <span className="hanzi text-[22vw] md:text-[180px] leading-none text-cream drop-shadow-[0_0_40px_rgba(255,215,0,0.1)]">
+              <span
+                className="text-[22vw] md:text-[180px] leading-none text-cream drop-shadow-[0_0_40px_rgba(255,215,0,0.1)]"
+                style={{ fontFamily: hanziFont.family }}
+              >
                 {card.hanzi}
               </span>
             </div>
