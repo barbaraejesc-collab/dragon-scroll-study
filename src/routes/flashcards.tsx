@@ -201,6 +201,7 @@ function FlashcardsPage() {
   }, [flipped, current?.hanzi]);
 
   const restart = useCallback(async () => {
+    setHanziFont((prev) => pickRandomFont(prev.name));
     if (errorsMode) {
       navigate({ to: "/flashcards", search: {} });
       return;
