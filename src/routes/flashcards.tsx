@@ -291,7 +291,7 @@ function FlashcardsPage() {
       ) : finished ? (
         <FinishedView total={total} onRestart={restart} />
       ) : current ? (
-        <FlashcardView card={current} flipped={flipped} onFlip={() => setFlipped((f) => !f)} onAnswer={answer} />
+        <FlashcardView card={current} flipped={flipped} onFlip={() => setFlipped((f) => !f)} onAnswer={answer} hanziFont={hanziFont} />
       ) : null}
 
       <p className="text-[10px] text-center text-muted-foreground/60 mt-4 hidden md:block">
