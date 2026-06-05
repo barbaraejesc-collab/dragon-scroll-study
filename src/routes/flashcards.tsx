@@ -18,13 +18,50 @@ export const Route = createFileRoute("/flashcards")({
 type Card = { id: string; hanzi: string; pinyin: string; meaning: string; category: string };
 type Progress = Record<string, { correct: number; wrong: number }>;
 
+// Pool of distinct Chinese fonts (loaded in __root.tsx). Each session picks one.
+const HANZI_FONTS = [
+  { name: "Noto Serif SC", family: "'Noto Serif SC', serif" },
+  { name: "Noto Sans SC", family: "'Noto Sans SC', sans-serif" },
+  { name: "Ma Shan Zheng", family: "'Ma Shan Zheng', cursive" },
+  { name: "ZCOOL XiaoWei", family: "'ZCOOL XiaoWei', serif" },
+  { name: "ZCOOL QingKe HuangYou", family: "'ZCOOL QingKe HuangYou', sans-serif" },
+  { name: "Liu Jian Mao Cao", family: "'Liu Jian Mao Cao', cursive" },
+  { name: "Long Cang", family: "'Long Cang', cursive" },
+  { name: "Zhi Mang Xing", family: "'Zhi Mang Xing', cursive" },
+];
+
+function pickRandomFont(excludeName?: string) {
+  const pool = excludeName ? HANZI_FONTS.filter((f) => f.name !== excludeName) : HANZI_FONTS;
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+// Cache best zh-CN voice so we don't repick each call
+let cachedZhVoice: SpeechSynthesisVoice | null = null;
+function getZhVoice(): SpeechSynthesisVoice | null {
+  if (typeof window === "undefined" || !("speechSynthesis" in window)) return null;
+  if (cachedZhVoice) return cachedZhVoice;
+  const voices = window.speechSynthesis.getVoices();
+  if (!voices.length) return null;
+  const zh = voices.filter((v) => /^zh(-|_)?(CN|Hans)?/i.test(v.lang));
+  const preferred =
+    zh.find((v) => /Tingting|Sinji|Mei-Jia|Yaoyao|Female/i.test(v.name)) ||
+    zh.find((v) => v.localService) ||
+    zh[0] ||
+    null;
+  cachedZhVoice = preferred;
+  return preferred;
+}
+
 function speakHanzi(text: string) {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
   try {
     window.speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
     u.lang = "zh-CN";
-    u.rate = 0.8;
+    u.rate = 0.7; // slower so the four tones (āáǎà) come through clearly
+    u.pitch = 1;
+    const v = getZhVoice();
+    if (v) u.voice = v;
     window.speechSynthesis.speak(u);
   } catch {
     // silently ignore
