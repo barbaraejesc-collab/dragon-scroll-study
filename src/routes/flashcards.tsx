@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, Check, X, RotateCw, Volume2 } from "lucide-react";
 import { playCorrect, playWrong } from "@/lib/sounds";
+import { speakZh, preloadZh } from "@/lib/tts";
 
 
 export const Route = createFileRoute("/flashcards")({
@@ -35,37 +36,8 @@ function pickRandomFont(excludeName?: string) {
   return pool[Math.floor(Math.random() * pool.length)];
 }
 
-// Cache best zh-CN voice so we don't repick each call
-let cachedZhVoice: SpeechSynthesisVoice | null = null;
-function getZhVoice(): SpeechSynthesisVoice | null {
-  if (typeof window === "undefined" || !("speechSynthesis" in window)) return null;
-  if (cachedZhVoice) return cachedZhVoice;
-  const voices = window.speechSynthesis.getVoices();
-  if (!voices.length) return null;
-  const zh = voices.filter((v) => /^zh(-|_)?(CN|Hans)?/i.test(v.lang));
-  const preferred =
-    zh.find((v) => /Tingting|Sinji|Mei-Jia|Yaoyao|Female/i.test(v.name)) ||
-    zh.find((v) => v.localService) ||
-    zh[0] ||
-    null;
-  cachedZhVoice = preferred;
-  return preferred;
-}
-
 function speakHanzi(text: string) {
-  if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
-  try {
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = "zh-CN";
-    u.rate = 0.7; // slower so the four tones (āáǎà) come through clearly
-    u.pitch = 1;
-    const v = getZhVoice();
-    if (v) u.voice = v;
-    window.speechSynthesis.speak(u);
-  } catch {
-    // silently ignore
-  }
+  void speakZh(text);
 }
 
 function FlashcardsPage() {
@@ -81,14 +53,7 @@ function FlashcardsPage() {
   const [loaded, setLoaded] = useState(false);
   const [hanziFont, setHanziFont] = useState(() => pickRandomFont());
 
-  // Warm up the voices list so getZhVoice() returns a real voice after first paint
-  useEffect(() => {
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
-    const load = () => { cachedZhVoice = null; getZhVoice(); };
-    load();
-    window.speechSynthesis.onvoiceschanged = load;
-    return () => { window.speechSynthesis.onvoiceschanged = null; };
-  }, []);
+
 
 
   useEffect(() => {
@@ -199,6 +164,16 @@ function FlashcardsPage() {
   useEffect(() => {
     if (flipped && current?.hanzi) speakHanzi(current.hanzi);
   }, [flipped, current?.hanzi]);
+
+  // Preload audio for the next few cards so flipping is instant
+  useEffect(() => {
+    for (let i = 0; i < 3; i++) {
+      const id = queue[idx + i];
+      const c = id ? cards.find((x) => x.id === id) : null;
+      if (c?.hanzi) preloadZh(c.hanzi);
+    }
+  }, [idx, queue, cards]);
+
 
   const restart = useCallback(async () => {
     setHanziFont((prev) => pickRandomFont(prev.name));
