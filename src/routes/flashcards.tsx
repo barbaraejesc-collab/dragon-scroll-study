@@ -165,6 +165,16 @@ function FlashcardsPage() {
     if (flipped && current?.hanzi) speakHanzi(current.hanzi);
   }, [flipped, current?.hanzi]);
 
+  // Preload audio for the next few cards so flipping is instant
+  useEffect(() => {
+    for (let i = 0; i < 3; i++) {
+      const id = queue[idx + i];
+      const c = id ? cards.find((x) => x.id === id) : null;
+      if (c?.hanzi) preloadZh(c.hanzi);
+    }
+  }, [idx, queue, cards]);
+
+
   const restart = useCallback(async () => {
     setHanziFont((prev) => pickRandomFont(prev.name));
     if (errorsMode) {
