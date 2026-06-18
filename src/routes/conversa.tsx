@@ -7,23 +7,12 @@ import { pinyin } from "pinyin-pro";
 import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { speakZh } from "@/lib/tts";
 
 export const Route = createFileRoute("/conversa")({
   component: ConversaPage,
 });
 
-function speakZh(text: string) {
-  if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
-  try {
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = "zh-CN";
-    u.rate = 0.8;
-    window.speechSynthesis.speak(u);
-  } catch {
-    // silent
-  }
-}
 
 function parseAssistantText(raw: string): { zh: string; pt: string } {
   const zhMatch = raw.match(/\[ZH\]\s*([\s\S]*?)(?:\[PT\]|$)/i);
