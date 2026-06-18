@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowLeft, Search, Volume2 } from "lucide-react";
+import { speakZh } from "@/lib/tts";
 
 export const Route = createFileRoute("/vocabulario")({
   component: VocabularioPage,
@@ -14,15 +15,9 @@ type Card = { id: string; hanzi: string; pinyin: string; meaning: string; catego
 type Prog = Record<string, { correct: number; wrong: number }>;
 
 function speak(text: string) {
-  if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
-  try {
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = "zh-CN";
-    u.rate = 0.8;
-    window.speechSynthesis.speak(u);
-  } catch {}
+  void speakZh(text);
 }
+
 
 function VocabularioPage() {
   const { user, loading } = useAuth();
