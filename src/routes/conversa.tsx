@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
-import { ArrowLeft, Send, Volume2, Eye, EyeOff, Languages } from "lucide-react";
+import { ArrowLeft, Send, Volume2, Eye, EyeOff, Languages, CheckCircle2, Loader2 } from "lucide-react";
 import { pinyin } from "pinyin-pro";
 import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
@@ -22,6 +22,16 @@ function parseAssistantText(raw: string): { zh: string; pt: string } {
   return { zh, pt };
 }
 
+// Structural particles/pronouns always considered valid, matching the server prompt.
+const ALWAYS_ALLOWED = new Set(
+  "吗呢吧啊和也在的了不很是你我他她们这那什么哪儿谁".split("")
+);
+
+function isHanzi(ch: string) {
+  const code = ch.codePointAt(0) ?? 0;
+  return code >= 0x4e00 && code <= 0x9fff;
+}
+
 function ConversaPage() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
@@ -30,24 +40,37 @@ function ConversaPage() {
   const [input, setInput] = useState("");
   const [showTranslation, setShowTranslation] = useState<Record<string, boolean>>({});
   const [showPinyin, setShowPinyin] = useState<Record<string, boolean>>({});
+  const [checks, setChecks] = useState<Record<string, { loading: boolean; result?: string }>>({});
+  const [allowedSet, setAllowedSet] = useState<Set<string> | null>(null);
   const spokenIdsRef = useRef<Set<string>>(new Set());
 
   useEffect(() => {
     if (!loading && !user) navigate({ to: "/auth" });
   }, [user, loading, navigate]);
 
+  // Load full hanzi vocabulary once to highlight out-of-vocab characters.
+  useEffect(() => {
+    fetch("/api/vocab")
+      .then((r) => r.json())
+      .then((d: { hanzi: string[] }) => {
+        const s = new Set<string>();
+        for (const w of d.hanzi ?? []) for (const c of w) s.add(c);
+        for (const c of ALWAYS_ALLOWED) s.add(c);
+        setAllowedSet(s);
+      })
+      .catch(() => {});
+  }, []);
+
   const transport = useMemo(() => new DefaultChatTransport({ api: "/api/chat" }), []);
   const { messages, sendMessage, status, error } = useChat({ transport });
 
   const isLoading = status === "submitted" || status === "streaming";
 
-  // Auto-scroll
   useEffect(() => {
     const el = scrollerRef.current;
     if (el) el.scrollTop = el.scrollHeight;
   }, [messages, isLoading]);
 
-  // Auto-speak assistant messages once they finish streaming
   useEffect(() => {
     if (status !== "ready") return;
     const last = messages[messages.length - 1];
@@ -79,9 +102,45 @@ function ConversaPage() {
     sendMessage({ text: "你好" });
   };
 
+  const handleCheck = async (id: string, text: string) => {
+    setChecks((s) => ({ ...s, [id]: { loading: true } }));
+    try {
+      const r = await fetch("/api/check", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+      const d = await r.json();
+      setChecks((s) => ({ ...s, [id]: { loading: false, result: d.result ?? "Erro na verificação." } }));
+    } catch {
+      setChecks((s) => ({ ...s, [id]: { loading: false, result: "Erro na verificação." } }));
+    }
+  };
+
+  const renderZh = (zh: string) => {
+    if (!allowedSet) return zh;
+    return Array.from(zh).map((ch, i) => {
+      if (isHanzi(ch) && !allowedSet.has(ch)) {
+        return (
+          <span
+            key={i}
+            className="underline decoration-wavy decoration-destructive underline-offset-4"
+            title="Fora do vocabulário aprendido"
+          >
+            {ch}
+          </span>
+        );
+      }
+      return <span key={i}>{ch}</span>;
+    });
+  };
+
   return (
-    <main className="min-h-screen flex flex-col max-w-2xl mx-auto px-4 py-4">
-      <header className="flex items-center justify-between mb-3 pb-3 border-b border-border">
+    <main
+      className="flex flex-col max-w-2xl mx-auto px-4 pt-4"
+      style={{ height: "100dvh" }}
+    >
+      <header className="flex items-center justify-between mb-3 pb-3 border-b border-border shrink-0">
         <Link to="/dashboard" className="text-muted-foreground hover:text-foreground flex items-center gap-2 text-sm">
           <ArrowLeft className="w-4 h-4" /> Dashboard
         </Link>
@@ -109,11 +168,29 @@ function ConversaPage() {
         {messages.map((m) => {
           const raw = m.parts.filter((p) => p.type === "text").map((p: any) => p.text).join("");
           if (m.role === "user") {
+            const chk = checks[m.id];
             return (
-              <div key={m.id} className="flex justify-end">
+              <div key={m.id} className="flex flex-col items-end gap-1">
                 <div className="max-w-[80%] rounded-2xl rounded-br-sm bg-primary text-primary-foreground px-4 py-2 hanzi text-lg">
                   {raw}
                 </div>
+                <button
+                  onClick={() => handleCheck(m.id, raw)}
+                  disabled={chk?.loading}
+                  className="flex items-center gap-1 text-[11px] text-muted-foreground hover:text-foreground px-1.5 py-0.5"
+                >
+                  {chk?.loading ? (
+                    <Loader2 className="w-3 h-3 animate-spin" />
+                  ) : (
+                    <CheckCircle2 className="w-3 h-3" />
+                  )}
+                  {chk?.result ? "verificar de novo" : "verificar frase"}
+                </button>
+                {chk?.result && (
+                  <div className="max-w-[85%] rounded-xl bg-muted text-foreground px-3 py-2 text-xs whitespace-pre-wrap">
+                    {chk.result}
+                  </div>
+                )}
               </div>
             );
           }
@@ -123,7 +200,7 @@ function ConversaPage() {
           return (
             <div key={m.id} className="flex justify-start">
               <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-muted text-foreground px-4 py-2">
-                <div className="hanzi text-xl leading-relaxed">{zh}</div>
+                <div className="hanzi text-xl leading-relaxed">{renderZh(zh)}</div>
                 {showPy && (
                   <div className="mt-1 text-sm text-accent">
                     {pinyin(zh, { toneType: "symbol", nonZh: "consecutive" })}
@@ -183,13 +260,16 @@ function ConversaPage() {
         )}
       </div>
 
-      <div className="pt-3 border-t border-border">
+      <div
+        className="pt-3 border-t border-border shrink-0"
+        style={{ paddingBottom: "max(env(safe-area-inset-bottom), 1rem)" }}
+      >
         <form
           onSubmit={(e) => {
             e.preventDefault();
             handleSend();
           }}
-          className="flex gap-2"
+          className="flex gap-2 items-center"
         >
           <input
             ref={inputRef}
@@ -197,7 +277,7 @@ function ConversaPage() {
             onChange={(e) => setInput(e.target.value)}
             placeholder="Escreva em 中文…"
             className={cn(
-              "flex-1 rounded-full bg-muted px-4 py-2.5 text-base outline-none",
+              "flex-1 min-w-0 rounded-full bg-muted px-4 py-2.5 text-base outline-none",
               "focus:ring-2 focus:ring-ring",
               "hanzi"
             )}
