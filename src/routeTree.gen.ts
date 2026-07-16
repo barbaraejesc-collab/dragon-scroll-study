@@ -17,6 +17,7 @@ import { Route as CuriosidadesRouteImport } from './routes/curiosidades'
 import { Route as ConversaRouteImport } from './routes/conversa'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiVocabRouteImport } from './routes/api/vocab'
 import { Route as ApiTtsRouteImport } from './routes/api/tts'
 import { Route as ApiCuriosidadeRouteImport } from './routes/api/curiosidade'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
@@ -61,6 +62,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiVocabRoute = ApiVocabRouteImport.update({
+  id: '/api/vocab',
+  path: '/api/vocab',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiTtsRoute = ApiTtsRouteImport.update({
   id: '/api/tts',
   path: '/api/tts',
@@ -89,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/api/chat': typeof ApiChatRoute
   '/api/curiosidade': typeof ApiCuriosidadeRoute
   '/api/tts': typeof ApiTtsRoute
+  '/api/vocab': typeof ApiVocabRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -102,6 +109,7 @@ export interface FileRoutesByTo {
   '/api/chat': typeof ApiChatRoute
   '/api/curiosidade': typeof ApiCuriosidadeRoute
   '/api/tts': typeof ApiTtsRoute
+  '/api/vocab': typeof ApiVocabRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -116,6 +124,7 @@ export interface FileRoutesById {
   '/api/chat': typeof ApiChatRoute
   '/api/curiosidade': typeof ApiCuriosidadeRoute
   '/api/tts': typeof ApiTtsRoute
+  '/api/vocab': typeof ApiVocabRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -131,6 +140,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/api/curiosidade'
     | '/api/tts'
+    | '/api/vocab'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -144,6 +154,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/api/curiosidade'
     | '/api/tts'
+    | '/api/vocab'
   id:
     | '__root__'
     | '/'
@@ -157,6 +168,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/api/curiosidade'
     | '/api/tts'
+    | '/api/vocab'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -171,6 +183,7 @@ export interface RootRouteChildren {
   ApiChatRoute: typeof ApiChatRoute
   ApiCuriosidadeRoute: typeof ApiCuriosidadeRoute
   ApiTtsRoute: typeof ApiTtsRoute
+  ApiVocabRoute: typeof ApiVocabRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -231,6 +244,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/vocab': {
+      id: '/api/vocab'
+      path: '/api/vocab'
+      fullPath: '/api/vocab'
+      preLoaderRoute: typeof ApiVocabRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/tts': {
       id: '/api/tts'
       path: '/api/tts'
@@ -267,6 +287,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiChatRoute: ApiChatRoute,
   ApiCuriosidadeRoute: ApiCuriosidadeRoute,
   ApiTtsRoute: ApiTtsRoute,
+  ApiVocabRoute: ApiVocabRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
