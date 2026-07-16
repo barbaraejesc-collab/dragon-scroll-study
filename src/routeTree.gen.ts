@@ -20,6 +20,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiVocabRouteImport } from './routes/api/vocab'
 import { Route as ApiTtsRouteImport } from './routes/api/tts'
 import { Route as ApiCuriosidadeRouteImport } from './routes/api/curiosidade'
+import { Route as ApiCheckRouteImport } from './routes/api/check'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 
 const VocabularioRoute = VocabularioRouteImport.update({
@@ -77,6 +78,11 @@ const ApiCuriosidadeRoute = ApiCuriosidadeRouteImport.update({
   path: '/api/curiosidade',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiCheckRoute = ApiCheckRouteImport.update({
+  id: '/api/check',
+  path: '/api/check',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
   path: '/api/chat',
@@ -93,6 +99,7 @@ export interface FileRoutesByFullPath {
   '/quiz': typeof QuizRoute
   '/vocabulario': typeof VocabularioRoute
   '/api/chat': typeof ApiChatRoute
+  '/api/check': typeof ApiCheckRoute
   '/api/curiosidade': typeof ApiCuriosidadeRoute
   '/api/tts': typeof ApiTtsRoute
   '/api/vocab': typeof ApiVocabRoute
@@ -107,6 +114,7 @@ export interface FileRoutesByTo {
   '/quiz': typeof QuizRoute
   '/vocabulario': typeof VocabularioRoute
   '/api/chat': typeof ApiChatRoute
+  '/api/check': typeof ApiCheckRoute
   '/api/curiosidade': typeof ApiCuriosidadeRoute
   '/api/tts': typeof ApiTtsRoute
   '/api/vocab': typeof ApiVocabRoute
@@ -122,6 +130,7 @@ export interface FileRoutesById {
   '/quiz': typeof QuizRoute
   '/vocabulario': typeof VocabularioRoute
   '/api/chat': typeof ApiChatRoute
+  '/api/check': typeof ApiCheckRoute
   '/api/curiosidade': typeof ApiCuriosidadeRoute
   '/api/tts': typeof ApiTtsRoute
   '/api/vocab': typeof ApiVocabRoute
@@ -138,6 +147,7 @@ export interface FileRouteTypes {
     | '/quiz'
     | '/vocabulario'
     | '/api/chat'
+    | '/api/check'
     | '/api/curiosidade'
     | '/api/tts'
     | '/api/vocab'
@@ -152,6 +162,7 @@ export interface FileRouteTypes {
     | '/quiz'
     | '/vocabulario'
     | '/api/chat'
+    | '/api/check'
     | '/api/curiosidade'
     | '/api/tts'
     | '/api/vocab'
@@ -166,6 +177,7 @@ export interface FileRouteTypes {
     | '/quiz'
     | '/vocabulario'
     | '/api/chat'
+    | '/api/check'
     | '/api/curiosidade'
     | '/api/tts'
     | '/api/vocab'
@@ -181,6 +193,7 @@ export interface RootRouteChildren {
   QuizRoute: typeof QuizRoute
   VocabularioRoute: typeof VocabularioRoute
   ApiChatRoute: typeof ApiChatRoute
+  ApiCheckRoute: typeof ApiCheckRoute
   ApiCuriosidadeRoute: typeof ApiCuriosidadeRoute
   ApiTtsRoute: typeof ApiTtsRoute
   ApiVocabRoute: typeof ApiVocabRoute
@@ -265,6 +278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiCuriosidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/check': {
+      id: '/api/check'
+      path: '/api/check'
+      fullPath: '/api/check'
+      preLoaderRoute: typeof ApiCheckRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/chat': {
       id: '/api/chat'
       path: '/api/chat'
@@ -285,6 +305,7 @@ const rootRouteChildren: RootRouteChildren = {
   QuizRoute: QuizRoute,
   VocabularioRoute: VocabularioRoute,
   ApiChatRoute: ApiChatRoute,
+  ApiCheckRoute: ApiCheckRoute,
   ApiCuriosidadeRoute: ApiCuriosidadeRoute,
   ApiTtsRoute: ApiTtsRoute,
   ApiVocabRoute: ApiVocabRoute,
