@@ -29,13 +29,16 @@ function Dashboard() {
 
   useEffect(() => {
     if (!user) return;
-    (async () => {
+    let cancelled = false;
+
+    const loadStats = async () => {
       const [{ count: totalCards }, { data: progress }, { data: sessions }, { data: profile }] = await Promise.all([
         supabase.from("cards").select("*", { count: "exact", head: true }),
         supabase.from("card_progress").select("correct_count,wrong_count").eq("user_id", user.id),
         supabase.from("study_sessions").select("study_date").eq("user_id", user.id).order("study_date", { ascending: false }),
         supabase.from("profiles").select("display_name").eq("id", user.id).maybeSingle(),
       ]);
+      if (cancelled) return;
       const answeredRows = (progress ?? []).filter((p) => p.correct_count + p.wrong_count > 0);
       const totalCorrect = answeredRows.reduce((s, p) => s + p.correct_count, 0);
       const totalWrong = answeredRows.reduce((s, p) => s + p.wrong_count, 0);
@@ -51,7 +54,25 @@ function Dashboard() {
         streak,
         displayName: profile?.display_name ?? user.email ?? "",
       });
-    })();
+    };
+
+    loadStats();
+
+    // Refetch when returning to the tab (fixes stale numbers after finishing a session).
+    const onFocus = () => loadStats();
+    const onPageShow = () => loadStats();
+    const onVisibility = () => {
+      if (document.visibilityState === "visible") loadStats();
+    };
+    window.addEventListener("focus", onFocus);
+    window.addEventListener("pageshow", onPageShow);
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => {
+      cancelled = true;
+      window.removeEventListener("focus", onFocus);
+      window.removeEventListener("pageshow", onPageShow);
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
   }, [user]);
 
   if (!user) return null;
