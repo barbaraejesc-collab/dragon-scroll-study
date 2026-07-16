@@ -125,7 +125,7 @@ export const Route = createFileRoute("/api/chat")({
 
         const gateway = createLovableAiGatewayProvider(key);
         const result = streamText({
-          model: gateway("google/gemini-2.5-pro"),
+          model: gateway("google/gemini-2.5-flash"),
           system: buildSystemPrompt(vocab, hanziList, used, remaining, hanziArr.length),
           messages: await convertToModelMessages(messages),
           temperature: 0.2,
