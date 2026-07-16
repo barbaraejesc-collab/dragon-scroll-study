@@ -142,7 +142,7 @@ function FlashcardsPage() {
     };
     setProgress((p) => ({ ...p, [current.id]: next }));
 
-    await supabase.from("card_progress").upsert(
+    const { error: upsertErr } = await supabase.from("card_progress").upsert(
       {
         user_id: user.id,
         card_id: current.id,
@@ -153,6 +153,7 @@ function FlashcardsPage() {
       },
       { onConflict: "user_id,card_id" }
     );
+    if (upsertErr) console.error("[flashcards] falha ao salvar pontuação:", upsertErr);
 
     const nextIdx = idx + 1;
     setFlipped(false);
