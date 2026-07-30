@@ -151,6 +151,7 @@ function FlashcardsPage() {
   const answer = useCallback(async (correct: boolean) => {
     if (!current || !user) return;
     if (correct) playCorrect(); else playWrong();
+    setScore((s) => ({ correct: s.correct + (correct ? 1 : 0), wrong: s.wrong + (correct ? 0 : 1) }));
     const prev = progress[current.id] ?? { correct: 0, wrong: 0 };
     const next = {
       correct: prev.correct + (correct ? 1 : 0),
