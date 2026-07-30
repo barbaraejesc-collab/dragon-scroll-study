@@ -234,8 +234,15 @@ function FlashcardsPage() {
 
   if (loaded && cards.length === 0) {
     return (
-      <main className="min-h-screen flex items-center justify-center px-6">
-        <p className="text-muted-foreground">Nenhum card disponível.</p>
+      <main className="min-h-screen flex flex-col items-center justify-center px-6 text-center space-y-4">
+        <p className="text-muted-foreground">
+          {sem ? `Nenhum ideograma cadastrado no ${sem}º semestre ainda.` : "Nenhum card disponível."}
+        </p>
+        {sem && (
+          <Button asChild variant="outline">
+            <Link to="/flashcards" search={{}}>Estudar todos os semestres</Link>
+          </Button>
+        )}
       </main>
     );
   }
@@ -246,7 +253,7 @@ function FlashcardsPage() {
         <div className="hanzi text-7xl text-accent">好</div>
         <h2 className="text-2xl font-serif">Nenhum erro registrado ainda!</h2>
         <p className="text-muted-foreground text-sm">Continue estudando para construir seu histórico.</p>
-        <Button asChild><Link to="/flashcards" search={{}}>Sessão normal</Link></Button>
+        <Button asChild><Link to="/flashcards" search={{ sem }}>Sessão normal</Link></Button>
       </main>
     );
   }
@@ -255,7 +262,7 @@ function FlashcardsPage() {
 
   return (
     <main className="min-h-screen px-4 py-6 max-w-2xl mx-auto flex flex-col">
-      <header className="flex items-center justify-between mb-6">
+      <header className="flex items-center justify-between mb-4">
         <Button variant="ghost" size="sm" asChild>
           <Link to="/dashboard"><ArrowLeft className="w-4 h-4 mr-1" /> Voltar</Link>
         </Button>
@@ -267,6 +274,33 @@ function FlashcardsPage() {
         </Button>
       </header>
 
+      <div className="flex flex-wrap items-center gap-2 mb-5">
+        <span className="text-[10px] uppercase tracking-widest text-muted-foreground/70 font-serif mr-1">
+          Semestre
+        </span>
+        <Link
+          to="/flashcards"
+          search={{ mode, sem: undefined }}
+          className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
+            !sem ? "bg-accent text-background border-accent" : "border-border text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          Todos
+        </Link>
+        {semesters.map((s) => (
+          <Link
+            key={s}
+            to="/flashcards"
+            search={{ mode, sem: s }}
+            className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
+              sem === s ? "bg-accent text-background border-accent" : "border-border text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            {s}º
+          </Link>
+        ))}
+      </div>
+
       <div className="mb-6">
         <div className="flex justify-between text-xs text-muted-foreground mb-2 font-serif">
           <span>Sessão</span>
@@ -274,6 +308,7 @@ function FlashcardsPage() {
         </div>
         <Progress value={total ? (done / total) * 100 : 0} className="h-1.5" />
       </div>
+
 
       {!loaded ? (
         <div className="flex-1 flex items-center justify-center">
