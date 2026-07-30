@@ -11,7 +11,7 @@ export const Route = createFileRoute("/vocabulario")({
   component: VocabularioPage,
 });
 
-type Card = { id: string; hanzi: string; pinyin: string; meaning: string; category: string };
+type Card = { id: string; hanzi: string; pinyin: string; meaning: string; category: string; semester: number };
 type Prog = Record<string, { correct: number; wrong: number }>;
 
 function speak(text: string) {
@@ -26,6 +26,7 @@ function VocabularioPage() {
   const [progress, setProgress] = useState<Prog>({});
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<string>("all");
+  const [semester, setSemester] = useState<number | "all">("all");
   const [filter, setFilter] = useState<"all" | "errors" | "new" | "mastered">("all");
 
   useEffect(() => {
@@ -53,9 +54,15 @@ function VocabularioPage() {
     return Array.from(set).sort();
   }, [cards]);
 
+  const semesters = useMemo(
+    () => Array.from(new Set(cards.map((c) => c.semester ?? 1))).sort((a, b) => a - b),
+    [cards]
+  );
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return cards.filter((c) => {
+      if (semester !== "all" && (c.semester ?? 1) !== semester) return false;
       if (category !== "all" && c.category !== category) return false;
       const pr = progress[c.id];
       if (filter === "errors" && (!pr || pr.wrong === 0)) return false;
@@ -68,7 +75,8 @@ function VocabularioPage() {
         c.meaning.toLowerCase().includes(q)
       );
     });
-  }, [cards, query, category, filter, progress]);
+  }, [cards, query, category, semester, filter, progress]);
+
 
   if (!user) return null;
 
@@ -107,6 +115,31 @@ function VocabularioPage() {
           </button>
         ))}
       </div>
+
+      <div className="flex flex-wrap items-center gap-2 mb-3">
+        <span className="text-[10px] uppercase tracking-widest text-muted-foreground/70 font-serif mr-1">Semestre</span>
+        <button
+          onClick={() => setSemester("all")}
+          className={`text-xs px-2.5 py-1 rounded-full border ${
+            semester === "all" ? "bg-primary/30 border-primary text-cream" : "border-border text-muted-foreground"
+          }`}
+        >
+          Todos
+        </button>
+        {semesters.map((s) => (
+          <button
+            key={s}
+            onClick={() => setSemester(s)}
+            className={`text-xs px-2.5 py-1 rounded-full border ${
+              semester === s ? "bg-primary/30 border-primary text-cream" : "border-border text-muted-foreground"
+            }`}
+          >
+            {s}º
+          </button>
+        ))}
+      </div>
+
+
 
       <div className="flex flex-wrap gap-2 mb-6">
         <button

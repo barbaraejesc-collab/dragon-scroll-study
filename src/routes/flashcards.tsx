@@ -12,12 +12,16 @@ import { speakZh, preloadZh } from "@/lib/tts";
 export const Route = createFileRoute("/flashcards")({
   validateSearch: (s: Record<string, unknown>) => ({
     mode: s.mode === "errors" ? ("errors" as const) : undefined,
+    sem: s.sem !== undefined && s.sem !== null && !Number.isNaN(Number(s.sem))
+      ? Number(s.sem)
+      : undefined,
   }),
   component: FlashcardsPage,
 });
 
-type Card = { id: string; hanzi: string; pinyin: string; meaning: string; category: string };
+type Card = { id: string; hanzi: string; pinyin: string; meaning: string; category: string; semester: number };
 type Progress = Record<string, { correct: number; wrong: number }>;
+
 
 // Pool of distinct Chinese fonts (loaded in __root.tsx). Each session picks one.
 const HANZI_FONTS = [
@@ -43,9 +47,10 @@ function speakHanzi(text: string) {
 function FlashcardsPage() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
-  const { mode } = Route.useSearch();
+  const { mode, sem } = Route.useSearch();
   const errorsMode = mode === "errors";
   const [cards, setCards] = useState<Card[]>([]);
+  const [semesters, setSemesters] = useState<number[]>([]);
   const [progress, setProgress] = useState<Progress>({});
   const [queue, setQueue] = useState<string[]>([]);
   const [idx, setIdx] = useState(0);
@@ -63,13 +68,16 @@ function FlashcardsPage() {
   // Load cards + progress + saved session position
   useEffect(() => {
     if (!user) return;
+    setLoaded(false);
     (async () => {
       const [{ data: cardsData }, { data: progressData }, { data: stateData }] = await Promise.all([
         supabase.from("cards").select("*"),
         supabase.from("card_progress").select("card_id,correct_count,wrong_count").eq("user_id", user.id),
         supabase.from("flashcard_session_state").select("queue,current_index").eq("user_id", user.id).maybeSingle(),
       ]);
-      const c = cardsData ?? [];
+      const all = (cardsData ?? []) as Card[];
+      setSemesters(Array.from(new Set(all.map((x) => x.semester ?? 1))).sort((a, b) => a - b));
+      const c = sem ? all.filter((x) => (x.semester ?? 1) === sem) : all;
       const p: Progress = {};
       (progressData ?? []).forEach((row) => {
         p[row.card_id] = { correct: row.correct_count, wrong: row.wrong_count };
@@ -91,6 +99,10 @@ function FlashcardsPage() {
           [ranked[i], ranked[j]] = [ranked[j], ranked[i]];
         }
         setQueue(ranked);
+        setIdx(0);
+      } else if (sem) {
+        // Semester-scoped session: always fresh (saved position tracks the full deck).
+        setQueue(buildSession(c));
         setIdx(0);
       } else {
         const cardIds = new Set(c.map((x) => x.id));
@@ -115,7 +127,8 @@ function FlashcardsPage() {
       const today = new Date().toISOString().slice(0, 10);
       supabase.from("study_sessions").insert({ user_id: user.id, study_date: today }).then(() => {});
     })();
-  }, [user, errorsMode]);
+  }, [user, errorsMode, sem]);
+
 
   const current = useMemo(() => cards.find((c) => c.id === queue[idx]) ?? null, [cards, queue, idx]);
   const total = queue.length;
@@ -123,14 +136,15 @@ function FlashcardsPage() {
 
   const persistIndex = useCallback(
     async (newIdx: number) => {
-      if (!user || errorsMode) return;
+      if (!user || errorsMode || sem) return;
       await supabase.from("flashcard_session_state").upsert(
         { user_id: user.id, queue, current_index: newIdx, updated_at: new Date().toISOString() },
         { onConflict: "user_id" }
       );
     },
-    [user, queue, errorsMode]
+    [user, queue, errorsMode, sem]
   );
+
 
   const answer = useCallback(async (correct: boolean) => {
     if (!current || !user) return;
@@ -179,20 +193,21 @@ function FlashcardsPage() {
   const restart = useCallback(async () => {
     setHanziFont((prev) => pickRandomFont(prev.name));
     if (errorsMode) {
-      navigate({ to: "/flashcards", search: {} });
+      navigate({ to: "/flashcards", search: { sem } });
       return;
     }
     const fresh = buildSession(cards);
     setQueue(fresh);
     setIdx(0);
     setFlipped(false);
-    if (user) {
+    if (user && !sem) {
       await supabase.from("flashcard_session_state").upsert(
         { user_id: user.id, queue: fresh, current_index: 0, updated_at: new Date().toISOString() },
         { onConflict: "user_id" }
       );
     }
-  }, [errorsMode, cards, user, navigate]);
+  }, [errorsMode, cards, user, navigate, sem]);
+
 
   // Keyboard shortcuts: Space=flip, ←=errei, →=acertei
   useEffect(() => {
@@ -219,8 +234,15 @@ function FlashcardsPage() {
 
   if (loaded && cards.length === 0) {
     return (
-      <main className="min-h-screen flex items-center justify-center px-6">
-        <p className="text-muted-foreground">Nenhum card disponível.</p>
+      <main className="min-h-screen flex flex-col items-center justify-center px-6 text-center space-y-4">
+        <p className="text-muted-foreground">
+          {sem ? `Nenhum ideograma cadastrado no ${sem}º semestre ainda.` : "Nenhum card disponível."}
+        </p>
+        {sem && (
+          <Button asChild variant="outline">
+            <Link to="/flashcards" search={{}}>Estudar todos os semestres</Link>
+          </Button>
+        )}
       </main>
     );
   }
@@ -231,7 +253,7 @@ function FlashcardsPage() {
         <div className="hanzi text-7xl text-accent">好</div>
         <h2 className="text-2xl font-serif">Nenhum erro registrado ainda!</h2>
         <p className="text-muted-foreground text-sm">Continue estudando para construir seu histórico.</p>
-        <Button asChild><Link to="/flashcards" search={{}}>Sessão normal</Link></Button>
+        <Button asChild><Link to="/flashcards" search={{ sem }}>Sessão normal</Link></Button>
       </main>
     );
   }
@@ -240,7 +262,7 @@ function FlashcardsPage() {
 
   return (
     <main className="min-h-screen px-4 py-6 max-w-2xl mx-auto flex flex-col">
-      <header className="flex items-center justify-between mb-6">
+      <header className="flex items-center justify-between mb-4">
         <Button variant="ghost" size="sm" asChild>
           <Link to="/dashboard"><ArrowLeft className="w-4 h-4 mr-1" /> Voltar</Link>
         </Button>
@@ -252,6 +274,33 @@ function FlashcardsPage() {
         </Button>
       </header>
 
+      <div className="flex flex-wrap items-center gap-2 mb-5">
+        <span className="text-[10px] uppercase tracking-widest text-muted-foreground/70 font-serif mr-1">
+          Semestre
+        </span>
+        <Link
+          to="/flashcards"
+          search={{ mode, sem: undefined }}
+          className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
+            !sem ? "bg-accent text-background border-accent" : "border-border text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          Todos
+        </Link>
+        {semesters.map((s) => (
+          <Link
+            key={s}
+            to="/flashcards"
+            search={{ mode, sem: s }}
+            className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
+              sem === s ? "bg-accent text-background border-accent" : "border-border text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            {s}º
+          </Link>
+        ))}
+      </div>
+
       <div className="mb-6">
         <div className="flex justify-between text-xs text-muted-foreground mb-2 font-serif">
           <span>Sessão</span>
@@ -259,6 +308,7 @@ function FlashcardsPage() {
         </div>
         <Progress value={total ? (done / total) * 100 : 0} className="h-1.5" />
       </div>
+
 
       {!loaded ? (
         <div className="flex-1 flex items-center justify-center">

@@ -60,6 +60,7 @@ export type Database = {
           id: string
           meaning: string
           pinyin: string
+          semester: number
         }
         Insert: {
           category: string
@@ -68,6 +69,7 @@ export type Database = {
           id?: string
           meaning: string
           pinyin: string
+          semester?: number
         }
         Update: {
           category?: string
@@ -76,6 +78,7 @@ export type Database = {
           id?: string
           meaning?: string
           pinyin?: string
+          semester?: number
         }
         Relationships: []
       }
