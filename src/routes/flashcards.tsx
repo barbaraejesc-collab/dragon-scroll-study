@@ -57,6 +57,7 @@ function FlashcardsPage() {
   const [flipped, setFlipped] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [hanziFont, setHanziFont] = useState(() => pickRandomFont());
+  const [score, setScore] = useState({ correct: 0, wrong: 0 });
 
 
 
