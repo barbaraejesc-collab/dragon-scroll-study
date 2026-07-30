@@ -57,6 +57,7 @@ function FlashcardsPage() {
   const [flipped, setFlipped] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [hanziFont, setHanziFont] = useState(() => pickRandomFont());
+  const [score, setScore] = useState({ correct: 0, wrong: 0 });
 
 
 
@@ -69,6 +70,7 @@ function FlashcardsPage() {
   useEffect(() => {
     if (!user) return;
     setLoaded(false);
+    setScore({ correct: 0, wrong: 0 });
     (async () => {
       const [{ data: cardsData }, { data: progressData }, { data: stateData }] = await Promise.all([
         supabase.from("cards").select("*"),
@@ -149,6 +151,7 @@ function FlashcardsPage() {
   const answer = useCallback(async (correct: boolean) => {
     if (!current || !user) return;
     if (correct) playCorrect(); else playWrong();
+    setScore((s) => ({ correct: s.correct + (correct ? 1 : 0), wrong: s.wrong + (correct ? 0 : 1) }));
     const prev = progress[current.id] ?? { correct: 0, wrong: 0 };
     const next = {
       correct: prev.correct + (correct ? 1 : 0),
@@ -199,6 +202,7 @@ function FlashcardsPage() {
     const fresh = buildSession(cards);
     setQueue(fresh);
     setIdx(0);
+    setScore({ correct: 0, wrong: 0 });
     setFlipped(false);
     if (user && !sem) {
       await supabase.from("flashcard_session_state").upsert(
@@ -304,7 +308,11 @@ function FlashcardsPage() {
       <div className="mb-6">
         <div className="flex justify-between text-xs text-muted-foreground mb-2 font-serif">
           <span>Sessão</span>
-          <span>{Math.min(done, total)} / {total}</span>
+          <span className="flex items-center gap-3">
+            <span className="text-success">✓ {score.correct}</span>
+            <span className="text-destructive">✕ {score.wrong}</span>
+            <span>{Math.min(done, total)} / {total}</span>
+          </span>
         </div>
         <Progress value={total ? (done / total) * 100 : 0} className="h-1.5" />
       </div>
@@ -315,7 +323,8 @@ function FlashcardsPage() {
           <div className="hanzi text-6xl text-accent/40 shimmer-gold">学</div>
         </div>
       ) : finished ? (
-        <FinishedView total={total} onRestart={restart} />
+        <FinishedView total={total} score={score} onRestart={restart} />
+
       ) : current ? (
         <FlashcardView card={current} flipped={flipped} onFlip={() => setFlipped((f) => !f)} onAnswer={answer} hanziFont={hanziFont} />
       ) : null}
@@ -395,18 +404,39 @@ function FlashcardView({
   );
 }
 
-function FinishedView({ total, onRestart }: { total: number; onRestart: () => void }) {
+function FinishedView({
+  total, score, onRestart,
+}: {
+  total: number; score: { correct: number; wrong: number }; onRestart: () => void;
+}) {
+  const answered = score.correct + score.wrong;
+  const pct = answered > 0 ? Math.round((score.correct / answered) * 100) : null;
   return (
     <div className="flex-1 flex flex-col items-center justify-center text-center space-y-6 py-12">
       <div className="hanzi text-8xl text-accent shimmer-gold">完</div>
       <h2 className="text-3xl font-serif">Sessão completa!</h2>
       <p className="text-muted-foreground">Você revisou {total} cards. 加油!</p>
+      <div className="flex items-center gap-6 font-serif">
+        <div>
+          <div className="text-3xl text-success">{score.correct}</div>
+          <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Acertos</div>
+        </div>
+        <div>
+          <div className="text-3xl text-destructive">{score.wrong}</div>
+          <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Erros</div>
+        </div>
+        <div>
+          <div className="text-3xl text-accent">{pct === null ? "--" : `${pct}%`}</div>
+          <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Aproveitamento</div>
+        </div>
+      </div>
       <Button onClick={onRestart} size="lg" className="bg-gradient-to-r from-primary to-primary/80">
         <RotateCw className="w-4 h-4 mr-2" /> Nova sessão
       </Button>
     </div>
   );
 }
+
 
 function buildSession(cards: Card[]): string[] {
   const ids = cards.map((c) => c.id);
