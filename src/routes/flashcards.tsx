@@ -47,9 +47,10 @@ function speakHanzi(text: string) {
 function FlashcardsPage() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
-  const { mode } = Route.useSearch();
+  const { mode, sem } = Route.useSearch();
   const errorsMode = mode === "errors";
   const [cards, setCards] = useState<Card[]>([]);
+  const [semesters, setSemesters] = useState<number[]>([]);
   const [progress, setProgress] = useState<Progress>({});
   const [queue, setQueue] = useState<string[]>([]);
   const [idx, setIdx] = useState(0);
@@ -67,13 +68,16 @@ function FlashcardsPage() {
   // Load cards + progress + saved session position
   useEffect(() => {
     if (!user) return;
+    setLoaded(false);
     (async () => {
       const [{ data: cardsData }, { data: progressData }, { data: stateData }] = await Promise.all([
         supabase.from("cards").select("*"),
         supabase.from("card_progress").select("card_id,correct_count,wrong_count").eq("user_id", user.id),
         supabase.from("flashcard_session_state").select("queue,current_index").eq("user_id", user.id).maybeSingle(),
       ]);
-      const c = cardsData ?? [];
+      const all = (cardsData ?? []) as Card[];
+      setSemesters(Array.from(new Set(all.map((x) => x.semester ?? 1))).sort((a, b) => a - b));
+      const c = sem ? all.filter((x) => (x.semester ?? 1) === sem) : all;
       const p: Progress = {};
       (progressData ?? []).forEach((row) => {
         p[row.card_id] = { correct: row.correct_count, wrong: row.wrong_count };
@@ -95,6 +99,10 @@ function FlashcardsPage() {
           [ranked[i], ranked[j]] = [ranked[j], ranked[i]];
         }
         setQueue(ranked);
+        setIdx(0);
+      } else if (sem) {
+        // Semester-scoped session: always fresh (saved position tracks the full deck).
+        setQueue(buildSession(c));
         setIdx(0);
       } else {
         const cardIds = new Set(c.map((x) => x.id));
@@ -119,7 +127,8 @@ function FlashcardsPage() {
       const today = new Date().toISOString().slice(0, 10);
       supabase.from("study_sessions").insert({ user_id: user.id, study_date: today }).then(() => {});
     })();
-  }, [user, errorsMode]);
+  }, [user, errorsMode, sem]);
+
 
   const current = useMemo(() => cards.find((c) => c.id === queue[idx]) ?? null, [cards, queue, idx]);
   const total = queue.length;
