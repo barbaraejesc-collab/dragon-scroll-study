@@ -136,14 +136,15 @@ function FlashcardsPage() {
 
   const persistIndex = useCallback(
     async (newIdx: number) => {
-      if (!user || errorsMode) return;
+      if (!user || errorsMode || sem) return;
       await supabase.from("flashcard_session_state").upsert(
         { user_id: user.id, queue, current_index: newIdx, updated_at: new Date().toISOString() },
         { onConflict: "user_id" }
       );
     },
-    [user, queue, errorsMode]
+    [user, queue, errorsMode, sem]
   );
+
 
   const answer = useCallback(async (correct: boolean) => {
     if (!current || !user) return;
