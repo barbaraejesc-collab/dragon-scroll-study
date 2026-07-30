@@ -193,20 +193,21 @@ function FlashcardsPage() {
   const restart = useCallback(async () => {
     setHanziFont((prev) => pickRandomFont(prev.name));
     if (errorsMode) {
-      navigate({ to: "/flashcards", search: {} });
+      navigate({ to: "/flashcards", search: { sem } });
       return;
     }
     const fresh = buildSession(cards);
     setQueue(fresh);
     setIdx(0);
     setFlipped(false);
-    if (user) {
+    if (user && !sem) {
       await supabase.from("flashcard_session_state").upsert(
         { user_id: user.id, queue: fresh, current_index: 0, updated_at: new Date().toISOString() },
         { onConflict: "user_id" }
       );
     }
-  }, [errorsMode, cards, user, navigate]);
+  }, [errorsMode, cards, user, navigate, sem]);
+
 
   // Keyboard shortcuts: Space=flip, ←=errei, →=acertei
   useEffect(() => {
