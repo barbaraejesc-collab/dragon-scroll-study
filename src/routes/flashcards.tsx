@@ -70,6 +70,7 @@ function FlashcardsPage() {
   useEffect(() => {
     if (!user) return;
     setLoaded(false);
+    setScore({ correct: 0, wrong: 0 });
     (async () => {
       const [{ data: cardsData }, { data: progressData }, { data: stateData }] = await Promise.all([
         supabase.from("cards").select("*"),
