@@ -54,9 +54,15 @@ function VocabularioPage() {
     return Array.from(set).sort();
   }, [cards]);
 
+  const semesters = useMemo(
+    () => Array.from(new Set(cards.map((c) => c.semester ?? 1))).sort((a, b) => a - b),
+    [cards]
+  );
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return cards.filter((c) => {
+      if (semester !== "all" && (c.semester ?? 1) !== semester) return false;
       if (category !== "all" && c.category !== category) return false;
       const pr = progress[c.id];
       if (filter === "errors" && (!pr || pr.wrong === 0)) return false;
@@ -69,7 +75,8 @@ function VocabularioPage() {
         c.meaning.toLowerCase().includes(q)
       );
     });
-  }, [cards, query, category, filter, progress]);
+  }, [cards, query, category, semester, filter, progress]);
+
 
   if (!user) return null;
 
