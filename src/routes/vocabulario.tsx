@@ -26,6 +26,7 @@ function VocabularioPage() {
   const [progress, setProgress] = useState<Prog>({});
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<string>("all");
+  const [semester, setSemester] = useState<number | "all">("all");
   const [filter, setFilter] = useState<"all" | "errors" | "new" | "mastered">("all");
 
   useEffect(() => {
