@@ -12,12 +12,16 @@ import { speakZh, preloadZh } from "@/lib/tts";
 export const Route = createFileRoute("/flashcards")({
   validateSearch: (s: Record<string, unknown>) => ({
     mode: s.mode === "errors" ? ("errors" as const) : undefined,
+    sem: s.sem !== undefined && s.sem !== null && !Number.isNaN(Number(s.sem))
+      ? Number(s.sem)
+      : undefined,
   }),
   component: FlashcardsPage,
 });
 
-type Card = { id: string; hanzi: string; pinyin: string; meaning: string; category: string };
+type Card = { id: string; hanzi: string; pinyin: string; meaning: string; category: string; semester: number };
 type Progress = Record<string, { correct: number; wrong: number }>;
+
 
 // Pool of distinct Chinese fonts (loaded in __root.tsx). Each session picks one.
 const HANZI_FONTS = [
