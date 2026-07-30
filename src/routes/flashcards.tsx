@@ -308,7 +308,11 @@ function FlashcardsPage() {
       <div className="mb-6">
         <div className="flex justify-between text-xs text-muted-foreground mb-2 font-serif">
           <span>Sessão</span>
-          <span>{Math.min(done, total)} / {total}</span>
+          <span className="flex items-center gap-3">
+            <span className="text-success">✓ {score.correct}</span>
+            <span className="text-destructive">✕ {score.wrong}</span>
+            <span>{Math.min(done, total)} / {total}</span>
+          </span>
         </div>
         <Progress value={total ? (done / total) * 100 : 0} className="h-1.5" />
       </div>
@@ -319,7 +323,8 @@ function FlashcardsPage() {
           <div className="hanzi text-6xl text-accent/40 shimmer-gold">学</div>
         </div>
       ) : finished ? (
-        <FinishedView total={total} onRestart={restart} />
+        <FinishedView total={total} score={score} onRestart={restart} />
+
       ) : current ? (
         <FlashcardView card={current} flipped={flipped} onFlip={() => setFlipped((f) => !f)} onAnswer={answer} hanziFont={hanziFont} />
       ) : null}
