@@ -404,18 +404,39 @@ function FlashcardView({
   );
 }
 
-function FinishedView({ total, onRestart }: { total: number; onRestart: () => void }) {
+function FinishedView({
+  total, score, onRestart,
+}: {
+  total: number; score: { correct: number; wrong: number }; onRestart: () => void;
+}) {
+  const answered = score.correct + score.wrong;
+  const pct = answered > 0 ? Math.round((score.correct / answered) * 100) : null;
   return (
     <div className="flex-1 flex flex-col items-center justify-center text-center space-y-6 py-12">
       <div className="hanzi text-8xl text-accent shimmer-gold">完</div>
       <h2 className="text-3xl font-serif">Sessão completa!</h2>
       <p className="text-muted-foreground">Você revisou {total} cards. 加油!</p>
+      <div className="flex items-center gap-6 font-serif">
+        <div>
+          <div className="text-3xl text-success">{score.correct}</div>
+          <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Acertos</div>
+        </div>
+        <div>
+          <div className="text-3xl text-destructive">{score.wrong}</div>
+          <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Erros</div>
+        </div>
+        <div>
+          <div className="text-3xl text-accent">{pct === null ? "--" : `${pct}%`}</div>
+          <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Aproveitamento</div>
+        </div>
+      </div>
       <Button onClick={onRestart} size="lg" className="bg-gradient-to-r from-primary to-primary/80">
         <RotateCw className="w-4 h-4 mr-2" /> Nova sessão
       </Button>
     </div>
   );
 }
+
 
 function buildSession(cards: Card[]): string[] {
   const ids = cards.map((c) => c.id);
