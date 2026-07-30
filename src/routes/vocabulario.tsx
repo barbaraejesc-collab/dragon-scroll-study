@@ -11,7 +11,7 @@ export const Route = createFileRoute("/vocabulario")({
   component: VocabularioPage,
 });
 
-type Card = { id: string; hanzi: string; pinyin: string; meaning: string; category: string };
+type Card = { id: string; hanzi: string; pinyin: string; meaning: string; category: string; semester: number };
 type Prog = Record<string, { correct: number; wrong: number }>;
 
 function speak(text: string) {
