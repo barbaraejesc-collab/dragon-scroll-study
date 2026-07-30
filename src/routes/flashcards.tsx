@@ -202,6 +202,7 @@ function FlashcardsPage() {
     const fresh = buildSession(cards);
     setQueue(fresh);
     setIdx(0);
+    setScore({ correct: 0, wrong: 0 });
     setFlipped(false);
     if (user && !sem) {
       await supabase.from("flashcard_session_state").upsert(
