@@ -116,6 +116,31 @@ function VocabularioPage() {
         ))}
       </div>
 
+      <div className="flex flex-wrap items-center gap-2 mb-3">
+        <span className="text-[10px] uppercase tracking-widest text-muted-foreground/70 font-serif mr-1">Semestre</span>
+        <button
+          onClick={() => setSemester("all")}
+          className={`text-xs px-2.5 py-1 rounded-full border ${
+            semester === "all" ? "bg-primary/30 border-primary text-cream" : "border-border text-muted-foreground"
+          }`}
+        >
+          Todos
+        </button>
+        {semesters.map((s) => (
+          <button
+            key={s}
+            onClick={() => setSemester(s)}
+            className={`text-xs px-2.5 py-1 rounded-full border ${
+              semester === s ? "bg-primary/30 border-primary text-cream" : "border-border text-muted-foreground"
+            }`}
+          >
+            {s}º
+          </button>
+        ))}
+      </div>
+
+
+
       <div className="flex flex-wrap gap-2 mb-6">
         <button
           onClick={() => setCategory("all")}
