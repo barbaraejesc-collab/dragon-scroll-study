@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/lib/auth-context";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Flame, BookOpen, Target, LogOut, Sparkles, AlertTriangle, Zap, List } from "lucide-react";
+import { Flame, BookOpen, Target, LogOut, Sparkles, AlertTriangle, Zap, List, PlayCircle } from "lucide-react";
 
 export const Route = createFileRoute("/dashboard")({
   component: Dashboard,
