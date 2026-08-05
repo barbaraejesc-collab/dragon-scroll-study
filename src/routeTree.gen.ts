@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VocabularioRouteImport } from './routes/vocabulario'
 import { Route as QuizRouteImport } from './routes/quiz'
+import { Route as LiveRouteImport } from './routes/live'
 import { Route as FlashcardsRouteImport } from './routes/flashcards'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CuriosidadesRouteImport } from './routes/curiosidades'
@@ -31,6 +32,11 @@ const VocabularioRoute = VocabularioRouteImport.update({
 const QuizRoute = QuizRouteImport.update({
   id: '/quiz',
   path: '/quiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LiveRoute = LiveRouteImport.update({
+  id: '/live',
+  path: '/live',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FlashcardsRoute = FlashcardsRouteImport.update({
@@ -96,6 +102,7 @@ export interface FileRoutesByFullPath {
   '/curiosidades': typeof CuriosidadesRoute
   '/dashboard': typeof DashboardRoute
   '/flashcards': typeof FlashcardsRoute
+  '/live': typeof LiveRoute
   '/quiz': typeof QuizRoute
   '/vocabulario': typeof VocabularioRoute
   '/api/chat': typeof ApiChatRoute
@@ -111,6 +118,7 @@ export interface FileRoutesByTo {
   '/curiosidades': typeof CuriosidadesRoute
   '/dashboard': typeof DashboardRoute
   '/flashcards': typeof FlashcardsRoute
+  '/live': typeof LiveRoute
   '/quiz': typeof QuizRoute
   '/vocabulario': typeof VocabularioRoute
   '/api/chat': typeof ApiChatRoute
@@ -127,6 +135,7 @@ export interface FileRoutesById {
   '/curiosidades': typeof CuriosidadesRoute
   '/dashboard': typeof DashboardRoute
   '/flashcards': typeof FlashcardsRoute
+  '/live': typeof LiveRoute
   '/quiz': typeof QuizRoute
   '/vocabulario': typeof VocabularioRoute
   '/api/chat': typeof ApiChatRoute
@@ -144,6 +153,7 @@ export interface FileRouteTypes {
     | '/curiosidades'
     | '/dashboard'
     | '/flashcards'
+    | '/live'
     | '/quiz'
     | '/vocabulario'
     | '/api/chat'
@@ -159,6 +169,7 @@ export interface FileRouteTypes {
     | '/curiosidades'
     | '/dashboard'
     | '/flashcards'
+    | '/live'
     | '/quiz'
     | '/vocabulario'
     | '/api/chat'
@@ -174,6 +185,7 @@ export interface FileRouteTypes {
     | '/curiosidades'
     | '/dashboard'
     | '/flashcards'
+    | '/live'
     | '/quiz'
     | '/vocabulario'
     | '/api/chat'
@@ -190,6 +202,7 @@ export interface RootRouteChildren {
   CuriosidadesRoute: typeof CuriosidadesRoute
   DashboardRoute: typeof DashboardRoute
   FlashcardsRoute: typeof FlashcardsRoute
+  LiveRoute: typeof LiveRoute
   QuizRoute: typeof QuizRoute
   VocabularioRoute: typeof VocabularioRoute
   ApiChatRoute: typeof ApiChatRoute
@@ -213,6 +226,13 @@ declare module '@tanstack/react-router' {
       path: '/quiz'
       fullPath: '/quiz'
       preLoaderRoute: typeof QuizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/live': {
+      id: '/live'
+      path: '/live'
+      fullPath: '/live'
+      preLoaderRoute: typeof LiveRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/flashcards': {
@@ -302,6 +322,7 @@ const rootRouteChildren: RootRouteChildren = {
   CuriosidadesRoute: CuriosidadesRoute,
   DashboardRoute: DashboardRoute,
   FlashcardsRoute: FlashcardsRoute,
+  LiveRoute: LiveRoute,
   QuizRoute: QuizRoute,
   VocabularioRoute: VocabularioRoute,
   ApiChatRoute: ApiChatRoute,
@@ -313,13 +334,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

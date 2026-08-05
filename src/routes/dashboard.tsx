@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/lib/auth-context";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Flame, BookOpen, Target, LogOut, Sparkles, AlertTriangle, Zap, List } from "lucide-react";
+import { Flame, BookOpen, Target, LogOut, Sparkles, AlertTriangle, Zap, List, PlayCircle } from "lucide-react";
 
 export const Route = createFileRoute("/dashboard")({
   component: Dashboard,
@@ -128,6 +128,13 @@ function Dashboard() {
             <p className="text-muted-foreground text-xs">10 perguntas com múltipla escolha</p>
           </div>
         </Link>
+        <Link to="/live" className="group">
+          <div className="bg-card border border-accent/40 rounded-2xl p-6 h-full transition-all group-hover:border-accent group-hover:shadow-[var(--shadow-gold)]">
+            <PlayCircle className="w-6 h-6 text-accent mb-3" />
+            <h3 className="text-lg font-serif text-cream mb-1">Modo Live</h3>
+            <p className="text-muted-foreground text-xs">Cards automáticos com áudio, sem cliques</p>
+          </div>
+        </Link>
         <Link to="/vocabulario" className="group">
           <div className="bg-card border border-border rounded-2xl p-6 h-full transition-all group-hover:border-accent/50">
             <List className="w-6 h-6 text-accent mb-3" />
@@ -135,6 +142,7 @@ function Dashboard() {
             <p className="text-muted-foreground text-xs">Explore todos os cards com busca</p>
           </div>
         </Link>
+
 
         <Link to="/curiosidades" className="md:col-span-3 group">
           <div className="bg-card border border-border rounded-2xl p-6 transition-all group-hover:border-accent/50">
