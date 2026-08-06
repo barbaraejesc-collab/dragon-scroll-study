@@ -94,47 +94,44 @@ function LivePage() {
     setFinished(false);
     setPaused(false);
     setRunning(true);
-    void speakZh(cards[0].hanzi);
   }, [semester, speed]);
 
   const current = deck[idx];
 
+  // Speak the hanzi whenever the back (pinyin + meaning) is revealed.
+  useEffect(() => {
+    if (!running || side !== "back" || !current) return;
+    void speakZh(current.hanzi);
+  }, [running, side, current?.id]);
+
   const advance = useCallback(() => {
-    setSide((prevSide) => {
-      if (prevSide === "front") {
-        setRemaining(speed);
-        if (current) void speakZh(current.hanzi);
-        return "back";
-      }
-      setIdx((i) => {
-        const next = i + 1;
-        if (next >= deck.length) {
-          setRunning(false);
-          setFinished(true);
-          return i;
-        }
-        setRemaining(speed);
-        void speakZh(deck[next].hanzi);
-        return next;
-      });
-      return "front";
-    });
-  }, [current, deck, speed]);
+    if (side === "front") {
+      setSide("back");
+      setRemaining(speed);
+      return;
+    }
+    const next = idx + 1;
+    if (next >= deck.length) {
+      setRunning(false);
+      setFinished(true);
+      return;
+    }
+    setSide("front");
+    setIdx(next);
+    setRemaining(speed);
+  }, [side, idx, deck.length, speed]);
 
   const skip = useCallback(() => {
+    const next = idx + 1;
+    if (next >= deck.length) {
+      setRunning(false);
+      setFinished(true);
+      return;
+    }
     setSide("front");
-    setIdx((i) => {
-      const next = i + 1;
-      if (next >= deck.length) {
-        setRunning(false);
-        setFinished(true);
-        return i;
-      }
-      setRemaining(speed);
-      void speakZh(deck[next].hanzi);
-      return next;
-    });
-  }, [deck, speed]);
+    setIdx(next);
+    setRemaining(speed);
+  }, [idx, deck.length, speed]);
 
   // Timer tick
   const advanceRef = useRef(advance);
@@ -143,11 +140,12 @@ function LivePage() {
     if (!running || paused) return;
     const t = setInterval(() => {
       setRemaining((r) => {
-        if (r <= 0.1) {
+        const nr = +(r - 0.1).toFixed(1);
+        if (nr <= 0) {
           advanceRef.current();
           return speed;
         }
-        return +(r - 0.1).toFixed(1);
+        return nr;
       });
     }, 100);
     return () => clearInterval(t);
