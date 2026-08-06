@@ -5,6 +5,35 @@ const blobUrlCache = new Map<string, string>();
 const inflight = new Map<string, Promise<string>>();
 let currentAudio: HTMLAudioElement | null = null;
 
+function getAudioElement(): HTMLAudioElement {
+  if (!currentAudio) {
+    currentAudio = new Audio();
+    currentAudio.preload = "auto";
+  }
+  return currentAudio;
+}
+
+/** Unlock media playback during a user gesture so subsequent automatic cards work on mobile. */
+export function unlockTts(): void {
+  if (typeof window === "undefined") return;
+  const audio = getAudioElement();
+  if (audio.src) return;
+  audio.src = "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQQAAACAgICA";
+  void audio.play().then(() => {
+    audio.pause();
+    audio.currentTime = 0;
+  }).catch(() => {});
+}
+
+function speakWithDeviceVoice(text: string): void {
+  if (!("speechSynthesis" in window)) return;
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "zh-CN";
+  utterance.rate = 0.8;
+  window.speechSynthesis.speak(utterance);
+}
+
 async function getAudioUrl(text: string): Promise<string> {
   const cached = blobUrlCache.get(text);
   if (cached) return cached;
@@ -37,17 +66,15 @@ export async function speakZh(text: string): Promise<void> {
   const clean = text?.trim();
   if (!clean) return;
   try {
-    if (currentAudio) {
-      currentAudio.pause();
-      currentAudio.src = "";
-      currentAudio = null;
-    }
+    const audio = getAudioElement();
+    audio.pause();
     const url = await getAudioUrl(clean);
-    const audio = new Audio(url);
-    currentAudio = audio;
-    await audio.play().catch(() => {});
+    audio.src = url;
+    audio.currentTime = 0;
+    await audio.play();
   } catch {
-    // swallow — TTS is a nice-to-have
+    // Keep pronunciation available if the professional voice is blocked or unavailable.
+    speakWithDeviceVoice(clean);
   }
 }
 

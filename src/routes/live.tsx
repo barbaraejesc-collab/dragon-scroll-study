@@ -4,7 +4,7 @@ import { useAuth } from "@/lib/auth-context";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Play, Pause, SkipForward, Square, ArrowLeft, RotateCw } from "lucide-react";
-import { speakZh } from "@/lib/tts";
+import { speakZh, unlockTts } from "@/lib/tts";
 
 export const Route = createFileRoute("/live")({
   head: () => ({
@@ -81,6 +81,8 @@ function LivePage() {
   }, [semester, speed, prefsLoaded]);
 
   const start = useCallback(async () => {
+    // Must happen synchronously inside the Start click for mobile autoplay policies.
+    unlockTts();
     setStarting(true);
     const query = supabase.from("cards").select("id,hanzi,pinyin,meaning,semester");
     const { data } = semester === "all" ? await query : await query.eq("semester", semester);
