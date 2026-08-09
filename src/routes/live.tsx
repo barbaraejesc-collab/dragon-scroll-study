@@ -282,7 +282,7 @@ function LivePage() {
         <h2 className="text-3xl font-serif italic">Você passou por todos os ideogramas! 🎉</h2>
         <p className="text-muted-foreground text-sm">{deck.length} cards nesta sessão</p>
         <div className="flex gap-3">
-          <Button onClick={() => void start()}>
+          <Button onClick={() => void start(true)}>
             <RotateCw className="w-4 h-4 mr-2" /> Nova sessão embaralhada
           </Button>
           <Button variant="ghost" onClick={() => navigate({ to: "/dashboard" })}>
