@@ -263,6 +263,13 @@ function LivePage() {
         <Button size="lg" className="w-full" onClick={() => void start()} disabled={starting}>
           <Play className="w-4 h-4 mr-2" /> {starting ? "Preparando..." : "Iniciar sessão"}
         </Button>
+        <button
+          onClick={() => void start(true)}
+          disabled={starting}
+          className="w-full mt-3 text-xs text-muted-foreground hover:text-accent transition-colors"
+        >
+          Começar do zero (embaralhar de novo)
+        </button>
       </main>
     );
   }
