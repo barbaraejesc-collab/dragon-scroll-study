@@ -206,10 +206,10 @@ function FlashcardsPage() {
     setIdx(0);
     setScore({ correct: 0, wrong: 0 });
     setFlipped(false);
-    if (user && !sem) {
+    if (user) {
       await supabase.from("flashcard_session_state").upsert(
-        { user_id: user.id, queue: fresh, current_index: 0, updated_at: new Date().toISOString() },
-        { onConflict: "user_id" }
+        { user_id: user.id, semester: sem ?? 0, queue: fresh, current_index: 0, updated_at: new Date().toISOString() },
+        { onConflict: "user_id,semester" }
       );
     }
   }, [errorsMode, cards, user, navigate, sem]);
