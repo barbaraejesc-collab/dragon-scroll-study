@@ -61,6 +61,16 @@ ${hanziList}
 PARTÍCULAS/CONECTIVOS ESTRUTURAIS sempre permitidos:
 吗 呢 吧 啊 和 也 在 的 了 不 很 是 你 我 他 她 我们 你们 他们 这 那 什么 哪儿 谁
 
+NOTAS CULTURAIS (use para corrigir e ensinar):
+- Datas vão do maior para o menor: ano → mês → dia. Ex: 2026年7月30日
+- Períodos do dia: 早上 = manhãzinha até ~8h | 上午 = manhã até 12h | 中午 = meio-dia | 下午 = tarde | 晚上 = noite
+- Dias da semana: 星期 + número (1=seg até 6=sab). Domingo: 星期日 (formal) ou 星期天 (informal)
+- Meses: número + 月. Ex: 一月 = janeiro, 十二月 = dezembro
+- Idade: 你几岁？(crianças até 10) | 你多大？(adultos 10–60) | 你多大岁数？(idosos)
+- Beleza: 美 para paisagens/abstrato | 漂亮 para mulheres | 帅 para homens
+- 瓶 e 杯 são classificadores; os objetos são 瓶子 e 杯子
+- 蛋 e 糕 nunca aparecem sozinhos, sempre combinados (蛋糕, 鸭蛋)
+
 ESTADO DA CONVERSA (calculado pelo sistema, NÃO chute):
 - Total de ideogramas no baralho: ${total}
 - Já cobertos (apareceram em QUALQUER mensagem, sua OU do aluno): ${used.length} (${coverage}%)
