@@ -71,11 +71,17 @@ function FlashcardsPage() {
     if (!user) return;
     setLoaded(false);
     setScore({ correct: 0, wrong: 0 });
+    const semKey = sem ?? 0;
     (async () => {
       const [{ data: cardsData }, { data: progressData }, { data: stateData }] = await Promise.all([
         supabase.from("cards").select("*"),
         supabase.from("card_progress").select("card_id,correct_count,wrong_count").eq("user_id", user.id),
-        supabase.from("flashcard_session_state").select("queue,current_index").eq("user_id", user.id).maybeSingle(),
+        supabase
+          .from("flashcard_session_state")
+          .select("queue,current_index")
+          .eq("user_id", user.id)
+          .eq("semester", semKey)
+          .maybeSingle(),
       ]);
       const all = (cardsData ?? []) as Card[];
       setSemesters(Array.from(new Set(all.map((x) => x.semester ?? 1))).sort((a, b) => a - b));
@@ -102,10 +108,6 @@ function FlashcardsPage() {
         }
         setQueue(ranked);
         setIdx(0);
-      } else if (sem) {
-        // Semester-scoped session: always fresh (saved position tracks the full deck).
-        setQueue(buildSession(c));
-        setIdx(0);
       } else {
         const cardIds = new Set(c.map((x) => x.id));
         const savedQueue = (stateData?.queue ?? []).filter((id: string) => cardIds.has(id));
@@ -119,8 +121,8 @@ function FlashcardsPage() {
           setQueue(fresh);
           setIdx(0);
           await supabase.from("flashcard_session_state").upsert(
-            { user_id: user.id, queue: fresh, current_index: 0, updated_at: new Date().toISOString() },
-            { onConflict: "user_id" }
+            { user_id: user.id, semester: semKey, queue: fresh, current_index: 0, updated_at: new Date().toISOString() },
+            { onConflict: "user_id,semester" }
           );
         }
       }
@@ -138,10 +140,10 @@ function FlashcardsPage() {
 
   const persistIndex = useCallback(
     async (newIdx: number) => {
-      if (!user || errorsMode || sem) return;
+      if (!user || errorsMode) return;
       await supabase.from("flashcard_session_state").upsert(
-        { user_id: user.id, queue, current_index: newIdx, updated_at: new Date().toISOString() },
-        { onConflict: "user_id" }
+        { user_id: user.id, semester: sem ?? 0, queue, current_index: newIdx, updated_at: new Date().toISOString() },
+        { onConflict: "user_id,semester" }
       );
     },
     [user, queue, errorsMode, sem]
