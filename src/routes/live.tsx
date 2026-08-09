@@ -80,23 +80,76 @@ function LivePage() {
     }
   }, [semester, speed, prefsLoaded]);
 
-  const start = useCallback(async () => {
-    // Must happen synchronously inside the Start click for mobile autoplay policies.
-    unlockTts();
-    setStarting(true);
-    const query = supabase.from("cards").select("id,hanzi,pinyin,meaning,semester");
-    const { data } = semester === "all" ? await query : await query.eq("semester", semester);
-    const cards = shuffle((data ?? []) as Card[]);
-    setStarting(false);
-    if (cards.length === 0) return;
-    setDeck(cards);
-    setIdx(0);
-    setSide("front");
-    setRemaining(speed);
-    setFinished(false);
-    setPaused(false);
-    setRunning(true);
-  }, [semester, speed]);
+  // Live sessions share flashcard_session_state, keyed apart from the normal
+  // flashcard sessions by an offset on the semester key.
+  const LIVE_OFFSET = 100;
+  const stateKey = useCallback(
+    (s: SemChoice) => LIVE_OFFSET + (s === "all" ? 0 : s),
+    []
+  );
+
+  const persist = useCallback(
+    async (queue: string[], index: number) => {
+      if (!user) return;
+      await supabase.from("flashcard_session_state").upsert(
+        {
+          user_id: user.id,
+          semester: stateKey(semester),
+          queue,
+          current_index: index,
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: "user_id,semester" }
+      );
+    },
+    [user, semester, stateKey]
+  );
+
+  const start = useCallback(
+    async (forceFresh = false) => {
+      // Must happen synchronously inside the Start click for mobile autoplay policies.
+      unlockTts();
+      setStarting(true);
+      const query = supabase.from("cards").select("id,hanzi,pinyin,meaning,semester");
+      const [{ data }, { data: state }] = await Promise.all([
+        semester === "all" ? query : query.eq("semester", semester),
+        user
+          ? supabase
+              .from("flashcard_session_state")
+              .select("queue,current_index")
+              .eq("user_id", user.id)
+              .eq("semester", stateKey(semester))
+              .maybeSingle()
+          : Promise.resolve({ data: null as { queue: string[]; current_index: number } | null }),
+      ]);
+      const all = (data ?? []) as Card[];
+      setStarting(false);
+      if (all.length === 0) return;
+
+      const byId = new Map(all.map((c) => [c.id, c]));
+      const savedQueue = (state?.queue ?? []).filter((id: string) => byId.has(id));
+      const savedIdx = state?.current_index ?? 0;
+
+      let cards: Card[];
+      let startIdx = 0;
+      if (!forceFresh && savedQueue.length === all.length && savedIdx > 0 && savedIdx < all.length) {
+        cards = savedQueue.map((id: string) => byId.get(id)!);
+        startIdx = savedIdx;
+      } else {
+        cards = shuffle(all);
+        void persist(cards.map((c) => c.id), 0);
+      }
+
+      setDeck(cards);
+      setIdx(startIdx);
+      setSide("front");
+      setRemaining(speed);
+      setFinished(false);
+      setPaused(false);
+      setRunning(true);
+    },
+    [semester, speed, user, stateKey, persist]
+  );
 
   const current = deck[idx];
 
@@ -106,34 +159,32 @@ function LivePage() {
     void speakZh(current.hanzi);
   }, [running, side, current?.id]);
 
+  const goTo = useCallback(
+    (next: number) => {
+      if (next >= deck.length) {
+        setRunning(false);
+        setFinished(true);
+        void persist(deck.map((c) => c.id), 0);
+        return;
+      }
+      setSide("front");
+      setIdx(next);
+      setRemaining(speed);
+      void persist(deck.map((c) => c.id), next);
+    },
+    [deck, speed, persist]
+  );
+
   const advance = useCallback(() => {
     if (side === "front") {
       setSide("back");
       setRemaining(speed);
       return;
     }
-    const next = idx + 1;
-    if (next >= deck.length) {
-      setRunning(false);
-      setFinished(true);
-      return;
-    }
-    setSide("front");
-    setIdx(next);
-    setRemaining(speed);
-  }, [side, idx, deck.length, speed]);
+    goTo(idx + 1);
+  }, [side, idx, speed, goTo]);
 
-  const skip = useCallback(() => {
-    const next = idx + 1;
-    if (next >= deck.length) {
-      setRunning(false);
-      setFinished(true);
-      return;
-    }
-    setSide("front");
-    setIdx(next);
-    setRemaining(speed);
-  }, [idx, deck.length, speed]);
+  const skip = useCallback(() => goTo(idx + 1), [goTo, idx]);
 
   // Timer tick
   const advanceRef = useRef(advance);
@@ -212,6 +263,13 @@ function LivePage() {
         <Button size="lg" className="w-full" onClick={() => void start()} disabled={starting}>
           <Play className="w-4 h-4 mr-2" /> {starting ? "Preparando..." : "Iniciar sessão"}
         </Button>
+        <button
+          onClick={() => void start(true)}
+          disabled={starting}
+          className="w-full mt-3 text-xs text-muted-foreground hover:text-accent transition-colors"
+        >
+          Começar do zero (embaralhar de novo)
+        </button>
       </main>
     );
   }
@@ -224,7 +282,7 @@ function LivePage() {
         <h2 className="text-3xl font-serif italic">Você passou por todos os ideogramas! 🎉</h2>
         <p className="text-muted-foreground text-sm">{deck.length} cards nesta sessão</p>
         <div className="flex gap-3">
-          <Button onClick={() => void start()}>
+          <Button onClick={() => void start(true)}>
             <RotateCw className="w-4 h-4 mr-2" /> Nova sessão embaralhada
           </Button>
           <Button variant="ghost" onClick={() => navigate({ to: "/dashboard" })}>

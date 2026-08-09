@@ -119,18 +119,21 @@ export type Database = {
         Row: {
           current_index: number
           queue: string[]
+          semester: number
           updated_at: string
           user_id: string
         }
         Insert: {
           current_index?: number
           queue?: string[]
+          semester?: number
           updated_at?: string
           user_id: string
         }
         Update: {
           current_index?: number
           queue?: string[]
+          semester?: number
           updated_at?: string
           user_id?: string
         }
