@@ -198,7 +198,7 @@ function FlashcardsPage() {
   const restart = useCallback(async () => {
     setHanziFont((prev) => pickRandomFont(prev.name));
     if (errorsMode) {
-      navigate({ to: "/flashcards", search: { sem } });
+      navigate({ to: "/flashcards", search: { mode: undefined, sem } });
       return;
     }
     const fresh = buildSession(cards);
@@ -246,7 +246,7 @@ function FlashcardsPage() {
         </p>
         {sem && (
           <Button asChild variant="outline">
-            <Link to="/flashcards" search={{}}>Estudar todos os semestres</Link>
+            <Link to="/flashcards" search={{ mode: undefined, sem: undefined }}>Estudar todos os semestres</Link>
           </Button>
         )}
       </main>
@@ -259,7 +259,7 @@ function FlashcardsPage() {
         <div className="hanzi text-7xl text-accent">好</div>
         <h2 className="text-2xl font-serif">Nenhum erro registrado ainda!</h2>
         <p className="text-muted-foreground text-sm">Continue estudando para construir seu histórico.</p>
-        <Button asChild><Link to="/flashcards" search={{ sem }}>Sessão normal</Link></Button>
+        <Button asChild><Link to="/flashcards" search={{ mode: undefined, sem }}>Sessão normal</Link></Button>
       </main>
     );
   }

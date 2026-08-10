@@ -99,7 +99,7 @@ function Dashboard() {
       </section>
 
       <section className="grid md:grid-cols-3 gap-4">
-        <Link to="/flashcards" search={{}} className="md:col-span-2 group">
+        <Link to="/flashcards" search={{ mode: undefined, sem: undefined }} className="md:col-span-2 group">
           <div className="bg-gradient-to-br from-primary to-primary/70 rounded-2xl p-8 h-full shadow-[var(--shadow-elegant)] transition-transform group-hover:scale-[1.01]">
             <div className="hanzi text-7xl text-accent mb-4">卡</div>
             <h3 className="text-2xl font-serif text-cream mb-1">Flashcards</h3>
@@ -114,7 +114,7 @@ function Dashboard() {
           </div>
         </Link>
 
-        <Link to="/flashcards" search={{ mode: "errors" }} className="group">
+        <Link to="/flashcards" search={{ mode: "errors", sem: undefined }} className="group">
           <div className="bg-card border border-destructive/40 rounded-2xl p-6 h-full transition-all group-hover:border-destructive group-hover:shadow-[0_0_24px_-8px_hsl(var(--destructive)/0.5)]">
             <AlertTriangle className="w-6 h-6 text-destructive mb-3" />
             <h3 className="text-lg font-serif text-cream mb-1">Revisar erros</h3>
