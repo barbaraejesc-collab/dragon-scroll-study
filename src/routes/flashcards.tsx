@@ -4,9 +4,18 @@ import { useAuth } from "@/lib/auth-context";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, Check, X, RotateCw, Volume2 } from "lucide-react";
+import { ArrowLeft, Check, X, RotateCw, Volume2, WifiOff } from "lucide-react";
 import { playCorrect, playWrong } from "@/lib/sounds";
-import { speakZh, preloadZh } from "@/lib/tts";
+import { speakZh, prefetchSession } from "@/lib/tts";
+import {
+  isOnline,
+  loadOfflineSession,
+  queueProgress,
+  restorePendingProgress,
+  saveOfflineIndex,
+  saveOfflineSession,
+  takePendingProgress,
+} from "@/lib/offline";
 
 
 export const Route = createFileRoute("/flashcards")({
@@ -58,6 +67,7 @@ function FlashcardsPage() {
   const [loaded, setLoaded] = useState(false);
   const [hanziFont, setHanziFont] = useState(() => pickRandomFont());
   const [score, setScore] = useState({ correct: 0, wrong: 0 });
+  const [offline, setOffline] = useState(false);
 
 
 
@@ -72,17 +82,52 @@ function FlashcardsPage() {
     setLoaded(false);
     setScore({ correct: 0, wrong: 0 });
     const semKey = sem ?? 0;
+    const scope = `fc:${semKey}${errorsMode ? ":errors" : ""}`;
     (async () => {
-      const [{ data: cardsData }, { data: progressData }, { data: stateData }] = await Promise.all([
-        supabase.from("cards").select("*"),
-        supabase.from("card_progress").select("card_id,correct_count,wrong_count").eq("user_id", user.id),
-        supabase
-          .from("flashcard_session_state")
-          .select("queue,current_index")
-          .eq("user_id", user.id)
-          .eq("semester", semKey)
-          .maybeSingle(),
-      ]);
+      let cardsData: Card[] | null = null;
+      let progressData: { card_id: string; correct_count: number; wrong_count: number }[] = [];
+      type SessionState = { queue: string[]; current_index: number };
+      let stateData: SessionState | null = null;
+      let failed = !isOnline();
+
+      if (!failed) {
+        try {
+          const [c, pr, st] = await Promise.all([
+            supabase.from("cards").select("*"),
+            supabase.from("card_progress").select("card_id,correct_count,wrong_count").eq("user_id", user.id),
+            supabase
+              .from("flashcard_session_state")
+              .select("queue,current_index")
+              .eq("user_id", user.id)
+              .eq("semester", semKey)
+              .maybeSingle(),
+          ]);
+          if (c.error) throw c.error;
+          cardsData = (c.data ?? []) as Card[];
+          progressData = pr.data ?? [];
+          stateData = (st.data ?? null) as SessionState | null;
+        } catch {
+          failed = true;
+        }
+      }
+
+      if (failed) {
+        // Sem conexão: retoma a sessão guardada no aparelho.
+        const cached = loadOfflineSession(scope);
+        setOffline(true);
+        if (cached) {
+          setCards(cached.cards as Card[]);
+          setQueue(cached.queue);
+          setIdx(Math.min(cached.index, cached.queue.length));
+          setLoaded(true);
+          return;
+        }
+        setCards([]);
+        setQueue([]);
+        setLoaded(true);
+        return;
+      }
+      setOffline(false);
       const all = (cardsData ?? []) as Card[];
       setSemesters(Array.from(new Set(all.map((x) => x.semester ?? 1))).sort((a, b) => a - b));
       const c = sem ? all.filter((x) => (x.semester ?? 1) === sem) : all;
@@ -141,6 +186,8 @@ function FlashcardsPage() {
   const persistIndex = useCallback(
     async (newIdx: number) => {
       if (!user || errorsMode) return;
+      saveOfflineIndex(`fc:${sem ?? 0}`, newIdx);
+      if (!isOnline()) return;
       await supabase.from("flashcard_session_state").upsert(
         { user_id: user.id, semester: sem ?? 0, queue, current_index: newIdx, updated_at: new Date().toISOString() },
         { onConflict: "user_id,semester" }
@@ -161,18 +208,25 @@ function FlashcardsPage() {
     };
     setProgress((p) => ({ ...p, [current.id]: next }));
 
-    const { error: upsertErr } = await supabase.from("card_progress").upsert(
-      {
-        user_id: user.id,
-        card_id: current.id,
-        correct_count: next.correct,
-        wrong_count: next.wrong,
-        last_seen_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: "user_id,card_id" }
-    );
-    if (upsertErr) console.error("[flashcards] falha ao salvar pontuação:", upsertErr);
+    const row = {
+      user_id: user.id,
+      card_id: current.id,
+      correct_count: next.correct,
+      wrong_count: next.wrong,
+      last_seen_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    };
+    if (!isOnline()) {
+      queueProgress(row);
+    } else {
+      const { error: upsertErr } = await supabase
+        .from("card_progress")
+        .upsert(row, { onConflict: "user_id,card_id" });
+      if (upsertErr) {
+        console.error("[flashcards] falha ao salvar pontuação:", upsertErr);
+        queueProgress(row);
+      }
+    }
 
     const nextIdx = idx + 1;
     setFlipped(false);
@@ -185,20 +239,50 @@ function FlashcardsPage() {
     if (flipped && current?.hanzi) speakHanzi(current.hanzi);
   }, [flipped, current?.hanzi]);
 
-  // Preload audio for the next few cards so flipping is instant
+  // Warm the whole session's audio in the background (atual → próximos 5 → resto)
+  // so o áudio continua funcionando com sinal fraco.
   useEffect(() => {
-    for (let i = 0; i < 3; i++) {
-      const id = queue[idx + i];
-      const c = id ? cards.find((x) => x.id === id) : null;
-      if (c?.hanzi) preloadZh(c.hanzi);
-    }
-  }, [idx, queue, cards]);
+    if (!queue.length || !cards.length) return;
+    const byId = new Map(cards.map((c) => [c.id, c]));
+    const texts = queue.map((id) => byId.get(id)?.hanzi ?? "").filter(Boolean);
+    return prefetchSession(texts, idx);
+  }, [queue, cards]);
+
+  // Cache the session locally for offline study.
+  useEffect(() => {
+    if (!loaded || !queue.length || !cards.length) return;
+    const byId = new Map(cards.map((c) => [c.id, c]));
+    const sessionCards = queue.map((id) => byId.get(id)).filter(Boolean) as Card[];
+    saveOfflineSession(`fc:${sem ?? 0}${errorsMode ? ":errors" : ""}`, sessionCards, queue, idx);
+  }, [loaded, queue, cards, sem, errorsMode]);
+
+  // Flush progress saved while offline as soon as the connection returns.
+  useEffect(() => {
+    const sync = async () => {
+      if (!user || !isOnline()) return;
+      setOffline(false);
+      const pending = takePendingProgress();
+      if (!pending.length) return;
+      const { error } = await supabase
+        .from("card_progress")
+        .upsert(pending, { onConflict: "user_id,card_id" });
+      if (error) restorePendingProgress(pending);
+    };
+    void sync();
+    const onOffline = () => setOffline(true);
+    window.addEventListener("online", sync);
+    window.addEventListener("offline", onOffline);
+    return () => {
+      window.removeEventListener("online", sync);
+      window.removeEventListener("offline", onOffline);
+    };
+  }, [user]);
 
 
   const restart = useCallback(async () => {
     setHanziFont((prev) => pickRandomFont(prev.name));
     if (errorsMode) {
-      navigate({ to: "/flashcards", search: { sem } });
+      navigate({ to: "/flashcards", search: { mode: undefined, sem } });
       return;
     }
     const fresh = buildSession(cards);
@@ -246,7 +330,7 @@ function FlashcardsPage() {
         </p>
         {sem && (
           <Button asChild variant="outline">
-            <Link to="/flashcards" search={{}}>Estudar todos os semestres</Link>
+            <Link to="/flashcards" search={{ mode: undefined, sem: undefined }}>Estudar todos os semestres</Link>
           </Button>
         )}
       </main>
@@ -259,7 +343,7 @@ function FlashcardsPage() {
         <div className="hanzi text-7xl text-accent">好</div>
         <h2 className="text-2xl font-serif">Nenhum erro registrado ainda!</h2>
         <p className="text-muted-foreground text-sm">Continue estudando para construir seu histórico.</p>
-        <Button asChild><Link to="/flashcards" search={{ sem }}>Sessão normal</Link></Button>
+        <Button asChild><Link to="/flashcards" search={{ mode: undefined, sem }}>Sessão normal</Link></Button>
       </main>
     );
   }
@@ -279,6 +363,13 @@ function FlashcardsPage() {
           <RotateCw className="w-4 h-4 mr-1" /> Recomeçar
         </Button>
       </header>
+
+      {offline && (
+        <div className="flex items-center gap-2 mb-4 rounded-xl border border-accent/40 bg-accent/10 px-3 py-2 text-xs text-accent">
+          <WifiOff className="w-3.5 h-3.5" />
+          Sem conexão — estudando offline. Seu progresso será sincronizado depois.
+        </div>
+      )}
 
       <div className="flex flex-wrap items-center gap-2 mb-5">
         <span className="text-[10px] uppercase tracking-widest text-muted-foreground/70 font-serif mr-1">

@@ -16,7 +16,10 @@ type Stats = {
   accuracy: number | null;
   streak: number;
   displayName: string;
+  categories: CategoryStat[];
 };
+
+type CategoryStat = { category: string; correct: number; total: number; accuracy: number };
 
 function Dashboard() {
   const { user, loading, signOut } = useAuth();
@@ -34,7 +37,7 @@ function Dashboard() {
     const loadStats = async () => {
       const [{ count: totalCards }, { data: progress }, { data: sessions }, { data: profile }] = await Promise.all([
         supabase.from("cards").select("*", { count: "exact", head: true }),
-        supabase.from("card_progress").select("correct_count,wrong_count").eq("user_id", user.id),
+        supabase.from("card_progress").select("card_id,correct_count,wrong_count").eq("user_id", user.id),
         supabase.from("study_sessions").select("study_date").eq("user_id", user.id).order("study_date", { ascending: false }),
         supabase.from("profiles").select("display_name").eq("id", user.id).maybeSingle(),
       ]);
@@ -46,6 +49,35 @@ function Dashboard() {
       const totalAnswers = totalCorrect + totalWrong;
       const accuracy = totalAnswers > 0 ? Math.round((totalCorrect / totalAnswers) * 100) : null;
       const streak = computeStreak((sessions ?? []).map((s) => s.study_date));
+
+      // Desempenho por categoria: cruza card_progress com a categoria de cada card.
+      let categories: CategoryStat[] = [];
+      const answeredIds = answeredRows.map((p) => p.card_id);
+      if (answeredIds.length > 0) {
+        const { data: answeredCards } = await supabase
+          .from("cards")
+          .select("id,category")
+          .in("id", answeredIds);
+        const catById = new Map((answeredCards ?? []).map((c) => [c.id, c.category]));
+        const acc = new Map<string, { correct: number; total: number }>();
+        for (const row of answeredRows) {
+          const cat = catById.get(row.card_id);
+          if (!cat) continue;
+          const entry = acc.get(cat) ?? { correct: 0, total: 0 };
+          entry.correct += row.correct_count;
+          entry.total += row.correct_count + row.wrong_count;
+          acc.set(cat, entry);
+        }
+        categories = Array.from(acc.entries())
+          .map(([category, v]) => ({
+            category,
+            correct: v.correct,
+            total: v.total,
+            accuracy: v.total > 0 ? Math.round((v.correct / v.total) * 100) : 0,
+          }))
+          .sort((a, b) => a.accuracy - b.accuracy);
+      }
+      if (cancelled) return;
       setStats({
         totalCards: totalCards ?? 0,
         studiedCards: answeredRows.length,
@@ -53,6 +85,7 @@ function Dashboard() {
         accuracy,
         streak,
         displayName: profile?.display_name ?? user.email ?? "",
+        categories,
       });
     };
 
@@ -98,8 +131,35 @@ function Dashboard() {
         <StatCard icon={<Sparkles />} label="Total" value={stats ? `${stats.totalCards}` : "—"} />
       </section>
 
+      {stats && stats.categories.length > 0 && (
+        <section className="mb-12">
+          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-4">Desempenho por categoria</h2>
+          <div className="grid sm:grid-cols-2 gap-3">
+            {stats.categories.map((c) => (
+              <div key={c.category} className="bg-card border border-border rounded-xl p-4">
+                <div className="flex items-baseline justify-between mb-2">
+                  <span className="text-sm font-serif text-cream">{c.category}</span>
+                  <span className={`text-sm font-serif ${c.accuracy < 60 ? "text-destructive" : "text-accent"}`}>
+                    {c.accuracy}%
+                  </span>
+                </div>
+                <div className="h-1.5 w-full rounded-full bg-border/40 overflow-hidden">
+                  <div
+                    className={`h-full rounded-full ${c.accuracy < 60 ? "bg-destructive" : "bg-accent"}`}
+                    style={{ width: `${c.accuracy}%` }}
+                  />
+                </div>
+                <p className="mt-2 text-[11px] text-muted-foreground">
+                  {c.correct}/{c.total} respostas certas
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       <section className="grid md:grid-cols-3 gap-4">
-        <Link to="/flashcards" search={{}} className="md:col-span-2 group">
+        <Link to="/flashcards" search={{ mode: undefined, sem: undefined }} className="md:col-span-2 group">
           <div className="bg-gradient-to-br from-primary to-primary/70 rounded-2xl p-8 h-full shadow-[var(--shadow-elegant)] transition-transform group-hover:scale-[1.01]">
             <div className="hanzi text-7xl text-accent mb-4">卡</div>
             <h3 className="text-2xl font-serif text-cream mb-1">Flashcards</h3>
@@ -114,7 +174,7 @@ function Dashboard() {
           </div>
         </Link>
 
-        <Link to="/flashcards" search={{ mode: "errors" }} className="group">
+        <Link to="/flashcards" search={{ mode: "errors", sem: undefined }} className="group">
           <div className="bg-card border border-destructive/40 rounded-2xl p-6 h-full transition-all group-hover:border-destructive group-hover:shadow-[0_0_24px_-8px_hsl(var(--destructive)/0.5)]">
             <AlertTriangle className="w-6 h-6 text-destructive mb-3" />
             <h3 className="text-lg font-serif text-cream mb-1">Revisar erros</h3>

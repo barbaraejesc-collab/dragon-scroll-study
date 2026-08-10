@@ -3,8 +3,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useAuth } from "@/lib/auth-context";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Play, Pause, SkipForward, Square, ArrowLeft, RotateCw } from "lucide-react";
-import { speakZh, unlockTts } from "@/lib/tts";
+import { Play, Pause, SkipForward, Square, ArrowLeft, RotateCw, Volume2, VolumeX, WifiOff } from "lucide-react";
+import { speakZh, unlockTts, prefetchSession, getTtsVolume, setTtsVolume } from "@/lib/tts";
+import { isOnline, loadOfflineSession, saveOfflineIndex, saveOfflineSession } from "@/lib/offline";
 
 export const Route = createFileRoute("/live")({
   head: () => ({
@@ -51,6 +52,24 @@ function LivePage() {
   const [remaining, setRemaining] = useState(speed);
   const [starting, setStarting] = useState(false);
   const [finished, setFinished] = useState(false);
+  const [volume, setVolume] = useState(1);
+  const [offline, setOffline] = useState(false);
+
+  useEffect(() => {
+    setVolume(getTtsVolume());
+  }, []);
+
+  useEffect(() => {
+    const on = () => setOffline(false);
+    const off = () => setOffline(true);
+    setOffline(!isOnline());
+    window.addEventListener("online", on);
+    window.addEventListener("offline", off);
+    return () => {
+      window.removeEventListener("online", on);
+      window.removeEventListener("offline", off);
+    };
+  }, []);
 
   useEffect(() => {
     if (!loading && !user) navigate({ to: "/auth" });
@@ -90,7 +109,8 @@ function LivePage() {
 
   const persist = useCallback(
     async (queue: string[], index: number) => {
-      if (!user) return;
+      saveOfflineIndex(`live:${semester}`, index);
+      if (!user || !isOnline()) return;
       await supabase.from("flashcard_session_state").upsert(
         {
           user_id: user.id,
@@ -110,19 +130,51 @@ function LivePage() {
       // Must happen synchronously inside the Start click for mobile autoplay policies.
       unlockTts();
       setStarting(true);
-      const query = supabase.from("cards").select("id,hanzi,pinyin,meaning,semester");
-      const [{ data }, { data: state }] = await Promise.all([
-        semester === "all" ? query : query.eq("semester", semester),
-        user
-          ? supabase
-              .from("flashcard_session_state")
-              .select("queue,current_index")
-              .eq("user_id", user.id)
-              .eq("semester", stateKey(semester))
-              .maybeSingle()
-          : Promise.resolve({ data: null as { queue: string[]; current_index: number } | null }),
-      ]);
-      const all = (data ?? []) as Card[];
+      const scope = `live:${semester}`;
+      let all: Card[] = [];
+      type SessionState = { queue: string[]; current_index: number };
+      let state: SessionState | null = null;
+      let failed = !isOnline();
+
+      if (!failed) {
+        try {
+          const query = supabase.from("cards").select("id,hanzi,pinyin,meaning,semester");
+          const [cardsRes, stateRes] = await Promise.all([
+            semester === "all" ? query : query.eq("semester", semester),
+            user
+              ? supabase
+                  .from("flashcard_session_state")
+                  .select("queue,current_index")
+                  .eq("user_id", user.id)
+                  .eq("semester", stateKey(semester))
+                  .maybeSingle()
+              : Promise.resolve({ data: null as { queue: string[]; current_index: number } | null }),
+          ]);
+          if (cardsRes.error) throw cardsRes.error;
+          all = (cardsRes.data ?? []) as Card[];
+          state = (stateRes.data ?? null) as SessionState | null;
+        } catch {
+          failed = true;
+        }
+      }
+
+      if (failed) {
+        // Sem conexão: usa a última sessão salva no aparelho.
+        setOffline(true);
+        const cached = loadOfflineSession(scope);
+        setStarting(false);
+        if (!cached || cached.cards.length === 0) return;
+        const cachedCards = cached.cards as Card[];
+        setDeck(cachedCards);
+        setIdx(forceFresh ? 0 : Math.min(cached.index, cachedCards.length - 1));
+        setSide("front");
+        setRemaining(speed);
+        setFinished(false);
+        setPaused(false);
+        setRunning(true);
+        return;
+      }
+      setOffline(false);
       setStarting(false);
       if (all.length === 0) return;
 
@@ -140,6 +192,7 @@ function LivePage() {
         void persist(cards.map((c) => c.id), 0);
       }
 
+      saveOfflineSession(scope, cards, cards.map((c) => c.id), startIdx);
       setDeck(cards);
       setIdx(startIdx);
       setSide("front");
@@ -152,6 +205,12 @@ function LivePage() {
   );
 
   const current = deck[idx];
+
+  // Warm all audio for the session (atual → próximos 5 → resto).
+  useEffect(() => {
+    if (!running || deck.length === 0) return;
+    return prefetchSession(deck.map((c) => c.hanzi), idx);
+  }, [running, deck]);
 
   // Speak the hanzi whenever the back (pinyin + meaning) is revealed.
   useEffect(() => {
@@ -304,9 +363,33 @@ function LivePage() {
 
       <div className="flex items-center justify-between px-6 py-4 text-xs uppercase tracking-widest text-muted-foreground">
         <span>{side === "front" ? "Ideograma" : "Pinyin + significado"}</span>
-        <span>
-          {idx + 1}/{deck.length}
-        </span>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            {volume === 0 ? (
+              <VolumeX className="w-3.5 h-3.5" />
+            ) : (
+              <Volume2 className="w-3.5 h-3.5" />
+            )}
+            <input
+              type="range"
+              min={0}
+              max={1}
+              step={0.05}
+              value={volume}
+              aria-label="Volume do áudio"
+              onChange={(e) => {
+                const v = Number(e.target.value);
+                setVolume(v);
+                setTtsVolume(v);
+              }}
+              className="w-20 accent-[hsl(var(--accent))] cursor-pointer"
+            />
+          </div>
+          {offline && <WifiOff className="w-3.5 h-3.5 text-accent" />}
+          <span>
+            {idx + 1}/{deck.length}
+          </span>
+        </div>
       </div>
 
       <section className="flex-1 flex flex-col items-center justify-center px-6 text-center">
