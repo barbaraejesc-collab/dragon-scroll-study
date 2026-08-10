@@ -4,9 +4,18 @@ import { useAuth } from "@/lib/auth-context";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, Check, X, RotateCw, Volume2 } from "lucide-react";
+import { ArrowLeft, Check, X, RotateCw, Volume2, WifiOff } from "lucide-react";
 import { playCorrect, playWrong } from "@/lib/sounds";
-import { speakZh, preloadZh } from "@/lib/tts";
+import { speakZh, prefetchSession } from "@/lib/tts";
+import {
+  isOnline,
+  loadOfflineSession,
+  queueProgress,
+  restorePendingProgress,
+  saveOfflineIndex,
+  saveOfflineSession,
+  takePendingProgress,
+} from "@/lib/offline";
 
 
 export const Route = createFileRoute("/flashcards")({
