@@ -132,7 +132,8 @@ function LivePage() {
       setStarting(true);
       const scope = `live:${semester}`;
       let all: Card[] = [];
-      let state: { queue: string[]; current_index: number } | null = null;
+      type SessionState = { queue: string[]; current_index: number };
+      let state: SessionState | null = null;
       let failed = !isOnline();
 
       if (!failed) {
@@ -151,7 +152,7 @@ function LivePage() {
           ]);
           if (cardsRes.error) throw cardsRes.error;
           all = (cardsRes.data ?? []) as Card[];
-          state = stateRes.data as typeof state;
+          state = (stateRes.data ?? null) as SessionState | null;
         } catch {
           failed = true;
         }

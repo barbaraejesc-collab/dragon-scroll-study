@@ -86,7 +86,8 @@ function FlashcardsPage() {
     (async () => {
       let cardsData: Card[] | null = null;
       let progressData: { card_id: string; correct_count: number; wrong_count: number }[] = [];
-      let stateData: { queue: string[]; current_index: number } | null = null;
+      type SessionState = { queue: string[]; current_index: number };
+      let stateData: SessionState | null = null;
       let failed = !isOnline();
 
       if (!failed) {
@@ -104,7 +105,7 @@ function FlashcardsPage() {
           if (c.error) throw c.error;
           cardsData = (c.data ?? []) as Card[];
           progressData = pr.data ?? [];
-          stateData = st.data as typeof stateData;
+          stateData = (st.data ?? null) as SessionState | null;
         } catch {
           failed = true;
         }
