@@ -16,10 +16,7 @@ type Stats = {
   accuracy: number | null;
   streak: number;
   displayName: string;
-  categories: CategoryStat[];
 };
-
-type CategoryStat = { category: string; correct: number; total: number; accuracy: number };
 
 function Dashboard() {
   const { user, loading, signOut } = useAuth();
@@ -50,33 +47,6 @@ function Dashboard() {
       const accuracy = totalAnswers > 0 ? Math.round((totalCorrect / totalAnswers) * 100) : null;
       const streak = computeStreak((sessions ?? []).map((s) => s.study_date));
 
-      // Desempenho por categoria: cruza card_progress com a categoria de cada card.
-      let categories: CategoryStat[] = [];
-      const answeredIds = answeredRows.map((p) => p.card_id);
-      if (answeredIds.length > 0) {
-        const { data: answeredCards } = await supabase
-          .from("cards")
-          .select("id,category")
-          .in("id", answeredIds);
-        const catById = new Map((answeredCards ?? []).map((c) => [c.id, c.category]));
-        const acc = new Map<string, { correct: number; total: number }>();
-        for (const row of answeredRows) {
-          const cat = catById.get(row.card_id);
-          if (!cat) continue;
-          const entry = acc.get(cat) ?? { correct: 0, total: 0 };
-          entry.correct += row.correct_count;
-          entry.total += row.correct_count + row.wrong_count;
-          acc.set(cat, entry);
-        }
-        categories = Array.from(acc.entries())
-          .map(([category, v]) => ({
-            category,
-            correct: v.correct,
-            total: v.total,
-            accuracy: v.total > 0 ? Math.round((v.correct / v.total) * 100) : 0,
-          }))
-          .sort((a, b) => a.accuracy - b.accuracy);
-      }
       if (cancelled) return;
       setStats({
         totalCards: totalCards ?? 0,
@@ -85,7 +55,6 @@ function Dashboard() {
         accuracy,
         streak,
         displayName: profile?.display_name ?? user.email ?? "",
-        categories,
       });
     };
 
@@ -130,33 +99,6 @@ function Dashboard() {
         <StatCard icon={<Flame />} label="Streak" value={stats ? `${stats.streak}d` : "—"} highlight />
         <StatCard icon={<Sparkles />} label="Total" value={stats ? `${stats.totalCards}` : "—"} />
       </section>
-
-      {stats && stats.categories.length > 0 && (
-        <section className="mb-12">
-          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-4">Desempenho por categoria</h2>
-          <div className="grid sm:grid-cols-2 gap-3">
-            {stats.categories.map((c) => (
-              <div key={c.category} className="bg-card border border-border rounded-xl p-4">
-                <div className="flex items-baseline justify-between mb-2">
-                  <span className="text-sm font-serif text-cream">{c.category}</span>
-                  <span className={`text-sm font-serif ${c.accuracy < 60 ? "text-destructive" : "text-accent"}`}>
-                    {c.accuracy}%
-                  </span>
-                </div>
-                <div className="h-1.5 w-full rounded-full bg-border/40 overflow-hidden">
-                  <div
-                    className={`h-full rounded-full ${c.accuracy < 60 ? "bg-destructive" : "bg-accent"}`}
-                    style={{ width: `${c.accuracy}%` }}
-                  />
-                </div>
-                <p className="mt-2 text-[11px] text-muted-foreground">
-                  {c.correct}/{c.total} respostas certas
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
 
       <section className="grid md:grid-cols-3 gap-4">
         <Link to="/flashcards" search={{ mode: undefined, sem: undefined }} className="md:col-span-2 group">
