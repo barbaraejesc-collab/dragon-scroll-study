@@ -100,33 +100,6 @@ function Dashboard() {
         <StatCard icon={<Sparkles />} label="Total" value={stats ? `${stats.totalCards}` : "—"} />
       </section>
 
-      {stats && stats.categories.length > 0 && (
-        <section className="mb-12">
-          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-4">Desempenho por categoria</h2>
-          <div className="grid sm:grid-cols-2 gap-3">
-            {stats.categories.map((c) => (
-              <div key={c.category} className="bg-card border border-border rounded-xl p-4">
-                <div className="flex items-baseline justify-between mb-2">
-                  <span className="text-sm font-serif text-cream">{c.category}</span>
-                  <span className={`text-sm font-serif ${c.accuracy < 60 ? "text-destructive" : "text-accent"}`}>
-                    {c.accuracy}%
-                  </span>
-                </div>
-                <div className="h-1.5 w-full rounded-full bg-border/40 overflow-hidden">
-                  <div
-                    className={`h-full rounded-full ${c.accuracy < 60 ? "bg-destructive" : "bg-accent"}`}
-                    style={{ width: `${c.accuracy}%` }}
-                  />
-                </div>
-                <p className="mt-2 text-[11px] text-muted-foreground">
-                  {c.correct}/{c.total} respostas certas
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
       <section className="grid md:grid-cols-3 gap-4">
         <Link to="/flashcards" search={{ mode: undefined, sem: undefined }} className="md:col-span-2 group">
           <div className="bg-gradient-to-br from-primary to-primary/70 rounded-2xl p-8 h-full shadow-[var(--shadow-elegant)] transition-transform group-hover:scale-[1.01]">
