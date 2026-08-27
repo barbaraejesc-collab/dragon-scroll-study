@@ -16,10 +16,7 @@ type Stats = {
   accuracy: number | null;
   streak: number;
   displayName: string;
-  categories: CategoryStat[];
 };
-
-type CategoryStat = { category: string; correct: number; total: number; accuracy: number };
 
 function Dashboard() {
   const { user, loading, signOut } = useAuth();
