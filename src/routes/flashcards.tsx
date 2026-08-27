@@ -32,21 +32,11 @@ type Card = { id: string; hanzi: string; pinyin: string; meaning: string; catego
 type Progress = Record<string, { correct: number; wrong: number }>;
 
 
-// Pool of distinct Chinese fonts (loaded in __root.tsx). Each session picks one.
-const HANZI_FONTS = [
-  { name: "Noto Serif SC", family: "'Noto Serif SC', serif" },
-  { name: "Noto Sans SC", family: "'Noto Sans SC', sans-serif" },
-  { name: "Ma Shan Zheng", family: "'Ma Shan Zheng', cursive" },
-  { name: "ZCOOL XiaoWei", family: "'ZCOOL XiaoWei', serif" },
-  { name: "ZCOOL QingKe HuangYou", family: "'ZCOOL QingKe HuangYou', sans-serif" },
-  { name: "Liu Jian Mao Cao", family: "'Liu Jian Mao Cao', cursive" },
-  { name: "Long Cang", family: "'Long Cang', cursive" },
-  { name: "Zhi Mang Xing", family: "'Zhi Mang Xing', cursive" },
-];
+// Fonte única, igual à do livro didático (serifada padrão de impressão).
+const BOOK_FONT = { name: "Noto Serif SC", family: "'Noto Serif SC', serif" };
 
-function pickRandomFont(excludeName?: string) {
-  const pool = excludeName ? HANZI_FONTS.filter((f) => f.name !== excludeName) : HANZI_FONTS;
-  return pool[Math.floor(Math.random() * pool.length)];
+function pickRandomFont(_excludeName?: string) {
+  return BOOK_FONT;
 }
 
 function speakHanzi(text: string) {
@@ -443,13 +433,10 @@ function FlashcardView({
       >
         <div className="flip-card-inner">
           {/* Frente */}
-          <div className="flip-face bg-gradient-to-br from-card to-secondary border border-border rounded-3xl shadow-[var(--shadow-elegant)] flex flex-col relative">
-            <span className="absolute top-3 left-4 text-[10px] uppercase tracking-widest text-muted-foreground/60 font-serif">
-              {hanziFont.name}
-            </span>
-            <div className="flex-1 flex items-center justify-center p-6">
+          <div className="flip-face bg-gradient-to-br from-card to-secondary border border-border rounded-3xl shadow-[var(--shadow-elegant)] flex flex-col relative overflow-hidden">
+            <div className="flex-1 flex items-center justify-center p-6 min-h-0">
               <span
-                className="text-[22vw] md:text-[180px] leading-none text-cream drop-shadow-[0_0_40px_rgba(255,215,0,0.1)]"
+                className="text-[20vw] md:text-[160px] leading-none text-cream drop-shadow-[0_0_40px_rgba(255,215,0,0.1)] break-all text-center"
                 style={{ fontFamily: hanziFont.family }}
               >
                 {card.hanzi}
@@ -458,18 +445,29 @@ function FlashcardView({
             <div className="p-5 text-center text-xs text-muted-foreground italic">toque para virar</div>
           </div>
           {/* Verso */}
-          <div className="flip-face flip-back bg-gradient-to-br from-primary/90 to-primary/60 border border-accent/30 rounded-3xl shadow-[var(--shadow-gold)] flex flex-col items-center justify-center p-8 text-center relative">
-            <button
-              type="button"
-              onClick={(e) => { e.stopPropagation(); speakHanzi(card.hanzi); }}
-              aria-label="Ouvir pronúncia"
-              className="absolute top-4 right-4 p-2 rounded-full bg-background/20 hover:bg-background/40 text-cream transition-colors"
-            >
-              <Volume2 className="w-5 h-5" />
-            </button>
-            <div className="text-accent text-2xl md:text-3xl mb-3 font-serif italic">{card.pinyin}</div>
-            <div className="text-cream text-2xl md:text-3xl font-serif">{card.meaning}</div>
-            <div className="hanzi text-5xl text-accent/30 mt-6">{card.hanzi}</div>
+          <div className="flip-face flip-back bg-gradient-to-br from-primary/90 to-primary/60 border border-accent/30 rounded-3xl shadow-[var(--shadow-gold)] flex flex-col overflow-hidden">
+            <div className="flex items-start justify-end p-3 shrink-0">
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); speakHanzi(card.hanzi); }}
+                aria-label="Ouvir pronúncia"
+                className="p-2 rounded-full bg-background/20 hover:bg-background/40 text-cream transition-colors"
+              >
+                <Volume2 className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="flex-1 min-h-0 overflow-y-auto px-6 pb-6 text-center flex flex-col items-center justify-center gap-3">
+              <div className="text-accent text-xl md:text-3xl font-serif italic break-words max-w-full">{card.pinyin}</div>
+              <div className="text-cream text-base md:text-2xl font-serif leading-snug break-words max-w-full">
+                {card.meaning}
+              </div>
+              <div
+                className="text-4xl md:text-5xl text-accent/30 leading-none break-all"
+                style={{ fontFamily: hanziFont.family }}
+              >
+                {card.hanzi}
+              </div>
+            </div>
           </div>
         </div>
       </div>
