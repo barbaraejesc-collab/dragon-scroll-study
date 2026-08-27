@@ -47,33 +47,6 @@ function Dashboard() {
       const accuracy = totalAnswers > 0 ? Math.round((totalCorrect / totalAnswers) * 100) : null;
       const streak = computeStreak((sessions ?? []).map((s) => s.study_date));
 
-      // Desempenho por categoria: cruza card_progress com a categoria de cada card.
-      let categories: CategoryStat[] = [];
-      const answeredIds = answeredRows.map((p) => p.card_id);
-      if (answeredIds.length > 0) {
-        const { data: answeredCards } = await supabase
-          .from("cards")
-          .select("id,category")
-          .in("id", answeredIds);
-        const catById = new Map((answeredCards ?? []).map((c) => [c.id, c.category]));
-        const acc = new Map<string, { correct: number; total: number }>();
-        for (const row of answeredRows) {
-          const cat = catById.get(row.card_id);
-          if (!cat) continue;
-          const entry = acc.get(cat) ?? { correct: 0, total: 0 };
-          entry.correct += row.correct_count;
-          entry.total += row.correct_count + row.wrong_count;
-          acc.set(cat, entry);
-        }
-        categories = Array.from(acc.entries())
-          .map(([category, v]) => ({
-            category,
-            correct: v.correct,
-            total: v.total,
-            accuracy: v.total > 0 ? Math.round((v.correct / v.total) * 100) : 0,
-          }))
-          .sort((a, b) => a.accuracy - b.accuracy);
-      }
       if (cancelled) return;
       setStats({
         totalCards: totalCards ?? 0,
@@ -82,7 +55,6 @@ function Dashboard() {
         accuracy,
         streak,
         displayName: profile?.display_name ?? user.email ?? "",
-        categories,
       });
     };
 
