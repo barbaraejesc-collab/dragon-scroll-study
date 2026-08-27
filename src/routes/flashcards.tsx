@@ -32,21 +32,11 @@ type Card = { id: string; hanzi: string; pinyin: string; meaning: string; catego
 type Progress = Record<string, { correct: number; wrong: number }>;
 
 
-// Pool of distinct Chinese fonts (loaded in __root.tsx). Each session picks one.
-const HANZI_FONTS = [
-  { name: "Noto Serif SC", family: "'Noto Serif SC', serif" },
-  { name: "Noto Sans SC", family: "'Noto Sans SC', sans-serif" },
-  { name: "Ma Shan Zheng", family: "'Ma Shan Zheng', cursive" },
-  { name: "ZCOOL XiaoWei", family: "'ZCOOL XiaoWei', serif" },
-  { name: "ZCOOL QingKe HuangYou", family: "'ZCOOL QingKe HuangYou', sans-serif" },
-  { name: "Liu Jian Mao Cao", family: "'Liu Jian Mao Cao', cursive" },
-  { name: "Long Cang", family: "'Long Cang', cursive" },
-  { name: "Zhi Mang Xing", family: "'Zhi Mang Xing', cursive" },
-];
+// Fonte única, igual à do livro didático (serifada padrão de impressão).
+const BOOK_FONT = { name: "Noto Serif SC", family: "'Noto Serif SC', serif" };
 
-function pickRandomFont(excludeName?: string) {
-  const pool = excludeName ? HANZI_FONTS.filter((f) => f.name !== excludeName) : HANZI_FONTS;
-  return pool[Math.floor(Math.random() * pool.length)];
+function pickRandomFont(_excludeName?: string) {
+  return BOOK_FONT;
 }
 
 function speakHanzi(text: string) {
