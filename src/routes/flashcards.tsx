@@ -173,6 +173,13 @@ function FlashcardsPage() {
   const total = queue.length;
   const done = idx;
 
+  // Segurança: se o card da posição atual não existir mais, avança em vez de ficar em branco.
+  useEffect(() => {
+    if (!loaded || !queue.length) return;
+    if (idx < queue.length && !cards.some((c) => c.id === queue[idx])) setIdx((i) => i + 1);
+  }, [loaded, cards, queue, idx]);
+
+
   const persistIndex = useCallback(
     async (newIdx: number) => {
       if (!user || errorsMode) return;
