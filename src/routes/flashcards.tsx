@@ -146,11 +146,25 @@ function FlashcardsPage() {
       } else {
         const cardIds = new Set(c.map((x) => x.id));
         const savedQueue = (stateData?.queue ?? []).filter((id: string) => cardIds.has(id));
-        const savedIdx = stateData?.current_index ?? 0;
+        const savedIdx = Math.min(stateData?.current_index ?? 0, savedQueue.length);
 
         if (savedQueue.length === c.length && savedQueue.length > 0) {
           setQueue(savedQueue);
-          setIdx(Math.min(savedIdx, savedQueue.length));
+          setIdx(savedIdx > 0 ? savedIdx : 0);
+
+          // Restaura o score da sessão: soma o progresso dos cards já respondidos
+          // (os primeiros savedIdx da fila salva), então fechar/reabrir o app
+          // mantém acertos e erros da rodada atual.
+          if (savedIdx > 0) {
+            const answered = savedQueue
+              .slice(0, savedIdx)
+              .map((id: string) => p[id])
+              .filter(Boolean);
+            setScore({
+              correct: answered.reduce((sum, x) => sum + x.correct, 0),
+              wrong: answered.reduce((sum, x) => sum + x.wrong, 0),
+            });
+          }
         } else {
           const fresh = buildSession(c);
           setQueue(fresh);
