@@ -71,6 +71,7 @@ function FlashcardsPage() {
   useEffect(() => {
     if (!user) return;
     setLoaded(false);
+    scoreRef.current = { correct: 0, wrong: 0 };
     setScore({ correct: 0, wrong: 0 });
     const semKey = sem ?? 0;
     const scope = `fc:${semKey}${errorsMode ? ":errors" : ""}`;
@@ -303,6 +304,7 @@ function FlashcardsPage() {
     const fresh = buildSession(cards);
     setQueue(fresh);
     setIdx(0);
+    scoreRef.current = { correct: 0, wrong: 0 };
     setScore({ correct: 0, wrong: 0 });
     setFlipped(false);
     if (user) {
