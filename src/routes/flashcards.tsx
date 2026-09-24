@@ -57,6 +57,7 @@ function FlashcardsPage() {
   const [loaded, setLoaded] = useState(false);
   const [hanziFont, setHanziFont] = useState(() => pickRandomFont());
   const [score, setScore] = useState({ correct: 0, wrong: 0 });
+  const scoreRef = useRef({ correct: 0, wrong: 0 });
   const [offline, setOffline] = useState(false);
 
 
@@ -76,7 +77,7 @@ function FlashcardsPage() {
     (async () => {
       let cardsData: Card[] | null = null;
       let progressData: { card_id: string; correct_count: number; wrong_count: number }[] = [];
-      type SessionState = { queue: string[]; current_index: number };
+      type SessionState = { queue: string[]; current_index: number; session_correct?: number; session_wrong?: number };
       let stateData: SessionState | null = null;
       let failed = !isOnline();
 
@@ -87,7 +88,7 @@ function FlashcardsPage() {
             supabase.from("card_progress").select("card_id,correct_count,wrong_count").eq("user_id", user.id),
             supabase
               .from("flashcard_session_state")
-              .select("queue,current_index")
+              .select("queue,current_index,session_correct,session_wrong")
               .eq("user_id", user.id)
               .eq("semester", semKey)
               .maybeSingle(),
@@ -152,18 +153,13 @@ function FlashcardsPage() {
           setQueue(savedQueue);
           setIdx(savedIdx > 0 ? savedIdx : 0);
 
-          // Restaura o score da sessão: soma o progresso dos cards já respondidos
-          // (os primeiros savedIdx da fila salva), então fechar/reabrir o app
-          // mantém acertos e erros da rodada atual.
+          // Restaura o score salvo da rodada atual (limitado ao nº de cards respondidos).
           if (savedIdx > 0) {
-            const answered = savedQueue
-              .slice(0, savedIdx)
-              .map((id: string) => p[id])
-              .filter(Boolean);
-            setScore({
-              correct: answered.reduce((sum, x) => sum + x.correct, 0),
-              wrong: answered.reduce((sum, x) => sum + x.wrong, 0),
-            });
+            const sc = Math.max(0, stateData?.session_correct ?? 0);
+            const sw = Math.max(0, stateData?.session_wrong ?? 0);
+            const restored = sc + sw <= savedIdx ? { correct: sc, wrong: sw } : { correct: 0, wrong: 0 };
+            scoreRef.current = restored;
+            setScore(restored);
           }
         } else {
           const fresh = buildSession(c);
@@ -200,7 +196,11 @@ function FlashcardsPage() {
       saveOfflineIndex(`fc:${sem ?? 0}`, newIdx);
       if (!isOnline()) return;
       await supabase.from("flashcard_session_state").upsert(
-        { user_id: user.id, semester: sem ?? 0, queue, current_index: newIdx, updated_at: new Date().toISOString() },
+        {
+          user_id: user.id, semester: sem ?? 0, queue, current_index: newIdx,
+          session_correct: scoreRef.current.correct, session_wrong: scoreRef.current.wrong,
+          updated_at: new Date().toISOString(),
+        },
         { onConflict: "user_id,semester" }
       );
     },
@@ -211,7 +211,11 @@ function FlashcardsPage() {
   const answer = useCallback(async (correct: boolean) => {
     if (!current || !user) return;
     if (correct) playCorrect(); else playWrong();
-    setScore((s) => ({ correct: s.correct + (correct ? 1 : 0), wrong: s.wrong + (correct ? 0 : 1) }));
+    scoreRef.current = {
+      correct: scoreRef.current.correct + (correct ? 1 : 0),
+      wrong: scoreRef.current.wrong + (correct ? 0 : 1),
+    };
+    setScore(scoreRef.current);
     const prev = progress[current.id] ?? { correct: 0, wrong: 0 };
     const next = {
       correct: prev.correct + (correct ? 1 : 0),
