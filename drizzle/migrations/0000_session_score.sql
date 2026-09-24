@@ -1,0 +1,1 @@
+ALTER TABLE public.flashcard_session_state ADD COLUMN IF NOT EXISTS session_correct integer NOT NULL DEFAULT 0, ADD COLUMN IF NOT EXISTS session_wrong integer NOT NULL DEFAULT 0;

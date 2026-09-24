@@ -120,6 +120,8 @@ export type Database = {
           current_index: number
           queue: string[]
           semester: number
+          session_correct: number
+          session_wrong: number
           updated_at: string
           user_id: string
         }
@@ -127,6 +129,8 @@ export type Database = {
           current_index?: number
           queue?: string[]
           semester?: number
+          session_correct?: number
+          session_wrong?: number
           updated_at?: string
           user_id: string
         }
@@ -134,6 +138,8 @@ export type Database = {
           current_index?: number
           queue?: string[]
           semester?: number
+          session_correct?: number
+          session_wrong?: number
           updated_at?: string
           user_id?: string
         }
