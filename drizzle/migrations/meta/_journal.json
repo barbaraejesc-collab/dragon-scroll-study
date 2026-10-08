@@ -8,6 +8,13 @@
       "when": 1790260745085,
       "tag": "0000_session_score",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791468460830,
+      "tag": "0001_card_type",
+      "breakpoints": true
     }
   ]
 }
