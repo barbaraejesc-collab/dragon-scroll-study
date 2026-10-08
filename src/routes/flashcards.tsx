@@ -28,7 +28,8 @@ export const Route = createFileRoute("/flashcards")({
   component: FlashcardsPage,
 });
 
-type Card = { id: string; hanzi: string; pinyin: string; meaning: string; category: string; semester: number };
+type Card = { id: string; hanzi: string; pinyin: string; meaning: string; category: string; semester: number; card_type?: string };
+const TYPE_OPTS = [{ k: "phrase", l: "Frases" }, { k: "word", l: "Ideogramas" }, { k: "radical", l: "Radicais" }];
 type Progress = Record<string, { correct: number; wrong: number }>;
 
 
@@ -59,6 +60,18 @@ function FlashcardsPage() {
   const [score, setScore] = useState({ correct: 0, wrong: 0 });
   const scoreRef = useRef({ correct: 0, wrong: 0 });
   const [offline, setOffline] = useState(false);
+  const [types, setTypes] = useState<string[] | null>(null);
+  useEffect(() => {
+    try { const v = JSON.parse(localStorage.getItem("fc:types") || "null"); setTypes(Array.isArray(v) && v.length ? v : ["phrase", "word", "radical"]); }
+    catch { setTypes(["phrase", "word", "radical"]); }
+  }, []);
+  const toggleType = (k: string) => setTypes((t) => {
+    const cur = t ?? [];
+    const next = cur.includes(k) ? cur.filter((x) => x !== k) : [...cur, k];
+    if (!next.length) return cur;
+    localStorage.setItem("fc:types", JSON.stringify(next));
+    return next;
+  });
 
 
 
@@ -69,7 +82,7 @@ function FlashcardsPage() {
 
   // Load cards + progress + saved session position
   useEffect(() => {
-    if (!user) return;
+    if (!user || !types) return;
     setLoaded(false);
     scoreRef.current = { correct: 0, wrong: 0 };
     setScore({ correct: 0, wrong: 0 });
@@ -122,7 +135,7 @@ function FlashcardsPage() {
       setOffline(false);
       const all = (cardsData ?? []) as Card[];
       setSemesters(Array.from(new Set(all.map((x) => x.semester ?? 1))).sort((a, b) => a - b));
-      const c = sem ? all.filter((x) => (x.semester ?? 1) === sem) : all;
+      const c = (sem ? all.filter((x) => (x.semester ?? 1) === sem) : all).filter((x) => types.includes(x.card_type ?? "word"));
       const p: Progress = {};
       (progressData ?? []).forEach((row) => {
         p[row.card_id] = { correct: row.correct_count, wrong: row.wrong_count };
@@ -177,7 +190,7 @@ function FlashcardsPage() {
       const today = new Date().toISOString().slice(0, 10);
       supabase.from("study_sessions").insert({ user_id: user.id, study_date: today }).then(() => {});
     })();
-  }, [user, errorsMode, sem]);
+  }, [user, errorsMode, sem, types]);
 
 
   const current = useMemo(() => cards.find((c) => c.id === queue[idx]) ?? null, [cards, queue, idx]);
@@ -415,6 +428,19 @@ function FlashcardsPage() {
         ))}
       </div>
 
+      <div className="flex flex-wrap items-center gap-2 mb-5 -mt-2">
+        <span className="text-[10px] uppercase tracking-widest text-muted-foreground/70 font-serif mr-1">Tipo</span>
+        {TYPE_OPTS.map((o) => {
+          const on = types?.includes(o.k);
+          return (
+            <button key={o.k} type="button" onClick={() => toggleType(o.k)}
+              className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${on ? "bg-accent text-background border-accent" : "border-border text-muted-foreground hover:text-foreground"}`}>
+              {on ? "☑" : "☐"} {o.l}
+            </button>
+          );
+        })}
+      </div>
+
       <div className="mb-6">
         <div className="flex justify-between text-xs text-muted-foreground mb-2 font-serif">
           <span>Sessão</span>
@@ -463,7 +489,7 @@ function FlashcardView({
           <div className="flip-face bg-gradient-to-br from-card to-secondary border border-border rounded-3xl shadow-[var(--shadow-elegant)] flex flex-col relative overflow-hidden">
             <div className="flex-1 flex items-center justify-center p-6 min-h-0">
               <span
-                className="text-[20vw] md:text-[160px] leading-none text-cream drop-shadow-[0_0_40px_rgba(255,215,0,0.1)] break-all text-center"
+                className={`${card.card_type === "phrase" ? "text-[11vw] md:text-[72px] leading-tight" : "text-[20vw] md:text-[160px] leading-none"} text-cream drop-shadow-[0_0_40px_rgba(255,215,0,0.1)] break-all text-center`}
                 style={{ fontFamily: hanziFont.family }}
               >
                 {card.hanzi}
