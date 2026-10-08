@@ -54,6 +54,7 @@ export type Database = {
       }
       cards: {
         Row: {
+          card_type: string
           category: string
           created_at: string
           hanzi: string
@@ -63,6 +64,7 @@ export type Database = {
           semester: number
         }
         Insert: {
+          card_type?: string
           category: string
           created_at?: string
           hanzi: string
@@ -72,6 +74,7 @@ export type Database = {
           semester?: number
         }
         Update: {
+          card_type?: string
           category?: string
           created_at?: string
           hanzi?: string
