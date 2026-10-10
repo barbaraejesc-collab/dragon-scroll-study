@@ -81,7 +81,7 @@ function LivePage() {
       const raw = localStorage.getItem(PREF_KEY);
       if (raw) {
         const p = JSON.parse(raw) as { semester?: SemChoice; speed?: number };
-        if (p.semester === "all" || p.semester === 1 || p.semester === 2) setSemester(p.semester);
+        
         if (p.speed && SPEEDS.includes(p.speed as (typeof SPEEDS)[number])) setSpeed(p.speed);
       }
     } catch {
@@ -284,23 +284,6 @@ function LivePage() {
         <p className="text-muted-foreground mb-10 text-sm">
           Os ideogramas passam sozinhos, com áudio e tempo controlado. Sem cliques.
         </p>
-
-        <section className="mb-8">
-          <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Semestre</p>
-          <div className="grid grid-cols-3 gap-3">
-            {([1, 2, "all"] as SemChoice[]).map((s) => (
-              <button
-                key={String(s)}
-                onClick={() => setSemester(s)}
-                className={`rounded-xl border px-4 py-3 text-sm transition-colors ${
-                  semester === s ? "border-accent text-accent bg-accent/10" : "border-border text-muted-foreground"
-                }`}
-              >
-                {s === "all" ? "Tudo junto" : `${s}º semestre`}
-              </button>
-            ))}
-          </div>
-        </section>
 
         <section className="mb-12">
           <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">Velocidade por etapa</p>
