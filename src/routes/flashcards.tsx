@@ -47,7 +47,8 @@ function speakHanzi(text: string) {
 function FlashcardsPage() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
-  const { mode, sem } = Route.useSearch();
+  const { mode } = Route.useSearch();
+  const sem = undefined as number | undefined;
   const errorsMode = mode === "errors";
   const [cards, setCards] = useState<Card[]>([]);
   const [semesters, setSemesters] = useState<number[]>([]);
@@ -402,33 +403,6 @@ function FlashcardsPage() {
       )}
 
       <div className="flex flex-wrap items-center gap-2 mb-5">
-        <span className="text-[10px] uppercase tracking-widest text-muted-foreground/70 font-serif mr-1">
-          Semestre
-        </span>
-        <Link
-          to="/flashcards"
-          search={{ mode, sem: undefined }}
-          className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
-            !sem ? "bg-accent text-background border-accent" : "border-border text-muted-foreground hover:text-foreground"
-          }`}
-        >
-          Todos
-        </Link>
-        {semesters.map((s) => (
-          <Link
-            key={s}
-            to="/flashcards"
-            search={{ mode, sem: s }}
-            className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
-              sem === s ? "bg-accent text-background border-accent" : "border-border text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            {s}º
-          </Link>
-        ))}
-      </div>
-
-      <div className="flex flex-wrap items-center gap-2 mb-5 -mt-2">
         <span className="text-[10px] uppercase tracking-widest text-muted-foreground/70 font-serif mr-1">Tipo</span>
         {TYPE_OPTS.map((o) => {
           const on = types?.includes(o.k);
