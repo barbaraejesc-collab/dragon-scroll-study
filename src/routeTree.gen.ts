@@ -9,54 +9,24 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as VocabularioRouteImport } from './routes/vocabulario'
-import { Route as QuizRouteImport } from './routes/quiz'
-import { Route as LiveRouteImport } from './routes/live'
-import { Route as FlashcardsRouteImport } from './routes/flashcards'
-import { Route as DashboardRouteImport } from './routes/dashboard'
-import { Route as CuriosidadesRouteImport } from './routes/curiosidades'
-import { Route as ConversaRouteImport } from './routes/conversa'
-import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ApiVocabRouteImport } from './routes/api/vocab'
-import { Route as ApiTtsRouteImport } from './routes/api/tts'
-import { Route as ApiCuriosidadeRouteImport } from './routes/api/curiosidade'
-import { Route as ApiCheckRouteImport } from './routes/api/check'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ConversaRouteImport } from './routes/conversa'
+import { Route as CuriosidadesRouteImport } from './routes/curiosidades'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as FlashcardsRouteImport } from './routes/flashcards'
+import { Route as LiveRouteImport } from './routes/live'
+import { Route as QuizRouteImport } from './routes/quiz'
+import { Route as VocabularioRouteImport } from './routes/vocabulario'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as ApiCheckRouteImport } from './routes/api/check'
+import { Route as ApiCuriosidadeRouteImport } from './routes/api/curiosidade'
+import { Route as ApiTtsRouteImport } from './routes/api/tts'
+import { Route as ApiVocabRouteImport } from './routes/api/vocab'
 
-const VocabularioRoute = VocabularioRouteImport.update({
-  id: '/vocabulario',
-  path: '/vocabulario',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const QuizRoute = QuizRouteImport.update({
-  id: '/quiz',
-  path: '/quiz',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LiveRoute = LiveRouteImport.update({
-  id: '/live',
-  path: '/live',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FlashcardsRoute = FlashcardsRouteImport.update({
-  id: '/flashcards',
-  path: '/flashcards',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DashboardRoute = DashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CuriosidadesRoute = CuriosidadesRouteImport.update({
-  id: '/curiosidades',
-  path: '/curiosidades',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ConversaRoute = ConversaRouteImport.update({
-  id: '/conversa',
-  path: '/conversa',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -64,24 +34,44 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const ConversaRoute = ConversaRouteImport.update({
+  id: '/conversa',
+  path: '/conversa',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiVocabRoute = ApiVocabRouteImport.update({
-  id: '/api/vocab',
-  path: '/api/vocab',
+const CuriosidadesRoute = CuriosidadesRouteImport.update({
+  id: '/curiosidades',
+  path: '/curiosidades',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiTtsRoute = ApiTtsRouteImport.update({
-  id: '/api/tts',
-  path: '/api/tts',
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiCuriosidadeRoute = ApiCuriosidadeRouteImport.update({
-  id: '/api/curiosidade',
-  path: '/api/curiosidade',
+const FlashcardsRoute = FlashcardsRouteImport.update({
+  id: '/flashcards',
+  path: '/flashcards',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LiveRoute = LiveRouteImport.update({
+  id: '/live',
+  path: '/live',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuizRoute = QuizRouteImport.update({
+  id: '/quiz',
+  path: '/quiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VocabularioRoute = VocabularioRouteImport.update({
+  id: '/vocabulario',
+  path: '/vocabulario',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiCheckRoute = ApiCheckRouteImport.update({
@@ -89,9 +79,19 @@ const ApiCheckRoute = ApiCheckRouteImport.update({
   path: '/api/check',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiChatRoute = ApiChatRouteImport.update({
-  id: '/api/chat',
-  path: '/api/chat',
+const ApiCuriosidadeRoute = ApiCuriosidadeRouteImport.update({
+  id: '/api/curiosidade',
+  path: '/api/curiosidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiTtsRoute = ApiTtsRouteImport.update({
+  id: '/api/tts',
+  path: '/api/tts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiVocabRoute = ApiVocabRouteImport.update({
+  id: '/api/vocab',
+  path: '/api/vocab',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -214,53 +214,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/vocabulario': {
-      id: '/vocabulario'
-      path: '/vocabulario'
-      fullPath: '/vocabulario'
-      preLoaderRoute: typeof VocabularioRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/quiz': {
-      id: '/quiz'
-      path: '/quiz'
-      fullPath: '/quiz'
-      preLoaderRoute: typeof QuizRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/live': {
-      id: '/live'
-      path: '/live'
-      fullPath: '/live'
-      preLoaderRoute: typeof LiveRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/flashcards': {
-      id: '/flashcards'
-      path: '/flashcards'
-      fullPath: '/flashcards'
-      preLoaderRoute: typeof FlashcardsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/curiosidades': {
-      id: '/curiosidades'
-      path: '/curiosidades'
-      fullPath: '/curiosidades'
-      preLoaderRoute: typeof CuriosidadesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/conversa': {
-      id: '/conversa'
-      path: '/conversa'
-      fullPath: '/conversa'
-      preLoaderRoute: typeof ConversaRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -270,32 +228,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/conversa': {
+      id: '/conversa'
+      path: '/conversa'
+      fullPath: '/conversa'
+      preLoaderRoute: typeof ConversaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/vocab': {
-      id: '/api/vocab'
-      path: '/api/vocab'
-      fullPath: '/api/vocab'
-      preLoaderRoute: typeof ApiVocabRouteImport
+    '/curiosidades': {
+      id: '/curiosidades'
+      path: '/curiosidades'
+      fullPath: '/curiosidades'
+      preLoaderRoute: typeof CuriosidadesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/tts': {
-      id: '/api/tts'
-      path: '/api/tts'
-      fullPath: '/api/tts'
-      preLoaderRoute: typeof ApiTtsRouteImport
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/curiosidade': {
-      id: '/api/curiosidade'
-      path: '/api/curiosidade'
-      fullPath: '/api/curiosidade'
-      preLoaderRoute: typeof ApiCuriosidadeRouteImport
+    '/flashcards': {
+      id: '/flashcards'
+      path: '/flashcards'
+      fullPath: '/flashcards'
+      preLoaderRoute: typeof FlashcardsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/live': {
+      id: '/live'
+      path: '/live'
+      fullPath: '/live'
+      preLoaderRoute: typeof LiveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quiz': {
+      id: '/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof QuizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vocabulario': {
+      id: '/vocabulario'
+      path: '/vocabulario'
+      fullPath: '/vocabulario'
+      preLoaderRoute: typeof VocabularioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/check': {
@@ -305,11 +291,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiCheckRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/chat': {
-      id: '/api/chat'
-      path: '/api/chat'
-      fullPath: '/api/chat'
-      preLoaderRoute: typeof ApiChatRouteImport
+    '/api/curiosidade': {
+      id: '/api/curiosidade'
+      path: '/api/curiosidade'
+      fullPath: '/api/curiosidade'
+      preLoaderRoute: typeof ApiCuriosidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/tts': {
+      id: '/api/tts'
+      path: '/api/tts'
+      fullPath: '/api/tts'
+      preLoaderRoute: typeof ApiTtsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/vocab': {
+      id: '/api/vocab'
+      path: '/api/vocab'
+      fullPath: '/api/vocab'
+      preLoaderRoute: typeof ApiVocabRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
