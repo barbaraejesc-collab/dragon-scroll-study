@@ -373,7 +373,10 @@
     "鱼",
     "鸭",
     "鸭蛋",
-    "学习"
+    "学习",
+    "颜色",
+    "耐心",
+    "事儿"
   ],
   "confirmedLearnedWords": [
     "学习"
@@ -394,6 +397,30 @@
     "小红"
   ],
   "phrases": [
+    {
+      "category": "Frases",
+      "hanzi": "这家商店的包有很多颜色。",
+      "id": "335ca943-5a14-42f0-b1af-5869a7f903e7",
+      "meaning": "As bolsas desta loja têm muitas cores.",
+      "pinyin": "Zhè jiā shāngdiàn de bāo yǒu hěn duō yánsè.",
+      "tokens": ["这", "家", "商店", "的", "包", "有", "很", "多", "颜色"]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "老师很有耐心。",
+      "id": "f22d524a-b77a-4a71-9314-333b770ac3fb",
+      "meaning": "A professora tem muita paciência.",
+      "pinyin": "Lǎoshī hěn yǒu nàixīn.",
+      "tokens": ["老师", "很", "有", "耐心"]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "你有什么事儿？",
+      "id": "90694af3-e86a-49cc-80f5-f12f31ad1b0f",
+      "meaning": "Qual é o assunto? / Do que você precisa?",
+      "pinyin": "Nǐ yǒu shénme shìr?",
+      "tokens": ["你", "有", "什么", "事儿"]
+    },
     {
       "category": "Frases",
       "hanzi": "一共多少钱？五块钱，不用找钱。",
