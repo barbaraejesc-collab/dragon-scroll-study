@@ -6,8 +6,8 @@ const learned = new Set(audit.learnedWords);
 
 describe('Phrase vocabulary audit', () => {
   test('keeps the original 84 phrases and three additions distinct', () => {
-    expect(audit.phrases).toHaveLength(93);
-    expect(new Set(audit.phrases.map((phrase) => phrase.id)).size).toBe(93);
+    expect(audit.phrases).toHaveLength(94);
+    expect(new Set(audit.phrases.map((phrase) => phrase.id)).size).toBe(94);
   });
 
   for (const word of ['颜色', '耐心', '事儿']) {
