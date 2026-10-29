@@ -376,10 +376,12 @@
     "学习",
     "颜色",
     "耐心",
-    "事儿"
+    "事儿",
+    "人"
   ],
   "confirmedLearnedWords": [
-    "学习"
+    "学习",
+    "人"
   ],
   "forbiddenLexicalCompounds": [
     "大家",
@@ -1978,6 +1980,27 @@
         "明天",
         "过",
         "生日"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "我家有五口人：爸爸、妈妈、哥哥、妹妹和我。",
+      "id": "2a07ff84-9001-4529-b1ab-15e1cd3ce942",
+      "meaning": "Na minha família somos cinco pessoas: papai, mamãe, irmão mais velho, irmã mais nova e eu.",
+      "pinyin": "Wǒ jiā yǒu wǔ kǒu rén: bàba, māma, gēge, mèimei hé wǒ.",
+      "tokens": [
+        "我",
+        "家",
+        "有",
+        "五",
+        "口",
+        "人",
+        "爸爸",
+        "妈妈",
+        "哥哥",
+        "妹妹",
+        "和",
+        "我"
       ]
     }
   ]
