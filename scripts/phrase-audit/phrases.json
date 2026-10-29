@@ -403,7 +403,17 @@
       "id": "335ca943-5a14-42f0-b1af-5869a7f903e7",
       "meaning": "As bolsas desta loja têm muitas cores.",
       "pinyin": "Zhè jiā shāngdiàn de bāo yǒu hěn duō yánsè.",
-      "tokens": ["这", "家", "商店", "的", "包", "有", "很", "多", "颜色"]
+      "tokens": [
+        "这",
+        "家",
+        "商店",
+        "的",
+        "包",
+        "有",
+        "很",
+        "多",
+        "颜色"
+      ]
     },
     {
       "category": "Frases",
@@ -411,7 +421,12 @@
       "id": "f22d524a-b77a-4a71-9314-333b770ac3fb",
       "meaning": "A professora tem muita paciência.",
       "pinyin": "Lǎoshī hěn yǒu nàixīn.",
-      "tokens": ["老师", "很", "有", "耐心"]
+      "tokens": [
+        "老师",
+        "很",
+        "有",
+        "耐心"
+      ]
     },
     {
       "category": "Frases",
@@ -419,7 +434,12 @@
       "id": "90694af3-e86a-49cc-80f5-f12f31ad1b0f",
       "meaning": "Qual é o assunto? / Do que você precisa?",
       "pinyin": "Nǐ yǒu shénme shìr?",
-      "tokens": ["你", "有", "什么", "事儿"]
+      "tokens": [
+        "你",
+        "有",
+        "什么",
+        "事儿"
+      ]
     },
     {
       "category": "Frases",
@@ -1860,6 +1880,104 @@
         "四",
         "等于",
         "五"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "我要半斤苹果。",
+      "id": "00a8de55-4c6c-44ba-a1fc-07913624e3a0",
+      "meaning": "Quero meio jin de maçãs.",
+      "pinyin": "Wǒ yào bàn jīn píngguǒ.",
+      "tokens": [
+        "我",
+        "要",
+        "半",
+        "斤",
+        "苹果"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "请问，你几点钟起床？",
+      "id": "b642cc7a-4d43-4627-b263-08d39e1d5df9",
+      "meaning": "Com licença, a que horas você acorda?",
+      "pinyin": "Qǐngwèn, nǐ jǐ diǎnzhōng qǐchuáng?",
+      "tokens": [
+        "请问",
+        "你",
+        "几",
+        "点钟",
+        "起床"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "我今天很忙，因为我要上课，明天有时间。",
+      "id": "e97b5a5e-1dcd-4f71-87a7-cf1e67c5bb41",
+      "meaning": "Hoje estou muito ocupada porque tenho aula; amanhã tenho tempo.",
+      "pinyin": "Wǒ jīntiān hěn máng, yīnwèi wǒ yào shàngkè, míngtiān yǒu shíjiān.",
+      "tokens": [
+        "我",
+        "今天",
+        "很",
+        "忙",
+        "因为",
+        "我",
+        "要",
+        "上课",
+        "明天",
+        "有",
+        "时间"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "你为什么买红葡萄酒？因为我爸爸爱喝。",
+      "id": "15f50f1c-b92a-4ec4-95a7-47fcbb750fb2",
+      "meaning": "Por que você compra vinho tinto? Porque meu pai adora beber.",
+      "pinyin": "Nǐ wèishénme mǎi hóng pútaojiǔ? Yīnwèi wǒ bàba ài hē.",
+      "tokens": [
+        "你",
+        "为什么",
+        "买",
+        "红葡萄酒",
+        "因为",
+        "我",
+        "爸爸",
+        "爱",
+        "喝"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "我的手机里有一张她的照片。",
+      "id": "d41f8fb7-797c-4768-b05c-553c7a66c28c",
+      "meaning": "No meu celular tem uma foto dela.",
+      "pinyin": "Wǒ de shǒujī lǐ yǒu yì zhāng tā de zhàopiàn.",
+      "tokens": [
+        "我",
+        "的",
+        "手机",
+        "里",
+        "有",
+        "一",
+        "张",
+        "她",
+        "的",
+        "照片"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "我明天过生日。",
+      "id": "916887ff-cf14-4ff3-a317-a8d2836d8c5c",
+      "meaning": "Amanhã eu comemoro meu aniversário.",
+      "pinyin": "Wǒ míngtiān guò shēngrì.",
+      "tokens": [
+        "我",
+        "明天",
+        "过",
+        "生日"
       ]
     }
   ]
