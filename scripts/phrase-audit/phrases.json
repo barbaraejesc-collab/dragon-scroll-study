@@ -1,4 +1,61 @@
 {
+  "confirmedLearnedWords": [
+    "学习",
+    "人",
+    "全身",
+    "全",
+    "身",
+    "舒服",
+    "每",
+    "锻炼",
+    "头",
+    "疼",
+    "嗓子",
+    "想",
+    "看病",
+    "病",
+    "身体",
+    "吧",
+    "还是",
+    "一起",
+    "穿",
+    "衣服",
+    "休息",
+    "挂号",
+    "有点儿",
+    "发炎",
+    "发烧",
+    "感冒",
+    "住院",
+    "药",
+    "愿意",
+    "中药",
+    "西药",
+    "开刀",
+    "化验",
+    "血",
+    "大便",
+    "小便",
+    "牙",
+    "肚子",
+    "生活",
+    "打针",
+    "请假条"
+  ],
+  "forbiddenLexicalCompounds": [
+    "大家",
+    "很怕",
+    "真的",
+    "鸭子",
+    "好吃",
+    "前面",
+    "过年",
+    "手表",
+    "好看",
+    "袋子",
+    "巴西人",
+    "小红"
+  ],
   "learnedWords": [
     "一",
     "一下",
@@ -377,26 +434,46 @@
     "颜色",
     "耐心",
     "事儿",
-    "人"
-  ],
-  "confirmedLearnedWords": [
-    "学习",
-    "人"
-  ],
-  "forbiddenLexicalCompounds": [
-    "大家",
-    "很怕",
-    "真的",
+    "人",
+    "全身",
+    "全",
+    "身",
+    "舒服",
+    "每",
+    "锻炼",
+    "头",
+    "疼",
+    "嗓子",
+    "想",
+    "看病",
+    "病",
+    "身体",
+    "吧",
     "还是",
-    "鸭子",
-    "好吃",
-    "前面",
-    "过年",
-    "手表",
-    "好看",
-    "袋子",
-    "巴西人",
-    "小红"
+    "一起",
+    "穿",
+    "衣服",
+    "休息",
+    "挂号",
+    "有点儿",
+    "发炎",
+    "发烧",
+    "感冒",
+    "住院",
+    "药",
+    "愿意",
+    "中药",
+    "西药",
+    "开刀",
+    "化验",
+    "血",
+    "大便",
+    "小便",
+    "牙",
+    "肚子",
+    "生活",
+    "打针",
+    "请假条"
   ],
   "phrases": [
     {
@@ -2001,6 +2078,298 @@
         "妹妹",
         "和",
         "我"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "我今天有点儿不舒服，想去医院看病。",
+      "id": "7333dde6-6648-452b-9de3-08b4e1dae13c",
+      "meaning": "Hoje estou me sentindo um pouco mal e quero ir ao hospital consultar o médico.",
+      "pinyin": "Wǒ jīntiān yǒudiǎnr bù shūfu, xiǎng qù yīyuàn kànbìng.",
+      "tokens": [
+        "我",
+        "今天",
+        "有点儿",
+        "不",
+        "舒服",
+        "想",
+        "去",
+        "医院",
+        "看病"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "我嗓子疼，还有点儿发烧。",
+      "id": "f70105cf-cd01-4d7f-82f6-5c53b16f9008",
+      "meaning": "Minha garganta está doendo e ainda estou com um pouco de febre.",
+      "pinyin": "Wǒ sǎngzi téng, hái yǒudiǎnr fāshāo.",
+      "tokens": [
+        "我",
+        "嗓子",
+        "疼",
+        "还",
+        "有点儿",
+        "发烧"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "你应该多喝茶，多休息。",
+      "id": "72d97f4e-ed08-48d7-b1be-9e022dcb6a6b",
+      "meaning": "Você deveria beber mais chá e descansar mais.",
+      "pinyin": "Nǐ yīnggāi duō hē chá, duō xiūxi.",
+      "tokens": [
+        "你",
+        "应该",
+        "多",
+        "喝",
+        "茶",
+        "多",
+        "休息"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "医生说我恐怕要开刀，还要打针。",
+      "id": "5c90e5bb-80b0-453e-8934-5768801fe785",
+      "meaning": "O médico disse que talvez eu precise operar e ainda tomar injeção.",
+      "pinyin": "Yīshēng shuō wǒ kǒngpà yào kāidāo, hái yào dǎzhēn.",
+      "tokens": [
+        "医生",
+        "说",
+        "我",
+        "恐怕",
+        "要",
+        "开刀",
+        "还",
+        "要",
+        "打针"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "他牙疼，不能吃东西。",
+      "id": "a83af66f-554b-469c-b3fd-b32b231c0053",
+      "meaning": "Ele está com dor de dente e não consegue comer.",
+      "pinyin": "Tā yá téng, bù néng chī dōngxi.",
+      "tokens": [
+        "他",
+        "牙",
+        "疼",
+        "不",
+        "能",
+        "吃",
+        "东西"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "你想吃中药还是西药？",
+      "id": "18510217-c681-4f3a-8ec1-03e6e7ba80c1",
+      "meaning": "Você quer tomar remédio chinês ou remédio ocidental?",
+      "pinyin": "Nǐ xiǎng chī zhōngyào háishi xīyào?",
+      "tokens": [
+        "你",
+        "想",
+        "吃",
+        "中药",
+        "还是",
+        "西药"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "我愿意住院，因为我全身都疼。",
+      "id": "fac92a20-5279-405e-b392-711cbb45b069",
+      "meaning": "Aceito ficar internado, porque meu corpo inteiro dói.",
+      "pinyin": "Wǒ yuànyì zhùyuàn, yīnwèi wǒ quánshēn dōu téng.",
+      "tokens": [
+        "我",
+        "愿意",
+        "住院",
+        "因为",
+        "我",
+        "全身",
+        "都",
+        "疼"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "她每天早上锻炼，身体很好。",
+      "id": "7ee3c936-37f3-4d13-9e58-90f33728743b",
+      "meaning": "Ela se exercita toda manhã, então a saúde dela é muito boa.",
+      "pinyin": "Tā měi tiān zǎoshang duànliàn, shēntǐ hěn hǎo.",
+      "tokens": [
+        "她",
+        "每",
+        "天",
+        "早上",
+        "锻炼",
+        "身体",
+        "很",
+        "好"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "你头有点儿疼，应该多穿衣服。",
+      "id": "b0b7ad14-471f-4546-89a8-5f2d4571a4fe",
+      "meaning": "Sua cabeça está doendo um pouco; você deveria vestir mais roupa.",
+      "pinyin": "Nǐ tóu yǒudiǎnr téng, yīnggāi duō chuān yīfu.",
+      "tokens": [
+        "你",
+        "头",
+        "有点儿",
+        "疼",
+        "应该",
+        "多",
+        "穿",
+        "衣服"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "你明天和我一起去看病吧。",
+      "id": "5fe756aa-2a76-4e5c-9223-8606b803c579",
+      "meaning": "Amanhã você vai comigo ao médico, combinado?",
+      "pinyin": "Nǐ míngtiān hé wǒ yìqǐ qù kànbìng ba.",
+      "tokens": [
+        "你",
+        "明天",
+        "和",
+        "我",
+        "一起",
+        "去",
+        "看病",
+        "吧"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "他肚子不舒服，不能上课，要写请假条。",
+      "id": "e42b282f-8999-4571-ac36-d0d9942bf266",
+      "meaning": "Ele está com a barriga ruim, não pode ir à aula e precisa escrever um pedido de licença.",
+      "pinyin": "Tā dùzi bù shūfu, bù néng shàngkè, yào xiě qǐngjiàtiáo.",
+      "tokens": [
+        "他",
+        "肚子",
+        "不",
+        "舒服",
+        "不",
+        "能",
+        "上课",
+        "要",
+        "写",
+        "请假条"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "在医院看病要挂号。",
+      "id": "f058160e-40ce-4cac-a249-706ac08337fe",
+      "meaning": "Para consultar no hospital, é preciso fazer o registro.",
+      "pinyin": "Zài yīyuàn kànbìng yào guàhào.",
+      "tokens": [
+        "在",
+        "医院",
+        "看病",
+        "要",
+        "挂号"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "我嗓子发炎，不能唱歌。",
+      "id": "f65448ac-c6b1-41e0-a1dd-3e719f0c665e",
+      "meaning": "Minha garganta está inflamada e eu não consigo cantar.",
+      "pinyin": "Wǒ sǎngzi fāyán, bù néng chànggē.",
+      "tokens": [
+        "我",
+        "嗓子",
+        "发炎",
+        "不",
+        "能",
+        "唱歌"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "医生要化验我的血、大便和小便。",
+      "id": "daaa14ed-6eb4-4d0e-a6aa-c9b73331f904",
+      "meaning": "O médico vai pedir exame do meu sangue, das fezes e da urina.",
+      "pinyin": "Yīshēng yào huàyàn wǒ de xuè, dàbiàn hé xiǎobiàn.",
+      "tokens": [
+        "医生",
+        "要",
+        "化验",
+        "我",
+        "的",
+        "血",
+        "大便",
+        "和",
+        "小便"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "在中国生活很有意思。",
+      "id": "bec3e518-f85e-4c4e-8638-c4c3efc60db9",
+      "meaning": "Viver na China é muito interessante.",
+      "pinyin": "Zài Zhōngguó shēnghuó hěn yǒu yìsi.",
+      "tokens": [
+        "在",
+        "中国",
+        "生活",
+        "很",
+        "有意思"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "我每天中午睡觉。",
+      "id": "30cc682b-c0f0-40fa-9ac7-6ad5c0c51395",
+      "meaning": "Eu durmo ao meio-dia todos os dias.",
+      "pinyin": "Wǒ měi tiān zhōngwǔ shuìjiào.",
+      "tokens": [
+        "我",
+        "每",
+        "天",
+        "中午",
+        "睡觉"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "这个药有点儿贵。",
+      "id": "37c3aade-c473-4ae8-b23a-a2cd59b98cbe",
+      "meaning": "Este remédio é um pouco caro.",
+      "pinyin": "Zhège yào yǒudiǎnr guì.",
+      "tokens": [
+        "这",
+        "个",
+        "药",
+        "有点儿",
+        "贵"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "这个医院的医生全都很好。",
+      "id": "49279fc6-82ee-465d-aa54-39feb261c3f8",
+      "meaning": "Os médicos deste hospital são todos muito bons.",
+      "pinyin": "Zhège yīyuàn de yīshēng quán dōu hěn hǎo.",
+      "tokens": [
+        "这",
+        "个",
+        "医院",
+        "的",
+        "医生",
+        "全",
+        "都",
+        "很",
+        "好"
       ]
     }
   ]
