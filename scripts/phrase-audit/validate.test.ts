@@ -5,9 +5,18 @@ const hanziOnly = (text: string) => text.replace(/[^\u3400-\u9fff]/g, '');
 const learned = new Set(audit.learnedWords);
 
 describe('Phrase vocabulary audit', () => {
-  test('keeps the original 84 phrases and three additions distinct', () => {
-    expect(audit.phrases).toHaveLength(94);
-    expect(new Set(audit.phrases.map((phrase) => phrase.id)).size).toBe(94);
+  test('keeps the original 84 phrases and all additions distinct', () => {
+    expect(audit.phrases).toHaveLength(112);
+    expect(new Set(audit.phrases.map((phrase) => phrase.id)).size).toBe(112);
+  });
+
+  test('practices the health and routine vocabulary in phrases', () => {
+    for (const word of ['看病', '还是', '吧', '锻炼', '请假条', '开刀', '化验', '请假条']) {
+      expect(learned.has(word)).toBe(true);
+    }
+    for (const word of ['看病', '还是', '吧', '锻炼', '请假条', '开刀', '化验']) {
+      expect(audit.phrases.some((phrase) => phrase.tokens.includes(word))).toBe(true);
+    }
   });
 
   for (const word of ['颜色', '耐心', '事儿']) {
