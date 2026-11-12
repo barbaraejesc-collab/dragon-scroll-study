@@ -4,6 +4,7 @@
 - [x] Validar palavras permitidas e conferir as frases no app.
 
 # Ampliação do vocabulário
+- [x] Incluir 只 (zhǐ, só/apenas), preservar zhī e conferir uma frase com o novo sentido.
 - [x] Incluir 颜色, 耐心 e 事儿 e atualizar 家 como classificador.
 - [x] Incluir frases com as quatro palavras e validar o vocabulário completo.
 - [x] Conferir os novos cards no aplicativo sem alterar o progresso existente.
