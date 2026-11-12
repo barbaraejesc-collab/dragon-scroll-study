@@ -43,7 +43,8 @@
     "请假条",
     "可是",
     "才",
-    "练习"
+    "练习",
+    "只"
   ],
   "forbiddenLexicalCompounds": [
     "大家",
@@ -481,7 +482,19 @@
     "才",
     "练习"
   ],
+  "learnedWordSenses": [
+    { "hanzi": "只", "pinyin": "zhī", "sense": "animal-classifier", "cardId": "4c4c2e32-5b6f-4814-b782-bc9e0c1a3e5b" },
+    { "hanzi": "只", "pinyin": "zhǐ", "sense": "only", "cardId": "f3c5480b-c4ae-4ec9-9faa-8c7e26c3e1a2" }
+  ],
   "phrases": [
+    {
+      "category": "Frases",
+      "hanzi": "我只喝茶。",
+      "id": "bd4a6b36-7dcf-47df-a297-376357bd68bc",
+      "meaning": "Eu só bebo chá.",
+      "pinyin": "Wǒ zhǐ hē chá.",
+      "tokens": ["我", "只", "喝", "茶"]
+    },
     {
       "category": "Frases",
       "hanzi": "这家商店的包有很多颜色。",

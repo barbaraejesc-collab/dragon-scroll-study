@@ -6,8 +6,18 @@ const learned = new Set(audit.learnedWords);
 
 describe('Phrase vocabulary audit', () => {
   test('keeps the original 84 phrases and all additions distinct', () => {
-    expect(audit.phrases).toHaveLength(115);
-    expect(new Set(audit.phrases.map((phrase) => phrase.id)).size).toBe(115);
+    expect(audit.phrases).toHaveLength(116);
+    expect(new Set(audit.phrases.map((phrase) => phrase.id)).size).toBe(116);
+  });
+
+  test('distinguishes learned 只 zhǐ only from 只 zhī animal classifier', () => {
+    expect(audit.learnedWordSenses.filter((word) => word.hanzi === '只').map((word) => [word.pinyin, word.sense])).toEqual([
+      ['zhī', 'animal-classifier'], ['zhǐ', 'only'],
+    ]);
+    const phrase = audit.phrases.find((item) => item.id === 'bd4a6b36-7dcf-47df-a297-376357bd68bc');
+    expect(phrase?.tokens).toEqual(['我', '只', '喝', '茶']);
+    expect(phrase?.pinyin).toBe('Wǒ zhǐ hē chá.');
+    expect(audit.learnedWordSenses[0].cardId).toBe('4c4c2e32-5b6f-4814-b782-bc9e0c1a3e5b');
   });
 
   test('practices the health and routine vocabulary in phrases', () => {
