@@ -40,7 +40,10 @@
     "肚子",
     "生活",
     "打针",
-    "请假条"
+    "请假条",
+    "可是",
+    "才",
+    "练习"
   ],
   "forbiddenLexicalCompounds": [
     "大家",
@@ -473,7 +476,10 @@
     "肚子",
     "生活",
     "打针",
-    "请假条"
+    "请假条",
+    "可是",
+    "才",
+    "练习"
   ],
   "phrases": [
     {
@@ -2370,6 +2376,52 @@
         "都",
         "很",
         "好"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "我每天都练习汉字。",
+      "id": "46966840-423d-4d8a-bce9-be30cdf71d42",
+      "meaning": "Eu pratico hanzi todos os dias.",
+      "pinyin": "Wǒ měitiān dōu liànxí Hànzì.",
+      "tokens": [
+        "我",
+        "每",
+        "天",
+        "都",
+        "练习",
+        "汉字"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "我想去，可是我今天很忙。",
+      "id": "178c3624-7968-4aca-8cff-35fa1fb98daa",
+      "meaning": "Eu quero ir, mas hoje estou muito ocupada.",
+      "pinyin": "Wǒ xiǎng qù, kěshì wǒ jīntiān hěn máng.",
+      "tokens": [
+        "我",
+        "想",
+        "去",
+        "可是",
+        "我",
+        "今天",
+        "很",
+        "忙"
+      ]
+    },
+    {
+      "category": "Frases",
+      "hanzi": "他十点钟才起床。",
+      "id": "7226a775-f6d0-4068-ac62-1d008288d670",
+      "meaning": "Ele só se levantou às dez horas.",
+      "pinyin": "Tā shí diǎnzhōng cái qǐchuáng.",
+      "tokens": [
+        "他",
+        "十",
+        "点钟",
+        "才",
+        "起床"
       ]
     }
   ]
