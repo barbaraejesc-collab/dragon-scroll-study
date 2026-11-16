@@ -7,6 +7,14 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/curiosidades")({
+  head: () => ({ meta: [
+    { title: "Curiosidades da China — 中文学习" },
+    { name: "description", content: "Explore cultura e curiosidades da China durante seus estudos." },
+    { property: "og:title", content: "Curiosidades da China — 中文学习" },
+    { property: "og:description", content: "Explore cultura e curiosidades da China durante seus estudos." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
+  ] }),
   component: CuriosidadesPage,
 });
 

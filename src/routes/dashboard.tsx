@@ -6,6 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Flame, BookOpen, Target, LogOut, Sparkles, AlertTriangle, Zap, List, PlayCircle } from "lucide-react";
 
 export const Route = createFileRoute("/dashboard")({
+  head: () => ({ meta: [
+    { title: "Meu estudo — 中文学习" },
+    { name: "description", content: "Acompanhe seu progresso e escolha seu modo de estudo de mandarim." },
+    { property: "og:title", content: "Meu estudo — 中文学习" },
+    { property: "og:description", content: "Acompanhe seu progresso e escolha seu modo de estudo de mandarim." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
+  ] }),
   component: Dashboard,
 });
 

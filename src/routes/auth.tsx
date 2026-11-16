@@ -8,6 +8,14 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 export const Route = createFileRoute("/auth")({
+  head: () => ({ meta: [
+    { title: "Entrar — 中文学习" },
+    { name: "description", content: "Acesse sua conta de estudo de mandarim e seu progresso salvo." },
+    { property: "og:title", content: "Entrar — 中文学习" },
+    { property: "og:description", content: "Acesse sua conta de estudo de mandarim e seu progresso salvo." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
+  ] }),
   component: AuthPage,
 });
 

@@ -4,6 +4,14 @@ import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
+  head: () => ({ meta: [
+    { title: "Início — 中文学习" },
+    { name: "description", content: "Seu sistema pessoal de estudo de mandarim." },
+    { property: "og:title", content: "Início — 中文学习" },
+    { property: "og:description", content: "Seu sistema pessoal de estudo de mandarim." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
+  ] }),
   component: Landing,
 });
 

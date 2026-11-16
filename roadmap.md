@@ -8,3 +8,8 @@
 - [x] Incluir 颜色, 耐心 e 事儿 e atualizar 家 como classificador.
 - [x] Incluir frases com as quatro palavras e validar o vocabulário completo.
 - [x] Conferir os novos cards no aplicativo sem alterar o progresso existente.
+
+# Lógica das frases
+- [x] Acrescentar tradução literal por palavras completas e estrutura gramatical às 116 frases.
+- [x] Mostrar as quatro camadas sempre no verso, com leitura confortável no celular.
+- [x] Testar os dados e conferir uma sessão real sem alterar o progresso.

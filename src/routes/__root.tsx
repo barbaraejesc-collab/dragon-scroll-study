@@ -81,8 +81,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary" },
       { name: "twitter:title", content: "中文学习 — Estudo de Mandarim" },
       { name: "twitter:description", content: "Sistema pessoal de estudo de mandarim com flashcards, repetição espaçada e progresso." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6e2ca454-eda6-4456-b8a4-d50b7c4ff9ee/id-preview-7bc662bd--a0f3a2ff-d827-4310-82a6-b50ebbc1c742.lovable.app-1778157719833.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6e2ca454-eda6-4456-b8a4-d50b7c4ff9ee/id-preview-7bc662bd--a0f3a2ff-d827-4310-82a6-b50ebbc1c742.lovable.app-1778157719833.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

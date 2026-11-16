@@ -10,6 +10,14 @@ import { cn } from "@/lib/utils";
 import { speakZh } from "@/lib/tts";
 
 export const Route = createFileRoute("/conversa")({
+  head: () => ({ meta: [
+    { title: "Tutora 小红 — 中文学习" },
+    { name: "description", content: "Pratique conversação em mandarim com a tutora 小红." },
+    { property: "og:title", content: "Tutora 小红 — 中文学习" },
+    { property: "og:description", content: "Pratique conversação em mandarim com a tutora 小红." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
+  ] }),
   component: ConversaPage,
 });
 

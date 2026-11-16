@@ -8,6 +8,14 @@ import { ArrowLeft, Search, Volume2 } from "lucide-react";
 import { speakZh } from "@/lib/tts";
 
 export const Route = createFileRoute("/vocabulario")({
+  head: () => ({ meta: [
+    { title: "Vocabulário — 中文学习" },
+    { name: "description", content: "Consulte suas palavras aprendidas, pinyin e significados em português." },
+    { property: "og:title", content: "Vocabulário — 中文学习" },
+    { property: "og:description", content: "Consulte suas palavras aprendidas, pinyin e significados em português." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
+  ] }),
   component: VocabularioPage,
 });
 

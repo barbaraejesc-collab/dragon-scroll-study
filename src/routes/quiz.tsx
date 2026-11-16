@@ -8,6 +8,14 @@ import { ArrowLeft, RotateCw, Check, X } from "lucide-react";
 import { playCorrect, playWrong } from "@/lib/sounds";
 
 export const Route = createFileRoute("/quiz")({
+  head: () => ({ meta: [
+    { title: "Quiz — 中文学习" },
+    { name: "description", content: "Pratique vocabulário de mandarim em um quiz." },
+    { property: "og:title", content: "Quiz — 中文学习" },
+    { property: "og:description", content: "Pratique vocabulário de mandarim em um quiz." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
+  ] }),
   component: QuizPage,
 });
 
