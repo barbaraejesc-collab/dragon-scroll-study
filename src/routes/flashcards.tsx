@@ -7,6 +7,7 @@ import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, Check, X, RotateCw, Volume2, WifiOff } from "lucide-react";
 import { playCorrect, playWrong } from "@/lib/sounds";
 import { speakZh, prefetchSession } from "@/lib/tts";
+import { PhraseLogicView } from "@/components/phrase-logic";
 import {
   isOnline,
   loadOfflineSession,
@@ -19,6 +20,14 @@ import {
 
 
 export const Route = createFileRoute("/flashcards")({
+  head: () => ({ meta: [
+    { title: "Flashcards — 中文学习" },
+    { name: "description", content: "Estude mandarim com pinyin, tradução em português, tradução literal e estrutura das frases." },
+    { property: "og:title", content: "Flashcards — 中文学习" },
+    { property: "og:description", content: "Pratique palavras e entenda a ordem das frases em mandarim." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
+  ] }),
   validateSearch: (s: Record<string, unknown>) => ({
     mode: s.mode === "errors" ? ("errors" as const) : undefined,
     sem: s.sem !== undefined && s.sem !== null && !Number.isNaN(Number(s.sem))
@@ -382,7 +391,7 @@ function FlashcardsPage() {
   const finished = loaded && idx >= total;
 
   return (
-    <main className="min-h-screen px-4 py-6 max-w-2xl mx-auto flex flex-col">
+    <main className="h-dvh min-h-[620px] px-4 py-6 max-w-2xl mx-auto flex flex-col">
       <header className="flex items-center justify-between mb-4">
         <Button variant="ghost" size="sm" asChild>
           <Link to="/dashboard"><ArrowLeft className="w-4 h-4 mr-1" /> Voltar</Link>
@@ -455,6 +464,10 @@ function FlashcardView({
   return (
     <div className="flex-1 flex flex-col">
       <div
+        role="button"
+        tabIndex={0}
+        aria-label={flipped ? "Frase revelada" : "Virar card"}
+        onKeyDown={(event) => { if (event.key === "Enter" && !flipped) onFlip(); }}
         className={`flip-card flex-1 min-h-[380px] cursor-pointer ${flipped ? "flipped" : ""}`}
         onClick={() => !flipped && onFlip()}
       >
@@ -474,22 +487,25 @@ function FlashcardView({
           {/* Verso */}
           <div className="flip-face flip-back bg-gradient-to-br from-primary/90 to-primary/60 border border-accent/30 rounded-3xl shadow-[var(--shadow-gold)] flex flex-col overflow-hidden">
             <div className="flex items-start justify-end p-3 shrink-0">
-              <button
+              <Button
+                variant="ghost"
+                size="icon"
                 type="button"
                 onClick={(e) => { e.stopPropagation(); speakHanzi(card.hanzi); }}
                 aria-label="Ouvir pronúncia"
                 className="p-2 rounded-full bg-background/20 hover:bg-background/40 text-cream transition-colors"
               >
                 <Volume2 className="w-5 h-5" />
-              </button>
+              </Button>
             </div>
-            <div className="flex-1 min-h-0 overflow-y-auto px-6 pb-6 text-center flex flex-col items-center justify-center gap-3">
+            <div className={`flex-1 min-h-0 overflow-y-auto overscroll-contain px-5 md:px-6 pb-6 text-center flex flex-col items-center gap-4 ${card.card_type === "phrase" ? "justify-start" : "justify-center"}`}>
               <div className="text-accent text-xl md:text-3xl font-serif italic break-words max-w-full">{card.pinyin}</div>
               <div className="text-cream text-base md:text-2xl font-serif leading-snug break-words max-w-full">
                 {card.meaning}
               </div>
+              {card.card_type === "phrase" && <PhraseLogicView id={card.id} hanzi={card.hanzi} />}
               <div
-                className="text-4xl md:text-5xl text-accent/30 leading-none break-all"
+                className={`${card.card_type === "phrase" ? "text-xl md:text-2xl leading-relaxed" : "text-4xl md:text-5xl leading-none"} text-accent/50 break-all max-w-full`}
                 style={{ fontFamily: hanziFont.family }}
               >
                 {card.hanzi}
