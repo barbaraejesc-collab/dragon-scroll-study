@@ -1,0 +1,4238 @@
+{
+  "bd4a6b36-7dcf-47df-a297-376357bd68bc": {
+    "hanzi": "我只喝茶。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "只",
+        "gloss": "apenas (zhǐ)"
+      },
+      {
+        "hanzi": "喝",
+        "gloss": "beber"
+      },
+      {
+        "hanzi": "茶",
+        "gloss": "chá"
+      }
+    ],
+    "structure": "Sujeito + restrição (só) + verbo + objeto"
+  },
+  "335ca943-5a14-42f0-b1af-5869a7f903e7": {
+    "hanzi": "这家商店的包有很多颜色。",
+    "segments": [
+      {
+        "hanzi": "这",
+        "gloss": "este/esta"
+      },
+      {
+        "hanzi": "家",
+        "gloss": "classificador de estabelecimentos"
+      },
+      {
+        "hanzi": "商店",
+        "gloss": "loja"
+      },
+      {
+        "hanzi": "的",
+        "gloss": "partícula de posse ou ligação"
+      },
+      {
+        "hanzi": "包",
+        "gloss": "bolsa"
+      },
+      {
+        "hanzi": "有",
+        "gloss": "ter/haver"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "多",
+        "gloss": "muito/mais"
+      },
+      {
+        "hanzi": "颜色",
+        "gloss": "cor"
+      }
+    ],
+    "structure": "Sujeito (bolsas desta loja) + verbo (ter) + quantidade + objeto"
+  },
+  "f22d524a-b77a-4a71-9314-333b770ac3fb": {
+    "hanzi": "老师很有耐心。",
+    "segments": [
+      {
+        "hanzi": "老师",
+        "gloss": "professor(a)"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "有",
+        "gloss": "ter/haver"
+      },
+      {
+        "hanzi": "耐心",
+        "gloss": "paciência"
+      }
+    ],
+    "structure": "Sujeito + intensidade + verbo (ter) + objeto"
+  },
+  "90694af3-e86a-49cc-80f5-f12f31ad1b0f": {
+    "hanzi": "你有什么事儿？",
+    "segments": [
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "有",
+        "gloss": "ter/haver"
+      },
+      {
+        "hanzi": "什么",
+        "gloss": "o quê/qual"
+      },
+      {
+        "hanzi": "事儿",
+        "gloss": "assunto/coisa imaterial"
+      }
+    ],
+    "structure": "Sujeito + verbo + palavra interrogativa + objeto"
+  },
+  "adeafe26-402a-4e62-aa2a-484d71a71ad0": {
+    "hanzi": "一共多少钱？五块钱，不用找钱。",
+    "segments": [
+      {
+        "hanzi": "一共",
+        "gloss": "ao todo"
+      },
+      {
+        "hanzi": "多",
+        "gloss": "muito/mais"
+      },
+      {
+        "hanzi": "少",
+        "gloss": "pouco"
+      },
+      {
+        "hanzi": "钱",
+        "gloss": "dinheiro"
+      },
+      {
+        "hanzi": "五",
+        "gloss": "cinco"
+      },
+      {
+        "hanzi": "块钱",
+        "gloss": "yuan"
+      },
+      {
+        "hanzi": "不用找钱",
+        "gloss": "não precisa dar troco"
+      }
+    ],
+    "structure": "Pergunta de preço total; resposta de preço + expressão de dispensa"
+  },
+  "de12861b-40b3-4c2e-bec6-8ce93a0466df": {
+    "hanzi": "一斤苹果多少钱？两块五毛钱。",
+    "segments": [
+      {
+        "hanzi": "一",
+        "gloss": "um"
+      },
+      {
+        "hanzi": "斤",
+        "gloss": "jin (medida de peso: 500 g)"
+      },
+      {
+        "hanzi": "苹果",
+        "gloss": "maçã"
+      },
+      {
+        "hanzi": "多",
+        "gloss": "muito/mais"
+      },
+      {
+        "hanzi": "少",
+        "gloss": "pouco"
+      },
+      {
+        "hanzi": "钱",
+        "gloss": "dinheiro"
+      },
+      {
+        "hanzi": "两块五毛钱",
+        "gloss": "dois yuan e cinquenta"
+      }
+    ],
+    "structure": "Quantidade + classificador + produto + pergunta de preço; resposta"
+  },
+  "8b8a0b13-ebf6-4020-a804-e9f051edf6e5": {
+    "hanzi": "一月、二月、五月很热，六月、七月、八月很冷。",
+    "segments": [
+      {
+        "hanzi": "一月",
+        "gloss": "janeiro"
+      },
+      {
+        "hanzi": "二月",
+        "gloss": "fevereiro"
+      },
+      {
+        "hanzi": "五月",
+        "gloss": "maio"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "热",
+        "gloss": "quente"
+      },
+      {
+        "hanzi": "六月",
+        "gloss": "junho"
+      },
+      {
+        "hanzi": "七月",
+        "gloss": "julho"
+      },
+      {
+        "hanzi": "八月",
+        "gloss": "agosto"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "冷",
+        "gloss": "frio"
+      }
+    ],
+    "structure": "Sujeito (lista de meses) + intensidade + adjetivo; outra lista + adjetivo"
+  },
+  "ba7386e2-02fb-40f9-b215-875ca4e4b999": {
+    "hanzi": "一百多个学生参加聚会。",
+    "segments": [
+      {
+        "hanzi": "一百多个",
+        "gloss": "mais de cem (com classificador geral)"
+      },
+      {
+        "hanzi": "学生",
+        "gloss": "estudante"
+      },
+      {
+        "hanzi": "参加",
+        "gloss": "participar"
+      },
+      {
+        "hanzi": "聚会",
+        "gloss": "reunião/encontro"
+      }
+    ],
+    "structure": "Quantidade + classificador + sujeito + verbo + objeto"
+  },
+  "c23300d7-81da-49a6-85ed-e070eca7c037": {
+    "hanzi": "下午两点钟我回宿舍睡觉。",
+    "segments": [
+      {
+        "hanzi": "下午",
+        "gloss": "tarde"
+      },
+      {
+        "hanzi": "两",
+        "gloss": "dois"
+      },
+      {
+        "hanzi": "点钟",
+        "gloss": "horas (de relógio)"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "回",
+        "gloss": "voltar"
+      },
+      {
+        "hanzi": "宿舍",
+        "gloss": "dormitório"
+      },
+      {
+        "hanzi": "睡觉",
+        "gloss": "dormir"
+      }
+    ],
+    "structure": "Tempo + sujeito + verbo (voltar) + lugar + ação/finalidade"
+  },
+  "938d641d-985d-44d8-8e5e-ce7c045f38cd": {
+    "hanzi": "九月、十月、十一月、十二月我都去中国。",
+    "segments": [
+      {
+        "hanzi": "九月",
+        "gloss": "setembro"
+      },
+      {
+        "hanzi": "十月",
+        "gloss": "outubro"
+      },
+      {
+        "hanzi": "十一月",
+        "gloss": "novembro"
+      },
+      {
+        "hanzi": "十二月",
+        "gloss": "dezembro"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "都",
+        "gloss": "todos/todas as vezes"
+      },
+      {
+        "hanzi": "去",
+        "gloss": "ir"
+      },
+      {
+        "hanzi": "中国",
+        "gloss": "China"
+      }
+    ],
+    "structure": "Tempo (meses) + sujeito + abrangência + verbo + destino"
+  },
+  "2ee581fa-7b97-498b-b169-6c294915bbdf": {
+    "hanzi": "二乘四等于八，十除二等于五。",
+    "segments": [
+      {
+        "hanzi": "二",
+        "gloss": "dois"
+      },
+      {
+        "hanzi": "乘",
+        "gloss": "multiplicado por"
+      },
+      {
+        "hanzi": "四",
+        "gloss": "quatro"
+      },
+      {
+        "hanzi": "等于",
+        "gloss": "é igual a"
+      },
+      {
+        "hanzi": "八",
+        "gloss": "oito"
+      },
+      {
+        "hanzi": "十",
+        "gloss": "dez"
+      },
+      {
+        "hanzi": "除",
+        "gloss": "dividido por"
+      },
+      {
+        "hanzi": "二",
+        "gloss": "dois"
+      },
+      {
+        "hanzi": "等于",
+        "gloss": "é igual a"
+      },
+      {
+        "hanzi": "五",
+        "gloss": "cinco"
+      }
+    ],
+    "structure": "Número + operação + número + igualdade + resultado; mesma ordem na segunda conta"
+  },
+  "193e49cc-bdb2-4ae0-bb51-336a00ad10d2": {
+    "hanzi": "今天天气怎么样？很冷。",
+    "segments": [
+      {
+        "hanzi": "今天",
+        "gloss": "hoje"
+      },
+      {
+        "hanzi": "天气",
+        "gloss": "tempo/clima"
+      },
+      {
+        "hanzi": "怎么样",
+        "gloss": "como é/que tal"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "冷",
+        "gloss": "frio"
+      }
+    ],
+    "structure": "Tempo + sujeito (clima) + pergunta; intensidade + adjetivo"
+  },
+  "0af32b04-5800-47eb-a778-c845e13baf73": {
+    "hanzi": "他卖很多东西。",
+    "segments": [
+      {
+        "hanzi": "他",
+        "gloss": "ele"
+      },
+      {
+        "hanzi": "卖",
+        "gloss": "vender"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "多",
+        "gloss": "muito/mais"
+      },
+      {
+        "hanzi": "东西",
+        "gloss": "coisa material"
+      }
+    ],
+    "structure": "Sujeito + verbo + quantidade + objeto"
+  },
+  "d339169a-fa3c-4866-9e59-59c1e2399e2f": {
+    "hanzi": "他喜欢喝可乐和啤酒，我喜欢喝果汁。",
+    "segments": [
+      {
+        "hanzi": "他",
+        "gloss": "ele"
+      },
+      {
+        "hanzi": "喜欢",
+        "gloss": "gostar de"
+      },
+      {
+        "hanzi": "喝",
+        "gloss": "beber"
+      },
+      {
+        "hanzi": "可乐",
+        "gloss": "refrigerante de cola"
+      },
+      {
+        "hanzi": "和",
+        "gloss": "e/com"
+      },
+      {
+        "hanzi": "啤酒",
+        "gloss": "cerveja"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "喜欢",
+        "gloss": "gostar de"
+      },
+      {
+        "hanzi": "喝",
+        "gloss": "beber"
+      },
+      {
+        "hanzi": "果汁",
+        "gloss": "suco"
+      }
+    ],
+    "structure": "Sujeito + gostar + ação + objetos; outro sujeito + gostar + ação + objeto"
+  },
+  "37863d78-a033-41cd-9a08-bd4c854f34c4": {
+    "hanzi": "他常常去体育馆游泳。",
+    "segments": [
+      {
+        "hanzi": "他",
+        "gloss": "ele"
+      },
+      {
+        "hanzi": "常常",
+        "gloss": "frequentemente"
+      },
+      {
+        "hanzi": "去",
+        "gloss": "ir"
+      },
+      {
+        "hanzi": "体育馆",
+        "gloss": "ginásio esportivo"
+      },
+      {
+        "hanzi": "游泳",
+        "gloss": "nadar"
+      }
+    ],
+    "structure": "Sujeito + frequência + verbo (ir) + lugar + ação/finalidade"
+  },
+  "cbf7b878-71e3-48d1-8d7c-322d5bc8d40f": {
+    "hanzi": "他的孙子、孙女、外孙和外孙女都在家。",
+    "segments": [
+      {
+        "hanzi": "他",
+        "gloss": "ele"
+      },
+      {
+        "hanzi": "的",
+        "gloss": "partícula de posse ou ligação"
+      },
+      {
+        "hanzi": "孙子",
+        "gloss": "neto (pelo filho)"
+      },
+      {
+        "hanzi": "孙女",
+        "gloss": "neta (pelo filho)"
+      },
+      {
+        "hanzi": "外孙",
+        "gloss": "neto (pela filha)"
+      },
+      {
+        "hanzi": "和",
+        "gloss": "e/com"
+      },
+      {
+        "hanzi": "外孙女",
+        "gloss": "neta (pela filha)"
+      },
+      {
+        "hanzi": "都",
+        "gloss": "todos/todas as vezes"
+      },
+      {
+        "hanzi": "在",
+        "gloss": "em/estar em"
+      },
+      {
+        "hanzi": "家",
+        "gloss": "casa/família"
+      }
+    ],
+    "structure": "Sujeito (netos dele) + abrangência + verbo de localização + lugar"
+  },
+  "18a1b979-3c37-41e8-b468-243e3a5d7c04": {
+    "hanzi": "他看报纸，我看光盘。",
+    "segments": [
+      {
+        "hanzi": "他",
+        "gloss": "ele"
+      },
+      {
+        "hanzi": "看",
+        "gloss": "ler/ver"
+      },
+      {
+        "hanzi": "报纸",
+        "gloss": "jornal"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "看",
+        "gloss": "ler/ver"
+      },
+      {
+        "hanzi": "光盘",
+        "gloss": "disco óptico/CD"
+      }
+    ],
+    "structure": "Sujeito + verbo + objeto; outro sujeito + verbo + objeto"
+  },
+  "96b8766f-a9ab-4c0a-bfb9-e79596a45321": {
+    "hanzi": "你什么时候来？我下午两点钟到。",
+    "segments": [
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "什么时候",
+        "gloss": "quando"
+      },
+      {
+        "hanzi": "来",
+        "gloss": "vir"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "下午",
+        "gloss": "tarde"
+      },
+      {
+        "hanzi": "两",
+        "gloss": "dois"
+      },
+      {
+        "hanzi": "点钟",
+        "gloss": "horas (de relógio)"
+      },
+      {
+        "hanzi": "到",
+        "gloss": "chegar"
+      }
+    ],
+    "structure": "Sujeito + tempo interrogativo + verbo; sujeito + tempo + verbo"
+  },
+  "a5d65565-1767-4e9c-baa6-5693173fdea9": {
+    "hanzi": "你几岁？我六岁，我属狗。",
+    "segments": [
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "几",
+        "gloss": "quantos/qual número"
+      },
+      {
+        "hanzi": "岁",
+        "gloss": "anos de idade"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "六",
+        "gloss": "seis"
+      },
+      {
+        "hanzi": "岁",
+        "gloss": "anos de idade"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "属",
+        "gloss": "pertencer ao signo de"
+      },
+      {
+        "hanzi": "狗",
+        "gloss": "cachorro"
+      }
+    ],
+    "structure": "Sujeito + idade interrogativa; sujeito + idade; sujeito + signo"
+  },
+  "794d7508-2c14-4939-afe8-b13c8e5eb18f": {
+    "hanzi": "你吸烟不吸烟？我不吸烟。",
+    "segments": [
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "吸烟",
+        "gloss": "fumar"
+      },
+      {
+        "hanzi": "不",
+        "gloss": "não"
+      },
+      {
+        "hanzi": "吸烟",
+        "gloss": "fumar"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "不",
+        "gloss": "não"
+      },
+      {
+        "hanzi": "吸烟",
+        "gloss": "fumar"
+      }
+    ],
+    "structure": "Sujeito + verbo + não + verbo (pergunta A-não-A); sujeito + negação + verbo"
+  },
+  "1b9d79f7-0f19-4661-af83-ef0429b80f7c": {
+    "hanzi": "你喜欢吃什么？我喜欢吃鱼和米饭。",
+    "segments": [
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "喜欢",
+        "gloss": "gostar de"
+      },
+      {
+        "hanzi": "吃",
+        "gloss": "comer"
+      },
+      {
+        "hanzi": "什么",
+        "gloss": "o quê/qual"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "喜欢",
+        "gloss": "gostar de"
+      },
+      {
+        "hanzi": "吃",
+        "gloss": "comer"
+      },
+      {
+        "hanzi": "鱼",
+        "gloss": "peixe"
+      },
+      {
+        "hanzi": "和",
+        "gloss": "e/com"
+      },
+      {
+        "hanzi": "米饭",
+        "gloss": "arroz cozido"
+      }
+    ],
+    "structure": "Sujeito + gostar + ação + objeto interrogativo; sujeito + gostar + ação + objetos"
+  },
+  "a22276f2-9aec-452a-9ab0-34ecc00dd1b9": {
+    "hanzi": "你多大岁数？我七十九岁。",
+    "segments": [
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "多",
+        "gloss": "muito/mais"
+      },
+      {
+        "hanzi": "大",
+        "gloss": "grande"
+      },
+      {
+        "hanzi": "岁数",
+        "gloss": "idade"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "七",
+        "gloss": "sete"
+      },
+      {
+        "hanzi": "十",
+        "gloss": "dez"
+      },
+      {
+        "hanzi": "九",
+        "gloss": "nove"
+      },
+      {
+        "hanzi": "岁",
+        "gloss": "anos de idade"
+      }
+    ],
+    "structure": "Sujeito + pergunta de idade; sujeito + número + anos"
+  },
+  "9d1fcd3e-a932-4511-a5c9-1dbfe2ad697e": {
+    "hanzi": "你好，你叫什么名字？",
+    "segments": [
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "好",
+        "gloss": "bom/bem"
+      },
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "叫",
+        "gloss": "chamar-se"
+      },
+      {
+        "hanzi": "什么",
+        "gloss": "o quê/qual"
+      },
+      {
+        "hanzi": "名字",
+        "gloss": "nome"
+      }
+    ],
+    "structure": "Saudação; sujeito + verbo (chamar-se) + interrogativo + nome"
+  },
+  "070052c7-ccf2-4c5d-ba8c-9853dbe9b96e": {
+    "hanzi": "你应该打的去，不该开车。",
+    "segments": [
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "应该",
+        "gloss": "deveria"
+      },
+      {
+        "hanzi": "打的",
+        "gloss": "pegar táxi"
+      },
+      {
+        "hanzi": "去",
+        "gloss": "ir"
+      },
+      {
+        "hanzi": "不",
+        "gloss": "não"
+      },
+      {
+        "hanzi": "该",
+        "gloss": "dever"
+      },
+      {
+        "hanzi": "开车",
+        "gloss": "dirigir"
+      }
+    ],
+    "structure": "Sujeito + dever + transporte + verbo (ir); negação + dever + ação"
+  },
+  "6066f425-1d19-4a0c-bce4-126e83a145c0": {
+    "hanzi": "你的生日是什么时候？",
+    "segments": [
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "的",
+        "gloss": "partícula de posse ou ligação"
+      },
+      {
+        "hanzi": "生日",
+        "gloss": "aniversário"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "什么时候",
+        "gloss": "quando"
+      }
+    ],
+    "structure": "Sujeito (seu aniversário) + ser + tempo interrogativo"
+  },
+  "6b4545f0-727d-4e97-9097-c906fee4f64d": {
+    "hanzi": "兄弟姐妹聚会，他们都很高兴。",
+    "segments": [
+      {
+        "hanzi": "兄弟姐妹",
+        "gloss": "irmãos e irmãs"
+      },
+      {
+        "hanzi": "聚会",
+        "gloss": "reunião/encontro"
+      },
+      {
+        "hanzi": "他",
+        "gloss": "ele"
+      },
+      {
+        "hanzi": "们",
+        "gloss": "marcador de plural"
+      },
+      {
+        "hanzi": "都",
+        "gloss": "todos/todas as vezes"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "高兴",
+        "gloss": "feliz"
+      }
+    ],
+    "structure": "Sujeito + verbo (reunir-se); sujeito plural + abrangência + intensidade + adjetivo"
+  },
+  "35f2d984-a5f4-44e1-b722-301d0c5bbb53": {
+    "hanzi": "公园里有两只鸭。",
+    "segments": [
+      {
+        "hanzi": "公园",
+        "gloss": "parque"
+      },
+      {
+        "hanzi": "里",
+        "gloss": "dentro"
+      },
+      {
+        "hanzi": "有",
+        "gloss": "ter/haver"
+      },
+      {
+        "hanzi": "两",
+        "gloss": "dois"
+      },
+      {
+        "hanzi": "只",
+        "gloss": "classificador de animais (zhī)"
+      },
+      {
+        "hanzi": "鸭",
+        "gloss": "pato"
+      }
+    ],
+    "structure": "Lugar + posição (dentro) + haver + quantidade + classificador + objeto"
+  },
+  "bb012c41-b3b1-4914-97b0-ddf34c74b653": {
+    "hanzi": "厕所在哪儿？在三层。",
+    "segments": [
+      {
+        "hanzi": "厕所",
+        "gloss": "banheiro"
+      },
+      {
+        "hanzi": "在",
+        "gloss": "em/estar em"
+      },
+      {
+        "hanzi": "哪儿",
+        "gloss": "onde"
+      },
+      {
+        "hanzi": "在",
+        "gloss": "em/estar em"
+      },
+      {
+        "hanzi": "三",
+        "gloss": "três"
+      },
+      {
+        "hanzi": "层",
+        "gloss": "andar"
+      }
+    ],
+    "structure": "Sujeito + localização + onde; localização + número do andar"
+  },
+  "cc8da405-31a3-4774-a23f-ad56d057afd7": {
+    "hanzi": "商店里有一台电脑和一辆车。",
+    "segments": [
+      {
+        "hanzi": "商店",
+        "gloss": "loja"
+      },
+      {
+        "hanzi": "里",
+        "gloss": "dentro"
+      },
+      {
+        "hanzi": "有",
+        "gloss": "ter/haver"
+      },
+      {
+        "hanzi": "一",
+        "gloss": "um"
+      },
+      {
+        "hanzi": "台",
+        "gloss": "classificador de aparelhos"
+      },
+      {
+        "hanzi": "电脑",
+        "gloss": "computador"
+      },
+      {
+        "hanzi": "和",
+        "gloss": "e/com"
+      },
+      {
+        "hanzi": "一",
+        "gloss": "um"
+      },
+      {
+        "hanzi": "辆",
+        "gloss": "classificador de veículos"
+      },
+      {
+        "hanzi": "车",
+        "gloss": "carro/veículo"
+      }
+    ],
+    "structure": "Lugar + posição + haver + quantidade + classificador + objeto + e + outro objeto"
+  },
+  "77e0d63d-656e-4d0e-92b0-cdadb7262ec5": {
+    "hanzi": "嗯，这个很美。",
+    "segments": [
+      {
+        "hanzi": "嗯",
+        "gloss": "aham"
+      },
+      {
+        "hanzi": "这",
+        "gloss": "este/esta"
+      },
+      {
+        "hanzi": "个",
+        "gloss": "classificador geral"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "美",
+        "gloss": "bonito"
+      }
+    ],
+    "structure": "Interjeição + demonstrativo + classificador + intensidade + adjetivo"
+  },
+  "4861d905-7b3e-4c6f-883e-9f058fb7c125": {
+    "hanzi": "太贵了！可以便宜吗？",
+    "segments": [
+      {
+        "hanzi": "太贵了！",
+        "gloss": "caro demais! (太…了: excesso)"
+      },
+      {
+        "hanzi": "可以便宜吗？",
+        "gloss": "pode ser mais barato? (吗: pergunta)"
+      }
+    ],
+    "structure": "Exclamação de preço excessivo; possibilidade + adjetivo + pergunta"
+  },
+  "407c7ad6-fc27-473c-8f00-9e86039acb7b": {
+    "hanzi": "她在商场买一个很漂亮的包。",
+    "segments": [
+      {
+        "hanzi": "她",
+        "gloss": "ela"
+      },
+      {
+        "hanzi": "在",
+        "gloss": "em/estar em"
+      },
+      {
+        "hanzi": "商场",
+        "gloss": "shopping"
+      },
+      {
+        "hanzi": "买",
+        "gloss": "comprar"
+      },
+      {
+        "hanzi": "一",
+        "gloss": "um"
+      },
+      {
+        "hanzi": "个",
+        "gloss": "classificador geral"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "漂亮",
+        "gloss": "bonito"
+      },
+      {
+        "hanzi": "的",
+        "gloss": "partícula de posse ou ligação"
+      },
+      {
+        "hanzi": "包",
+        "gloss": "bolsa"
+      }
+    ],
+    "structure": "Sujeito + em + lugar + verbo + quantidade + descrição do objeto + objeto"
+  },
+  "735095e0-145a-496b-a9e4-6831fa4fb808": {
+    "hanzi": "她姓什么？她是谁？",
+    "segments": [
+      {
+        "hanzi": "她",
+        "gloss": "ela"
+      },
+      {
+        "hanzi": "姓",
+        "gloss": "ter o sobrenome"
+      },
+      {
+        "hanzi": "什么",
+        "gloss": "o quê/qual"
+      },
+      {
+        "hanzi": "她",
+        "gloss": "ela"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "谁",
+        "gloss": "quem"
+      }
+    ],
+    "structure": "Sujeito + verbo (sobrenome) + interrogativo; sujeito + ser + quem"
+  },
+  "3ad2ccd4-f344-4375-a37b-c7725ea73d45": {
+    "hanzi": "她弟弟是司机，妹妹是售货员。",
+    "segments": [
+      {
+        "hanzi": "她",
+        "gloss": "ela"
+      },
+      {
+        "hanzi": "弟弟",
+        "gloss": "irmão mais novo"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "司机",
+        "gloss": "motorista"
+      },
+      {
+        "hanzi": "妹妹",
+        "gloss": "irmã mais nova"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "售货员",
+        "gloss": "vendedor(a)"
+      }
+    ],
+    "structure": "Sujeito (irmão dela) + ser + profissão; sujeito + ser + profissão"
+  },
+  "fb780770-9ae1-4569-bd32-a3154c054cc3": {
+    "hanzi": "她男朋友是企业家，很帅。",
+    "segments": [
+      {
+        "hanzi": "她",
+        "gloss": "ela"
+      },
+      {
+        "hanzi": "男朋友",
+        "gloss": "namorado"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "企业家",
+        "gloss": "empresário(a)"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "帅",
+        "gloss": "bonito (homem)"
+      }
+    ],
+    "structure": "Sujeito (namorado dela) + ser + profissão; intensidade + adjetivo"
+  },
+  "593c2425-21c0-4b02-b03a-013f60d76ffc": {
+    "hanzi": "学中文容易不容易？不太容易。",
+    "segments": [
+      {
+        "hanzi": "学",
+        "gloss": "aprender"
+      },
+      {
+        "hanzi": "中文",
+        "gloss": "chinês"
+      },
+      {
+        "hanzi": "容易",
+        "gloss": "fácil"
+      },
+      {
+        "hanzi": "不",
+        "gloss": "não"
+      },
+      {
+        "hanzi": "容易",
+        "gloss": "fácil"
+      },
+      {
+        "hanzi": "不",
+        "gloss": "não"
+      },
+      {
+        "hanzi": "太",
+        "gloss": "demais/muito"
+      },
+      {
+        "hanzi": "容易",
+        "gloss": "fácil"
+      }
+    ],
+    "structure": "Ação como assunto + adjetivo + não + adjetivo (A-não-A); resposta negativa"
+  },
+  "ff0341b8-b2cf-4725-9982-71219ed7fee3": {
+    "hanzi": "寿面很可口，蛋糕也很可口。",
+    "segments": [
+      {
+        "hanzi": "寿面",
+        "gloss": "macarrão da longevidade"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "可口",
+        "gloss": "saboroso"
+      },
+      {
+        "hanzi": "蛋糕",
+        "gloss": "bolo"
+      },
+      {
+        "hanzi": "也",
+        "gloss": "também"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "可口",
+        "gloss": "saboroso"
+      }
+    ],
+    "structure": "Sujeito + intensidade + adjetivo; sujeito + também + intensidade + adjetivo"
+  },
+  "505ce6d7-2814-4ba5-aa5b-03e38e7289fd": {
+    "hanzi": "师傅，我们去医院，这条路怎么样？",
+    "segments": [
+      {
+        "hanzi": "师傅",
+        "gloss": "mestre/senhor (tratamento ao motorista)"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "们",
+        "gloss": "marcador de plural"
+      },
+      {
+        "hanzi": "去",
+        "gloss": "ir"
+      },
+      {
+        "hanzi": "医院",
+        "gloss": "hospital"
+      },
+      {
+        "hanzi": "这",
+        "gloss": "este/esta"
+      },
+      {
+        "hanzi": "条",
+        "gloss": "classificador de coisas alongadas"
+      },
+      {
+        "hanzi": "路",
+        "gloss": "rua/caminho"
+      },
+      {
+        "hanzi": "怎么样",
+        "gloss": "como é/que tal"
+      }
+    ],
+    "structure": "Tratamento; sujeito plural + ir + destino; assunto (esta rua) + pergunta"
+  },
+  "14e5a9da-33b6-47c1-8ec1-d5f572333e0e": {
+    "hanzi": "我一九九八年三月十四号出生。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "一",
+        "gloss": "um"
+      },
+      {
+        "hanzi": "九",
+        "gloss": "nove"
+      },
+      {
+        "hanzi": "九",
+        "gloss": "nove"
+      },
+      {
+        "hanzi": "八",
+        "gloss": "oito"
+      },
+      {
+        "hanzi": "年",
+        "gloss": "ano"
+      },
+      {
+        "hanzi": "三月",
+        "gloss": "março"
+      },
+      {
+        "hanzi": "十",
+        "gloss": "dez"
+      },
+      {
+        "hanzi": "四",
+        "gloss": "quatro"
+      },
+      {
+        "hanzi": "号",
+        "gloss": "dia do mês"
+      },
+      {
+        "hanzi": "出生",
+        "gloss": "nascer"
+      }
+    ],
+    "structure": "Sujeito + data (ano → mês → dia) + verbo (nascer)"
+  },
+  "a534ba1d-5c60-4877-af20-bbf897b57b47": {
+    "hanzi": "我上午九点钟上课，中午十二点钟吃饭。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "上午",
+        "gloss": "manhã"
+      },
+      {
+        "hanzi": "九",
+        "gloss": "nove"
+      },
+      {
+        "hanzi": "点钟",
+        "gloss": "horas (de relógio)"
+      },
+      {
+        "hanzi": "上课",
+        "gloss": "ter aula"
+      },
+      {
+        "hanzi": "中午",
+        "gloss": "meio-dia"
+      },
+      {
+        "hanzi": "十",
+        "gloss": "dez"
+      },
+      {
+        "hanzi": "二",
+        "gloss": "dois"
+      },
+      {
+        "hanzi": "点钟",
+        "gloss": "horas (de relógio)"
+      },
+      {
+        "hanzi": "吃饭",
+        "gloss": "comer/fazer refeição"
+      }
+    ],
+    "structure": "Sujeito + tempo + ação; tempo + ação (sujeito subentendido)"
+  },
+  "dbbe78bd-8530-40e8-9465-6784fe6471ed": {
+    "hanzi": "我买一支笔、一个本子和一本书。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "买",
+        "gloss": "comprar"
+      },
+      {
+        "hanzi": "一",
+        "gloss": "um"
+      },
+      {
+        "hanzi": "支",
+        "gloss": "classificador de objetos finos"
+      },
+      {
+        "hanzi": "笔",
+        "gloss": "caneta"
+      },
+      {
+        "hanzi": "一",
+        "gloss": "um"
+      },
+      {
+        "hanzi": "个",
+        "gloss": "classificador geral"
+      },
+      {
+        "hanzi": "本子",
+        "gloss": "caderno"
+      },
+      {
+        "hanzi": "和",
+        "gloss": "e/com"
+      },
+      {
+        "hanzi": "一",
+        "gloss": "um"
+      },
+      {
+        "hanzi": "本",
+        "gloss": "classificador de livros"
+      },
+      {
+        "hanzi": "书",
+        "gloss": "livro"
+      }
+    ],
+    "structure": "Sujeito + verbo + lista de objetos (número → classificador → objeto)"
+  },
+  "bb78e5ae-6d46-4fb3-aa94-bb3c63403fc3": {
+    "hanzi": "我介绍一下，这是我的朋友。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "介绍",
+        "gloss": "apresentar"
+      },
+      {
+        "hanzi": "一下",
+        "gloss": "um pouco/brevemente"
+      },
+      {
+        "hanzi": "这",
+        "gloss": "este/esta"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "的",
+        "gloss": "partícula de posse ou ligação"
+      },
+      {
+        "hanzi": "朋友",
+        "gloss": "amigo(a)"
+      }
+    ],
+    "structure": "Sujeito + verbo + brevidade; demonstrativo + ser + posse + objeto"
+  },
+  "0bcdee64-703d-4aa6-96ea-08ce9da5ee39": {
+    "hanzi": "我们去公园散步，怎么样？",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "们",
+        "gloss": "marcador de plural"
+      },
+      {
+        "hanzi": "去",
+        "gloss": "ir"
+      },
+      {
+        "hanzi": "公园",
+        "gloss": "parque"
+      },
+      {
+        "hanzi": "散步",
+        "gloss": "passear a pé"
+      },
+      {
+        "hanzi": "怎么样",
+        "gloss": "como é/que tal"
+      }
+    ],
+    "structure": "Sujeito plural + ir + lugar + ação/finalidade; pedido de opinião"
+  },
+  "7e4c21bf-2575-494f-98ae-c6bcaf9ebe05": {
+    "hanzi": "我们去饭馆吃中餐，怎么样？好，我吃素。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "们",
+        "gloss": "marcador de plural"
+      },
+      {
+        "hanzi": "去",
+        "gloss": "ir"
+      },
+      {
+        "hanzi": "饭馆",
+        "gloss": "restaurante"
+      },
+      {
+        "hanzi": "吃",
+        "gloss": "comer"
+      },
+      {
+        "hanzi": "中餐",
+        "gloss": "comida chinesa"
+      },
+      {
+        "hanzi": "怎么样",
+        "gloss": "como é/que tal"
+      },
+      {
+        "hanzi": "好",
+        "gloss": "bom/bem"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "吃素",
+        "gloss": "comer vegetariano"
+      }
+    ],
+    "structure": "Sujeito plural + ir + lugar + ação + objeto; pedido de opinião; resposta"
+  },
+  "99a4fb6d-8401-49c6-9093-c20912837b89": {
+    "hanzi": "我们回家，和爸爸妈妈聚会。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "们",
+        "gloss": "marcador de plural"
+      },
+      {
+        "hanzi": "回",
+        "gloss": "voltar"
+      },
+      {
+        "hanzi": "家",
+        "gloss": "casa/família"
+      },
+      {
+        "hanzi": "和",
+        "gloss": "com"
+      },
+      {
+        "hanzi": "爸爸",
+        "gloss": "pai"
+      },
+      {
+        "hanzi": "妈妈",
+        "gloss": "mãe"
+      },
+      {
+        "hanzi": "聚会",
+        "gloss": "reunião/encontro"
+      }
+    ],
+    "structure": "Sujeito plural + voltar + lugar; companhia + ação"
+  },
+  "9a8e5de5-d73f-4e70-9b24-83cecf19378b": {
+    "hanzi": "我们在学校学习，老师教我们写汉字。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "们",
+        "gloss": "marcador de plural"
+      },
+      {
+        "hanzi": "在",
+        "gloss": "em/estar em"
+      },
+      {
+        "hanzi": "学校",
+        "gloss": "escola"
+      },
+      {
+        "hanzi": "学习",
+        "gloss": "estudar"
+      },
+      {
+        "hanzi": "老师",
+        "gloss": "professor(a)"
+      },
+      {
+        "hanzi": "教",
+        "gloss": "ensinar"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "们",
+        "gloss": "marcador de plural"
+      },
+      {
+        "hanzi": "写",
+        "gloss": "escrever"
+      },
+      {
+        "hanzi": "汉字",
+        "gloss": "caracteres chineses"
+      }
+    ],
+    "structure": "Sujeito plural + lugar + ação; sujeito + ensinar + pessoa + ação + objeto"
+  },
+  "cc024a17-1bd1-4b8e-a546-993db59ff121": {
+    "hanzi": "我们开车去玩儿。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "们",
+        "gloss": "marcador de plural"
+      },
+      {
+        "hanzi": "开车",
+        "gloss": "dirigir"
+      },
+      {
+        "hanzi": "去",
+        "gloss": "ir"
+      },
+      {
+        "hanzi": "玩儿",
+        "gloss": "brincar/passear"
+      }
+    ],
+    "structure": "Sujeito plural + transporte/ação + ir + finalidade"
+  },
+  "843fb9f1-7605-4274-8271-1fb434457c6a": {
+    "hanzi": "我们晚上去看电影，好不好？",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "们",
+        "gloss": "marcador de plural"
+      },
+      {
+        "hanzi": "晚上",
+        "gloss": "noite"
+      },
+      {
+        "hanzi": "去",
+        "gloss": "ir"
+      },
+      {
+        "hanzi": "看电影",
+        "gloss": "assistir a filme"
+      },
+      {
+        "hanzi": "好",
+        "gloss": "bom/bem"
+      },
+      {
+        "hanzi": "不",
+        "gloss": "não"
+      },
+      {
+        "hanzi": "好",
+        "gloss": "bom/bem"
+      }
+    ],
+    "structure": "Sujeito plural + tempo + ir + ação; pergunta A-não-A"
+  },
+  "52919cf2-2d83-4902-a5a9-fd51ca33694a": {
+    "hanzi": "我哥哥是老师，姐姐是记者。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "哥哥",
+        "gloss": "irmão mais velho"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "老师",
+        "gloss": "professor(a)"
+      },
+      {
+        "hanzi": "姐姐",
+        "gloss": "irmã mais velha"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "记者",
+        "gloss": "jornalista"
+      }
+    ],
+    "structure": "Sujeito (meu irmão) + ser + profissão; sujeito + ser + profissão"
+  },
+  "f18ed9a7-9970-404c-836a-91816ce10378": {
+    "hanzi": "我喜欢唱歌、跳舞，也喜欢听音乐。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "喜欢",
+        "gloss": "gostar de"
+      },
+      {
+        "hanzi": "唱歌",
+        "gloss": "cantar"
+      },
+      {
+        "hanzi": "跳舞",
+        "gloss": "dançar"
+      },
+      {
+        "hanzi": "也",
+        "gloss": "também"
+      },
+      {
+        "hanzi": "喜欢",
+        "gloss": "gostar de"
+      },
+      {
+        "hanzi": "听音乐",
+        "gloss": "ouvir música"
+      }
+    ],
+    "structure": "Sujeito + gostar + ações; também + gostar + ação"
+  },
+  "e847a36f-5648-4bea-8e0a-e257ea390a3d": {
+    "hanzi": "我在公司工作，你做什么工作？",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "在",
+        "gloss": "em/estar em"
+      },
+      {
+        "hanzi": "公司",
+        "gloss": "empresa"
+      },
+      {
+        "hanzi": "工作",
+        "gloss": "trabalhar/trabalho"
+      },
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "做",
+        "gloss": "fazer"
+      },
+      {
+        "hanzi": "什么",
+        "gloss": "o quê/qual"
+      },
+      {
+        "hanzi": "工作",
+        "gloss": "trabalhar/trabalho"
+      }
+    ],
+    "structure": "Sujeito + em + lugar + verbo; sujeito + verbo + interrogativo + objeto"
+  },
+  "e6e752fe-059d-42aa-a37d-a23d1e347dfa": {
+    "hanzi": "我在餐厅前等你。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "在",
+        "gloss": "em/estar em"
+      },
+      {
+        "hanzi": "餐厅",
+        "gloss": "restaurante"
+      },
+      {
+        "hanzi": "前",
+        "gloss": "frente"
+      },
+      {
+        "hanzi": "等",
+        "gloss": "esperar"
+      },
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      }
+    ],
+    "structure": "Sujeito + em + lugar + posição (frente) + verbo + objeto"
+  },
+  "2bda069b-fd4d-4b4f-b448-7d9ca1be5410": {
+    "hanzi": "我恐怕不能去。对不起！没事儿。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "恐怕",
+        "gloss": "receio que/provavelmente"
+      },
+      {
+        "hanzi": "不",
+        "gloss": "não"
+      },
+      {
+        "hanzi": "能",
+        "gloss": "poder/conseguir"
+      },
+      {
+        "hanzi": "去",
+        "gloss": "ir"
+      },
+      {
+        "hanzi": "对不起",
+        "gloss": "desculpe"
+      },
+      {
+        "hanzi": "没事儿",
+        "gloss": "tudo bem/não foi nada"
+      }
+    ],
+    "structure": "Sujeito + receio + negação + possibilidade + ação; desculpa; resposta"
+  },
+  "cd4d348a-0972-4cfe-91d4-214c7d974c14": {
+    "hanzi": "我家在巴西，你是哪儿人？",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "家",
+        "gloss": "casa/família"
+      },
+      {
+        "hanzi": "在",
+        "gloss": "em/estar em"
+      },
+      {
+        "hanzi": "巴西",
+        "gloss": "Brasil"
+      },
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "哪儿人",
+        "gloss": "pessoa de onde"
+      }
+    ],
+    "structure": "Sujeito (minha casa) + estar em + lugar; sujeito + ser + origem interrogativa"
+  },
+  "68a79451-2648-4c72-8f63-767156d34238": {
+    "hanzi": "我有一个儿子和两个女儿，孩子们很可爱。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "有",
+        "gloss": "ter/haver"
+      },
+      {
+        "hanzi": "一",
+        "gloss": "um"
+      },
+      {
+        "hanzi": "个",
+        "gloss": "classificador geral"
+      },
+      {
+        "hanzi": "儿子",
+        "gloss": "filho"
+      },
+      {
+        "hanzi": "和",
+        "gloss": "e/com"
+      },
+      {
+        "hanzi": "两",
+        "gloss": "dois"
+      },
+      {
+        "hanzi": "个",
+        "gloss": "classificador geral"
+      },
+      {
+        "hanzi": "女儿",
+        "gloss": "filha"
+      },
+      {
+        "hanzi": "孩子",
+        "gloss": "criança"
+      },
+      {
+        "hanzi": "们",
+        "gloss": "marcador de plural"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "可爱",
+        "gloss": "fofo"
+      }
+    ],
+    "structure": "Sujeito + ter + quantidade + classificador + objetos; sujeito plural + adjetivo"
+  },
+  "253877d4-8e94-4702-9801-c0d33c502e43": {
+    "hanzi": "我爱我的猫，也爱我的狗。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "爱",
+        "gloss": "amar"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "的",
+        "gloss": "partícula de posse ou ligação"
+      },
+      {
+        "hanzi": "猫",
+        "gloss": "gato"
+      },
+      {
+        "hanzi": "也",
+        "gloss": "também"
+      },
+      {
+        "hanzi": "爱",
+        "gloss": "amar"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "的",
+        "gloss": "partícula de posse ou ligação"
+      },
+      {
+        "hanzi": "狗",
+        "gloss": "cachorro"
+      }
+    ],
+    "structure": "Sujeito + verbo + posse + objeto; também + verbo + posse + objeto"
+  },
+  "1e378cfc-cd22-49b5-90c4-7eec06bdc53c": {
+    "hanzi": "我爷爷奶奶、外公外婆都很好。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "爷爷",
+        "gloss": "avô paterno"
+      },
+      {
+        "hanzi": "奶奶",
+        "gloss": "avó paterna"
+      },
+      {
+        "hanzi": "外公",
+        "gloss": "avô materno"
+      },
+      {
+        "hanzi": "外婆",
+        "gloss": "avó materna"
+      },
+      {
+        "hanzi": "都",
+        "gloss": "todos/todas as vezes"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "好",
+        "gloss": "bom/bem"
+      }
+    ],
+    "structure": "Sujeito (meus avós) + abrangência + intensidade + adjetivo"
+  },
+  "f4ebd3f7-26e5-4822-85aa-ded8385b550e": {
+    "hanzi": "我爸爸是律师，妈妈是医生。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "爸爸",
+        "gloss": "pai"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "律师",
+        "gloss": "advogado(a)"
+      },
+      {
+        "hanzi": "妈妈",
+        "gloss": "mãe"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "医生",
+        "gloss": "médico(a)"
+      }
+    ],
+    "structure": "Sujeito (meu pai) + ser + profissão; sujeito + ser + profissão"
+  },
+  "a28bd0a7-8353-4e49-b3c9-730d18422543": {
+    "hanzi": "我的专业是英语，他是中文系的。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "的",
+        "gloss": "partícula de posse ou ligação"
+      },
+      {
+        "hanzi": "专业",
+        "gloss": "área de formação"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "英语",
+        "gloss": "inglês"
+      },
+      {
+        "hanzi": "他",
+        "gloss": "ele"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "中文",
+        "gloss": "chinês"
+      },
+      {
+        "hanzi": "系",
+        "gloss": "departamento universitário"
+      },
+      {
+        "hanzi": "的",
+        "gloss": "partícula: pertencente a (departamento)"
+      }
+    ],
+    "structure": "Sujeito (minha área) + ser + objeto; sujeito + ser + departamento + ligação"
+  },
+  "0a95956a-b0f8-4350-908d-b9f88c807374": {
+    "hanzi": "我不会功夫，恐怕不行。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "不",
+        "gloss": "não"
+      },
+      {
+        "hanzi": "会",
+        "gloss": "saber (uma habilidade)"
+      },
+      {
+        "hanzi": "功夫",
+        "gloss": "kung fu"
+      },
+      {
+        "hanzi": "恐怕",
+        "gloss": "receio que/provavelmente"
+      },
+      {
+        "hanzi": "不",
+        "gloss": "não"
+      },
+      {
+        "hanzi": "行",
+        "gloss": "dar certo/ser possível"
+      }
+    ],
+    "structure": "Sujeito + negação + habilidade + objeto; receio + negação + possibilidade"
+  },
+  "6a73c35d-8947-4f68-98e7-a7d72e521b38": {
+    "hanzi": "我知道，当然可以。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "知道",
+        "gloss": "saber"
+      },
+      {
+        "hanzi": "当然",
+        "gloss": "claro/naturalmente"
+      },
+      {
+        "hanzi": "可以",
+        "gloss": "poder"
+      }
+    ],
+    "structure": "Sujeito + verbo; certeza + possibilidade (sujeito subentendido)"
+  },
+  "e2728a47-4e34-4bf3-be81-300a4d8e05a0": {
+    "hanzi": "我等你十分钟。很抱歉！没关系。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "等",
+        "gloss": "esperar"
+      },
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "十",
+        "gloss": "dez"
+      },
+      {
+        "hanzi": "分钟",
+        "gloss": "minuto"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "抱歉",
+        "gloss": "desculpa/pesar"
+      },
+      {
+        "hanzi": "没关系",
+        "gloss": "não tem problema"
+      }
+    ],
+    "structure": "Sujeito + verbo + objeto + duração; pedido de desculpa; resposta"
+  },
+  "a2c09cc3-342d-45b4-89aa-b0af095e348a": {
+    "hanzi": "我要一份汉堡和一杯牛奶。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "要",
+        "gloss": "querer/precisar"
+      },
+      {
+        "hanzi": "一",
+        "gloss": "um"
+      },
+      {
+        "hanzi": "份",
+        "gloss": "classificador de porções"
+      },
+      {
+        "hanzi": "汉堡",
+        "gloss": "hambúrguer"
+      },
+      {
+        "hanzi": "和",
+        "gloss": "e/com"
+      },
+      {
+        "hanzi": "一",
+        "gloss": "um"
+      },
+      {
+        "hanzi": "杯",
+        "gloss": "classificador: copo/xícara"
+      },
+      {
+        "hanzi": "牛奶",
+        "gloss": "leite"
+      }
+    ],
+    "structure": "Sujeito + querer + número + classificador + objeto + e + outro objeto"
+  },
+  "7b3c23fe-e5c5-4058-acf4-751f2944c378": {
+    "hanzi": "我要一瓶汽水，他要一杯茶。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "要",
+        "gloss": "querer/precisar"
+      },
+      {
+        "hanzi": "一",
+        "gloss": "um"
+      },
+      {
+        "hanzi": "瓶",
+        "gloss": "classificador: garrafa"
+      },
+      {
+        "hanzi": "汽水",
+        "gloss": "refrigerante"
+      },
+      {
+        "hanzi": "他",
+        "gloss": "ele"
+      },
+      {
+        "hanzi": "要",
+        "gloss": "querer/precisar"
+      },
+      {
+        "hanzi": "一",
+        "gloss": "um"
+      },
+      {
+        "hanzi": "杯",
+        "gloss": "classificador: copo/xícara"
+      },
+      {
+        "hanzi": "茶",
+        "gloss": "chá"
+      }
+    ],
+    "structure": "Sujeito + querer + quantidade + classificador + objeto; mesma ordem"
+  },
+  "0147078b-166c-4cce-a821-4fdee1b168e9": {
+    "hanzi": "我要喝汽水，不要喝酒。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "要",
+        "gloss": "querer/precisar"
+      },
+      {
+        "hanzi": "喝",
+        "gloss": "beber"
+      },
+      {
+        "hanzi": "汽水",
+        "gloss": "refrigerante"
+      },
+      {
+        "hanzi": "不",
+        "gloss": "não"
+      },
+      {
+        "hanzi": "要",
+        "gloss": "querer/precisar"
+      },
+      {
+        "hanzi": "喝",
+        "gloss": "beber"
+      },
+      {
+        "hanzi": "酒",
+        "gloss": "bebida alcoólica"
+      }
+    ],
+    "structure": "Sujeito + querer + ação + objeto; negação + querer + ação + objeto"
+  },
+  "de3ef1ce-fa24-48d4-b3e5-7bbb7a9cf7e1": {
+    "hanzi": "我跟妈妈说，她给我写一个便条。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "跟",
+        "gloss": "com"
+      },
+      {
+        "hanzi": "妈妈",
+        "gloss": "mãe"
+      },
+      {
+        "hanzi": "说",
+        "gloss": "falar"
+      },
+      {
+        "hanzi": "她",
+        "gloss": "ela"
+      },
+      {
+        "hanzi": "给",
+        "gloss": "para"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "写",
+        "gloss": "escrever"
+      },
+      {
+        "hanzi": "一",
+        "gloss": "um"
+      },
+      {
+        "hanzi": "个",
+        "gloss": "classificador geral"
+      },
+      {
+        "hanzi": "便条",
+        "gloss": "bilhete"
+      }
+    ],
+    "structure": "Sujeito + companhia + verbo; sujeito + destinatário + verbo + objeto"
+  },
+  "259f0419-93f6-4514-bd4d-50580eba3472": {
+    "hanzi": "我很饿，也很渴，还很累，很困。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "饿",
+        "gloss": "com fome"
+      },
+      {
+        "hanzi": "也",
+        "gloss": "também"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "渴",
+        "gloss": "com sede"
+      },
+      {
+        "hanzi": "还",
+        "gloss": "ainda/além disso"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "累",
+        "gloss": "cansado"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "困",
+        "gloss": "com sono"
+      }
+    ],
+    "structure": "Sujeito + intensidade + adjetivo; também/ainda + intensidade + outros adjetivos"
+  },
+  "840879ad-2ce8-4785-9132-2f4707b2d077": {
+    "hanzi": "星期一、星期二、星期四、星期五、星期六我都很忙，星期天不忙。",
+    "segments": [
+      {
+        "hanzi": "星期一",
+        "gloss": "segunda-feira"
+      },
+      {
+        "hanzi": "星期二",
+        "gloss": "terça-feira"
+      },
+      {
+        "hanzi": "星期四",
+        "gloss": "quinta-feira"
+      },
+      {
+        "hanzi": "星期五",
+        "gloss": "sexta-feira"
+      },
+      {
+        "hanzi": "星期六",
+        "gloss": "sábado"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "都",
+        "gloss": "todos/todas as vezes"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "忙",
+        "gloss": "ocupado"
+      },
+      {
+        "hanzi": "星期天",
+        "gloss": "domingo"
+      },
+      {
+        "hanzi": "不",
+        "gloss": "não"
+      },
+      {
+        "hanzi": "忙",
+        "gloss": "ocupado"
+      }
+    ],
+    "structure": "Tempo (dias da semana) + sujeito + abrangência + adjetivo; tempo + negação + adjetivo"
+  },
+  "74949502-7220-469d-b12a-4232080ecf2a": {
+    "hanzi": "昨天是星期日，明天是星期二。",
+    "segments": [
+      {
+        "hanzi": "昨天",
+        "gloss": "ontem"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "星期日",
+        "gloss": "domingo"
+      },
+      {
+        "hanzi": "明天",
+        "gloss": "amanhã"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "星期二",
+        "gloss": "terça-feira"
+      }
+    ],
+    "structure": "Tempo como sujeito + ser + dia da semana; mesma ordem"
+  },
+  "d6295123-370b-4199-96f4-f71b25b74a0b": {
+    "hanzi": "我晚上十点钟睡，早上六点钟起床。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "晚上",
+        "gloss": "noite"
+      },
+      {
+        "hanzi": "十",
+        "gloss": "dez"
+      },
+      {
+        "hanzi": "点钟",
+        "gloss": "horas (de relógio)"
+      },
+      {
+        "hanzi": "睡",
+        "gloss": "dormir"
+      },
+      {
+        "hanzi": "早上",
+        "gloss": "manhã cedo"
+      },
+      {
+        "hanzi": "六",
+        "gloss": "seis"
+      },
+      {
+        "hanzi": "点钟",
+        "gloss": "horas (de relógio)"
+      },
+      {
+        "hanzi": "起床",
+        "gloss": "levantar da cama"
+      }
+    ],
+    "structure": "Sujeito + tempo + ação; tempo + ação (sujeito subentendido)"
+  },
+  "b244aa7d-719e-4199-9270-5a06442e41f8": {
+    "hanzi": "现在几点钟？很晚。",
+    "segments": [
+      {
+        "hanzi": "现在",
+        "gloss": "agora"
+      },
+      {
+        "hanzi": "几",
+        "gloss": "quantos/qual número"
+      },
+      {
+        "hanzi": "点钟",
+        "gloss": "horas (de relógio)"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "晚",
+        "gloss": "tarde (horário)"
+      }
+    ],
+    "structure": "Tempo + número interrogativo + horas; intensidade + adjetivo"
+  },
+  "ee57cff9-daed-470a-8516-bee0316a8582": {
+    "hanzi": "现在几点钟？差一刻八点钟。",
+    "segments": [
+      {
+        "hanzi": "现在",
+        "gloss": "agora"
+      },
+      {
+        "hanzi": "几",
+        "gloss": "quantos/qual número"
+      },
+      {
+        "hanzi": "点钟",
+        "gloss": "horas (de relógio)"
+      },
+      {
+        "hanzi": "差",
+        "gloss": "faltar"
+      },
+      {
+        "hanzi": "一",
+        "gloss": "um"
+      },
+      {
+        "hanzi": "刻",
+        "gloss": "quarto de hora (15 minutos)"
+      },
+      {
+        "hanzi": "八",
+        "gloss": "oito"
+      },
+      {
+        "hanzi": "点钟",
+        "gloss": "horas (de relógio)"
+      }
+    ],
+    "structure": "Tempo + número interrogativo + horas; faltar + intervalo + hora-alvo"
+  },
+  "9ec96f06-4a1b-4658-bd06-8fc23a4c1749": {
+    "hanzi": "祝你生日快乐！这是送给你的礼物。",
+    "segments": [
+      {
+        "hanzi": "祝你生日快乐",
+        "gloss": "feliz aniversário (desejo a você aniversário feliz)"
+      },
+      {
+        "hanzi": "这",
+        "gloss": "este/esta"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "送",
+        "gloss": "presentear/enviar"
+      },
+      {
+        "hanzi": "给",
+        "gloss": "para"
+      },
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "的",
+        "gloss": "partícula de posse ou ligação"
+      },
+      {
+        "hanzi": "礼物",
+        "gloss": "presente"
+      }
+    ],
+    "structure": "Desejo de aniversário; demonstrativo + ser + ação + destinatário + ligação + presente"
+  },
+  "ddecd9d0-4acb-4093-9003-a92fbcf583cc": {
+    "hanzi": "祝贺你！你的中文真好啊！",
+    "segments": [
+      {
+        "hanzi": "祝贺",
+        "gloss": "parabenizar"
+      },
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "的",
+        "gloss": "partícula de posse ou ligação"
+      },
+      {
+        "hanzi": "中文",
+        "gloss": "chinês"
+      },
+      {
+        "hanzi": "真",
+        "gloss": "realmente"
+      },
+      {
+        "hanzi": "好",
+        "gloss": "bom/bem"
+      },
+      {
+        "hanzi": "啊",
+        "gloss": "partícula de exclamação"
+      }
+    ],
+    "structure": "Parabenizar + pessoa; sujeito (seu chinês) + intensidade + adjetivo + exclamação"
+  },
+  "29067d22-d027-4613-9b8f-787f47705ae4": {
+    "hanzi": "第一个问题是这个，第二个呢？",
+    "segments": [
+      {
+        "hanzi": "第",
+        "gloss": "prefixo de ordem (primeiro, segundo…)"
+      },
+      {
+        "hanzi": "一",
+        "gloss": "um"
+      },
+      {
+        "hanzi": "个",
+        "gloss": "classificador geral"
+      },
+      {
+        "hanzi": "问题",
+        "gloss": "pergunta/problema"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "这",
+        "gloss": "este/esta"
+      },
+      {
+        "hanzi": "个",
+        "gloss": "classificador geral"
+      },
+      {
+        "hanzi": "第",
+        "gloss": "prefixo de ordem (primeiro, segundo…)"
+      },
+      {
+        "hanzi": "二",
+        "gloss": "dois"
+      },
+      {
+        "hanzi": "个",
+        "gloss": "classificador geral"
+      },
+      {
+        "hanzi": "呢",
+        "gloss": "partícula: e quanto a…?"
+      }
+    ],
+    "structure": "Sujeito (primeira pergunta) + ser + demonstrativo; segundo item + partícula de retomada"
+  },
+  "672cb3f1-5943-4fc6-b559-d5a17508343f": {
+    "hanzi": "苹果、香蕉、葡萄都很便宜。",
+    "segments": [
+      {
+        "hanzi": "苹果",
+        "gloss": "maçã"
+      },
+      {
+        "hanzi": "香蕉",
+        "gloss": "banana"
+      },
+      {
+        "hanzi": "葡萄",
+        "gloss": "uva"
+      },
+      {
+        "hanzi": "都",
+        "gloss": "todos/todas as vezes"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "便宜",
+        "gloss": "barato"
+      }
+    ],
+    "structure": "Sujeito (lista de frutas) + abrangência + intensidade + adjetivo"
+  },
+  "5b2e88f0-a3b4-4a00-a062-19970064f54a": {
+    "hanzi": "认识你很高兴，这是我的名片。",
+    "segments": [
+      {
+        "hanzi": "认识",
+        "gloss": "conhecer"
+      },
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "高兴",
+        "gloss": "feliz"
+      },
+      {
+        "hanzi": "这",
+        "gloss": "este/esta"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "的",
+        "gloss": "partícula de posse ou ligação"
+      },
+      {
+        "hanzi": "名片",
+        "gloss": "cartão de visita"
+      }
+    ],
+    "structure": "Ação + objeto como assunto + intensidade + adjetivo; demonstrativo + ser + posse + objeto"
+  },
+  "432d6f8a-3b0e-4b96-84e9-917be7e21dd2": {
+    "hanzi": "语言很有意思，汉字也不难。",
+    "segments": [
+      {
+        "hanzi": "语言",
+        "gloss": "língua/idioma"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "有意思",
+        "gloss": "interessante"
+      },
+      {
+        "hanzi": "汉字",
+        "gloss": "caracteres chineses"
+      },
+      {
+        "hanzi": "也",
+        "gloss": "também"
+      },
+      {
+        "hanzi": "不",
+        "gloss": "não"
+      },
+      {
+        "hanzi": "难",
+        "gloss": "difícil"
+      }
+    ],
+    "structure": "Sujeito + intensidade + adjetivo; sujeito + também + negação + adjetivo"
+  },
+  "18741e74-c0ff-452e-b255-e1c3bf957cc7": {
+    "hanzi": "你读一遍，再回答问题。",
+    "segments": [
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "读",
+        "gloss": "ler"
+      },
+      {
+        "hanzi": "一",
+        "gloss": "um"
+      },
+      {
+        "hanzi": "遍",
+        "gloss": "classificador de vezes completas"
+      },
+      {
+        "hanzi": "再",
+        "gloss": "depois/novamente"
+      },
+      {
+        "hanzi": "回答",
+        "gloss": "responder"
+      },
+      {
+        "hanzi": "问题",
+        "gloss": "pergunta/problema"
+      }
+    ],
+    "structure": "Sujeito + ação + quantidade de vezes; depois + ação + objeto"
+  },
+  "8e52ea77-ee52-48de-b85a-69055aab645f": {
+    "hanzi": "进来坐。你要喝什么？茶？咖啡？",
+    "segments": [
+      {
+        "hanzi": "进",
+        "gloss": "entrar"
+      },
+      {
+        "hanzi": "来",
+        "gloss": "vir"
+      },
+      {
+        "hanzi": "坐",
+        "gloss": "sentar"
+      },
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "要",
+        "gloss": "querer/precisar"
+      },
+      {
+        "hanzi": "喝",
+        "gloss": "beber"
+      },
+      {
+        "hanzi": "什么",
+        "gloss": "o quê/qual"
+      },
+      {
+        "hanzi": "茶",
+        "gloss": "chá"
+      },
+      {
+        "hanzi": "咖啡",
+        "gloss": "café"
+      }
+    ],
+    "structure": "Ações em sequência (entrar → sentar); sujeito + querer + ação + interrogativo; opções"
+  },
+  "7fecf7f3-5e7d-40af-9d87-9bedd456b33f": {
+    "hanzi": "谢谢你！不用谢。再见！拜拜！",
+    "segments": [
+      {
+        "hanzi": "谢谢",
+        "gloss": "agradecer/obrigado"
+      },
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "不用谢",
+        "gloss": "de nada"
+      },
+      {
+        "hanzi": "再见",
+        "gloss": "até logo"
+      },
+      {
+        "hanzi": "拜拜",
+        "gloss": "tchau"
+      }
+    ],
+    "structure": "Agradecimento + pessoa; resposta; despedidas"
+  },
+  "b4e9f2b0-f6a1-4701-a3d2-3cf10d442b4c": {
+    "hanzi": "这位先生是作家，那位小姐是教授。",
+    "segments": [
+      {
+        "hanzi": "这",
+        "gloss": "este/esta"
+      },
+      {
+        "hanzi": "位",
+        "gloss": "classificador respeitoso de pessoas"
+      },
+      {
+        "hanzi": "先生",
+        "gloss": "senhor"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "作家",
+        "gloss": "escritor(a)"
+      },
+      {
+        "hanzi": "那",
+        "gloss": "aquele/aquela"
+      },
+      {
+        "hanzi": "位",
+        "gloss": "classificador respeitoso de pessoas"
+      },
+      {
+        "hanzi": "小姐",
+        "gloss": "senhorita"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "教授",
+        "gloss": "professor(a) universitário(a)"
+      }
+    ],
+    "structure": "Sujeito (demonstrativo + classificador + pessoa) + ser + profissão; mesma ordem"
+  },
+  "2eca12d4-000d-4fa1-86fa-8727e6b270fc": {
+    "hanzi": "这是我的尺子和橡皮。",
+    "segments": [
+      {
+        "hanzi": "这",
+        "gloss": "este/esta"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "的",
+        "gloss": "partícula de posse ou ligação"
+      },
+      {
+        "hanzi": "尺子",
+        "gloss": "régua"
+      },
+      {
+        "hanzi": "和",
+        "gloss": "e/com"
+      },
+      {
+        "hanzi": "橡皮",
+        "gloss": "borracha"
+      }
+    ],
+    "structure": "Demonstrativo + ser + posse + objetos"
+  },
+  "2c929a8b-d731-47d1-bc23-9aef7710e2c6": {
+    "hanzi": "这是我的照片，我们在这儿拍照。",
+    "segments": [
+      {
+        "hanzi": "这",
+        "gloss": "este/esta"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "的",
+        "gloss": "partícula de posse ou ligação"
+      },
+      {
+        "hanzi": "照片",
+        "gloss": "foto"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "们",
+        "gloss": "marcador de plural"
+      },
+      {
+        "hanzi": "在",
+        "gloss": "em/estar em"
+      },
+      {
+        "hanzi": "这儿",
+        "gloss": "aqui"
+      },
+      {
+        "hanzi": "拍照",
+        "gloss": "tirar foto"
+      }
+    ],
+    "structure": "Demonstrativo + ser + posse + objeto; sujeito plural + lugar + ação"
+  },
+  "84af7d3c-1dfc-4297-b8e7-ac0041999e04": {
+    "hanzi": "那个笔袋很小，是我的。",
+    "segments": [
+      {
+        "hanzi": "那",
+        "gloss": "aquele/aquela"
+      },
+      {
+        "hanzi": "个",
+        "gloss": "classificador geral"
+      },
+      {
+        "hanzi": "笔袋",
+        "gloss": "estojo"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "小",
+        "gloss": "pequeno"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "的",
+        "gloss": "partícula de posse ou ligação"
+      }
+    ],
+    "structure": "Sujeito (aquele estojo) + intensidade + adjetivo; ser + posse (objeto omitido)"
+  },
+  "6fd5cb13-8a97-4417-8a50-8998e791bc01": {
+    "hanzi": "那是我的表，很漂亮。",
+    "segments": [
+      {
+        "hanzi": "那",
+        "gloss": "aquele/aquela"
+      },
+      {
+        "hanzi": "是",
+        "gloss": "ser"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "的",
+        "gloss": "partícula de posse ou ligação"
+      },
+      {
+        "hanzi": "表",
+        "gloss": "relógio"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "漂亮",
+        "gloss": "bonito"
+      }
+    ],
+    "structure": "Demonstrativo + ser + posse + objeto; intensidade + adjetivo"
+  },
+  "d4260f9a-6192-4f63-858e-93123929d934": {
+    "hanzi": "银行在那儿，学院在这儿。",
+    "segments": [
+      {
+        "hanzi": "银行",
+        "gloss": "banco"
+      },
+      {
+        "hanzi": "在",
+        "gloss": "em/estar em"
+      },
+      {
+        "hanzi": "那儿",
+        "gloss": "ali"
+      },
+      {
+        "hanzi": "学院",
+        "gloss": "faculdade"
+      },
+      {
+        "hanzi": "在",
+        "gloss": "em/estar em"
+      },
+      {
+        "hanzi": "这儿",
+        "gloss": "aqui"
+      }
+    ],
+    "structure": "Sujeito + estar em + lugar; mesma ordem"
+  },
+  "b887d34c-7e19-44db-abeb-70c0de120d73": {
+    "hanzi": "零加五等于五，九减四等于五。",
+    "segments": [
+      {
+        "hanzi": "零",
+        "gloss": "zero"
+      },
+      {
+        "hanzi": "加",
+        "gloss": "mais"
+      },
+      {
+        "hanzi": "五",
+        "gloss": "cinco"
+      },
+      {
+        "hanzi": "等于",
+        "gloss": "é igual a"
+      },
+      {
+        "hanzi": "五",
+        "gloss": "cinco"
+      },
+      {
+        "hanzi": "九",
+        "gloss": "nove"
+      },
+      {
+        "hanzi": "减",
+        "gloss": "menos"
+      },
+      {
+        "hanzi": "四",
+        "gloss": "quatro"
+      },
+      {
+        "hanzi": "等于",
+        "gloss": "é igual a"
+      },
+      {
+        "hanzi": "五",
+        "gloss": "cinco"
+      }
+    ],
+    "structure": "Número + operação + número + igualdade + resultado; mesma ordem"
+  },
+  "00a8de55-4c6c-44ba-a1fc-07913624e3a0": {
+    "hanzi": "我要半斤苹果。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "要",
+        "gloss": "querer/precisar"
+      },
+      {
+        "hanzi": "半",
+        "gloss": "metade/meio"
+      },
+      {
+        "hanzi": "斤",
+        "gloss": "jin (medida de peso: 500 g)"
+      },
+      {
+        "hanzi": "苹果",
+        "gloss": "maçã"
+      }
+    ],
+    "structure": "Sujeito + querer + quantidade + medida + objeto"
+  },
+  "b642cc7a-4d43-4627-b263-08d39e1d5df9": {
+    "hanzi": "请问，你几点钟起床？",
+    "segments": [
+      {
+        "hanzi": "请问",
+        "gloss": "com licença (para perguntar)"
+      },
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "几",
+        "gloss": "quantos/qual número"
+      },
+      {
+        "hanzi": "点钟",
+        "gloss": "horas (de relógio)"
+      },
+      {
+        "hanzi": "起床",
+        "gloss": "levantar da cama"
+      }
+    ],
+    "structure": "Expressão para perguntar; sujeito + tempo interrogativo + ação"
+  },
+  "e97b5a5e-1dcd-4f71-87a7-cf1e67c5bb41": {
+    "hanzi": "我今天很忙，因为我要上课，明天有时间。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "今天",
+        "gloss": "hoje"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "忙",
+        "gloss": "ocupado"
+      },
+      {
+        "hanzi": "因为",
+        "gloss": "porque"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "要",
+        "gloss": "querer/precisar"
+      },
+      {
+        "hanzi": "上课",
+        "gloss": "ter aula"
+      },
+      {
+        "hanzi": "明天",
+        "gloss": "amanhã"
+      },
+      {
+        "hanzi": "有",
+        "gloss": "ter/haver"
+      },
+      {
+        "hanzi": "时间",
+        "gloss": "tempo"
+      }
+    ],
+    "structure": "Sujeito + tempo + adjetivo; porque + sujeito + necessidade + ação; tempo + ter + objeto"
+  },
+  "15f50f1c-b92a-4ec4-95a7-47fcbb750fb2": {
+    "hanzi": "你为什么买红葡萄酒？因为我爸爸爱喝。",
+    "segments": [
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "为什么",
+        "gloss": "por quê"
+      },
+      {
+        "hanzi": "买",
+        "gloss": "comprar"
+      },
+      {
+        "hanzi": "红葡萄酒",
+        "gloss": "vinho tinto"
+      },
+      {
+        "hanzi": "因为",
+        "gloss": "porque"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "爸爸",
+        "gloss": "pai"
+      },
+      {
+        "hanzi": "爱",
+        "gloss": "amar"
+      },
+      {
+        "hanzi": "喝",
+        "gloss": "beber"
+      }
+    ],
+    "structure": "Sujeito + por quê + verbo + objeto; porque + sujeito + gostar + ação"
+  },
+  "d41f8fb7-797c-4768-b05c-553c7a66c28c": {
+    "hanzi": "我的手机里有一张她的照片。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "的",
+        "gloss": "partícula de posse ou ligação"
+      },
+      {
+        "hanzi": "手机",
+        "gloss": "celular"
+      },
+      {
+        "hanzi": "里",
+        "gloss": "dentro"
+      },
+      {
+        "hanzi": "有",
+        "gloss": "ter/haver"
+      },
+      {
+        "hanzi": "一",
+        "gloss": "um"
+      },
+      {
+        "hanzi": "张",
+        "gloss": "classificador de coisas planas"
+      },
+      {
+        "hanzi": "她",
+        "gloss": "ela"
+      },
+      {
+        "hanzi": "的",
+        "gloss": "partícula de posse ou ligação"
+      },
+      {
+        "hanzi": "照片",
+        "gloss": "foto"
+      }
+    ],
+    "structure": "Lugar (dentro do meu celular) + haver + número + classificador + posse + objeto"
+  },
+  "916887ff-cf14-4ff3-a317-a8d2836d8c5c": {
+    "hanzi": "我明天过生日。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "明天",
+        "gloss": "amanhã"
+      },
+      {
+        "hanzi": "过",
+        "gloss": "comemorar/passar"
+      },
+      {
+        "hanzi": "生日",
+        "gloss": "aniversário"
+      }
+    ],
+    "structure": "Sujeito + tempo + verbo + objeto"
+  },
+  "2a07ff84-9001-4529-b1ab-15e1cd3ce942": {
+    "hanzi": "我家有五口人：爸爸、妈妈、哥哥、妹妹和我。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "家",
+        "gloss": "casa/família"
+      },
+      {
+        "hanzi": "有",
+        "gloss": "ter/haver"
+      },
+      {
+        "hanzi": "五",
+        "gloss": "cinco"
+      },
+      {
+        "hanzi": "口",
+        "gloss": "classificador de membros da família"
+      },
+      {
+        "hanzi": "人",
+        "gloss": "pessoa"
+      },
+      {
+        "hanzi": "爸爸",
+        "gloss": "pai"
+      },
+      {
+        "hanzi": "妈妈",
+        "gloss": "mãe"
+      },
+      {
+        "hanzi": "哥哥",
+        "gloss": "irmão mais velho"
+      },
+      {
+        "hanzi": "妹妹",
+        "gloss": "irmã mais nova"
+      },
+      {
+        "hanzi": "和",
+        "gloss": "e/com"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      }
+    ],
+    "structure": "Sujeito (minha família) + ter + número + classificador + pessoa; lista explicativa"
+  },
+  "7333dde6-6648-452b-9de3-08b4e1dae13c": {
+    "hanzi": "我今天有点儿不舒服，想去医院看病。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "今天",
+        "gloss": "hoje"
+      },
+      {
+        "hanzi": "有点儿",
+        "gloss": "um pouco (geralmente indesejável)"
+      },
+      {
+        "hanzi": "不",
+        "gloss": "não"
+      },
+      {
+        "hanzi": "舒服",
+        "gloss": "confortável/bem"
+      },
+      {
+        "hanzi": "想",
+        "gloss": "querer/ter vontade"
+      },
+      {
+        "hanzi": "去",
+        "gloss": "ir"
+      },
+      {
+        "hanzi": "医院",
+        "gloss": "hospital"
+      },
+      {
+        "hanzi": "看病",
+        "gloss": "consultar o médico"
+      }
+    ],
+    "structure": "Sujeito + tempo + grau + negação + adjetivo; vontade + ir + lugar + finalidade"
+  },
+  "f70105cf-cd01-4d7f-82f6-5c53b16f9008": {
+    "hanzi": "我嗓子疼，还有点儿发烧。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "嗓子",
+        "gloss": "garganta"
+      },
+      {
+        "hanzi": "疼",
+        "gloss": "doer"
+      },
+      {
+        "hanzi": "还",
+        "gloss": "ainda/além disso"
+      },
+      {
+        "hanzi": "有点儿",
+        "gloss": "um pouco (geralmente indesejável)"
+      },
+      {
+        "hanzi": "发烧",
+        "gloss": "ter febre"
+      }
+    ],
+    "structure": "Sujeito (minha garganta) + adjetivo de dor; ainda + grau + sintoma"
+  },
+  "72d97f4e-ed08-48d7-b1be-9e022dcb6a6b": {
+    "hanzi": "你应该多喝茶，多休息。",
+    "segments": [
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "应该",
+        "gloss": "deveria"
+      },
+      {
+        "hanzi": "多",
+        "gloss": "muito/mais"
+      },
+      {
+        "hanzi": "喝",
+        "gloss": "beber"
+      },
+      {
+        "hanzi": "茶",
+        "gloss": "chá"
+      },
+      {
+        "hanzi": "多",
+        "gloss": "muito/mais"
+      },
+      {
+        "hanzi": "休息",
+        "gloss": "descansar"
+      }
+    ],
+    "structure": "Sujeito + dever + quantidade + ação + objeto; quantidade + ação"
+  },
+  "5c90e5bb-80b0-453e-8934-5768801fe785": {
+    "hanzi": "医生说我恐怕要开刀，还要打针。",
+    "segments": [
+      {
+        "hanzi": "医生",
+        "gloss": "médico(a)"
+      },
+      {
+        "hanzi": "说",
+        "gloss": "falar"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "恐怕",
+        "gloss": "receio que/provavelmente"
+      },
+      {
+        "hanzi": "要",
+        "gloss": "querer/precisar"
+      },
+      {
+        "hanzi": "开刀",
+        "gloss": "operar/fazer cirurgia"
+      },
+      {
+        "hanzi": "还",
+        "gloss": "ainda/além disso"
+      },
+      {
+        "hanzi": "要",
+        "gloss": "querer/precisar"
+      },
+      {
+        "hanzi": "打针",
+        "gloss": "tomar/aplicar injeção"
+      }
+    ],
+    "structure": "Sujeito + dizer + oração (sujeito + probabilidade + necessidade + ação); ainda + necessidade + ação"
+  },
+  "a83af66f-554b-469c-b3fd-b32b231c0053": {
+    "hanzi": "他牙疼，不能吃东西。",
+    "segments": [
+      {
+        "hanzi": "他",
+        "gloss": "ele"
+      },
+      {
+        "hanzi": "牙",
+        "gloss": "dente"
+      },
+      {
+        "hanzi": "疼",
+        "gloss": "doer"
+      },
+      {
+        "hanzi": "不",
+        "gloss": "não"
+      },
+      {
+        "hanzi": "能",
+        "gloss": "poder/conseguir"
+      },
+      {
+        "hanzi": "吃",
+        "gloss": "comer"
+      },
+      {
+        "hanzi": "东西",
+        "gloss": "coisa material"
+      }
+    ],
+    "structure": "Sujeito (dente dele) + dor; negação + capacidade + ação + objeto"
+  },
+  "18510217-c681-4f3a-8ec1-03e6e7ba80c1": {
+    "hanzi": "你想吃中药还是西药？",
+    "segments": [
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "想",
+        "gloss": "querer/ter vontade"
+      },
+      {
+        "hanzi": "吃",
+        "gloss": "comer"
+      },
+      {
+        "hanzi": "中药",
+        "gloss": "remédio da medicina chinesa"
+      },
+      {
+        "hanzi": "还是",
+        "gloss": "ou (em pergunta de escolha)"
+      },
+      {
+        "hanzi": "西药",
+        "gloss": "remédio da medicina ocidental"
+      }
+    ],
+    "structure": "Sujeito + vontade + ação + opção A + ou + opção B"
+  },
+  "fac92a20-5279-405e-b392-711cbb45b069": {
+    "hanzi": "我愿意住院，因为我全身都疼。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "愿意",
+        "gloss": "estar disposto/aceitar"
+      },
+      {
+        "hanzi": "住院",
+        "gloss": "ficar internado"
+      },
+      {
+        "hanzi": "因为",
+        "gloss": "porque"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "全身",
+        "gloss": "corpo inteiro"
+      },
+      {
+        "hanzi": "都",
+        "gloss": "todos/todas as vezes"
+      },
+      {
+        "hanzi": "疼",
+        "gloss": "doer"
+      }
+    ],
+    "structure": "Sujeito + disposição + ação; porque + sujeito (meu corpo inteiro) + abrangência + dor"
+  },
+  "7ee3c936-37f3-4d13-9e58-90f33728743b": {
+    "hanzi": "她每天早上锻炼，身体很好。",
+    "segments": [
+      {
+        "hanzi": "她",
+        "gloss": "ela"
+      },
+      {
+        "hanzi": "每",
+        "gloss": "cada"
+      },
+      {
+        "hanzi": "天",
+        "gloss": "dia"
+      },
+      {
+        "hanzi": "早上",
+        "gloss": "manhã cedo"
+      },
+      {
+        "hanzi": "锻炼",
+        "gloss": "exercitar-se"
+      },
+      {
+        "hanzi": "身体",
+        "gloss": "corpo/saúde"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "好",
+        "gloss": "bom/bem"
+      }
+    ],
+    "structure": "Sujeito + frequência + tempo + ação; sujeito (corpo) + intensidade + adjetivo"
+  },
+  "b0b7ad14-471f-4546-89a8-5f2d4571a4fe": {
+    "hanzi": "你头有点儿疼，应该多穿衣服。",
+    "segments": [
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "头",
+        "gloss": "cabeça"
+      },
+      {
+        "hanzi": "有点儿",
+        "gloss": "um pouco (geralmente indesejável)"
+      },
+      {
+        "hanzi": "疼",
+        "gloss": "doer"
+      },
+      {
+        "hanzi": "应该",
+        "gloss": "deveria"
+      },
+      {
+        "hanzi": "多",
+        "gloss": "muito/mais"
+      },
+      {
+        "hanzi": "穿",
+        "gloss": "vestir"
+      },
+      {
+        "hanzi": "衣服",
+        "gloss": "roupa"
+      }
+    ],
+    "structure": "Sujeito (sua cabeça) + grau + dor; dever + quantidade + ação + objeto"
+  },
+  "5fe756aa-2a76-4e5c-9223-8606b803c579": {
+    "hanzi": "你明天和我一起去看病吧。",
+    "segments": [
+      {
+        "hanzi": "你",
+        "gloss": "você"
+      },
+      {
+        "hanzi": "明天",
+        "gloss": "amanhã"
+      },
+      {
+        "hanzi": "和",
+        "gloss": "com"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "一起",
+        "gloss": "juntos"
+      },
+      {
+        "hanzi": "去",
+        "gloss": "ir"
+      },
+      {
+        "hanzi": "看病",
+        "gloss": "consultar o médico"
+      },
+      {
+        "hanzi": "吧",
+        "gloss": "partícula de sugestão"
+      }
+    ],
+    "structure": "Sujeito + tempo + companhia + juntos + ir + finalidade + sugestão"
+  },
+  "e42b282f-8999-4571-ac36-d0d9942bf266": {
+    "hanzi": "他肚子不舒服，不能上课，要写请假条。",
+    "segments": [
+      {
+        "hanzi": "他",
+        "gloss": "ele"
+      },
+      {
+        "hanzi": "肚子",
+        "gloss": "barriga"
+      },
+      {
+        "hanzi": "不",
+        "gloss": "não"
+      },
+      {
+        "hanzi": "舒服",
+        "gloss": "confortável/bem"
+      },
+      {
+        "hanzi": "不",
+        "gloss": "não"
+      },
+      {
+        "hanzi": "能",
+        "gloss": "poder/conseguir"
+      },
+      {
+        "hanzi": "上课",
+        "gloss": "ter aula"
+      },
+      {
+        "hanzi": "要",
+        "gloss": "querer/precisar"
+      },
+      {
+        "hanzi": "写",
+        "gloss": "escrever"
+      },
+      {
+        "hanzi": "请假条",
+        "gloss": "pedido escrito de licença"
+      }
+    ],
+    "structure": "Sujeito (barriga dele) + negação + adjetivo; negação + possibilidade + ação; necessidade + ação + objeto"
+  },
+  "f058160e-40ce-4cac-a249-706ac08337fe": {
+    "hanzi": "在医院看病要挂号。",
+    "segments": [
+      {
+        "hanzi": "在",
+        "gloss": "em/estar em"
+      },
+      {
+        "hanzi": "医院",
+        "gloss": "hospital"
+      },
+      {
+        "hanzi": "看病",
+        "gloss": "consultar o médico"
+      },
+      {
+        "hanzi": "要",
+        "gloss": "querer/precisar"
+      },
+      {
+        "hanzi": "挂号",
+        "gloss": "registrar-se para consulta"
+      }
+    ],
+    "structure": "Lugar + ação como assunto + necessidade + ação"
+  },
+  "f65448ac-c6b1-41e0-a1dd-3e719f0c665e": {
+    "hanzi": "我嗓子发炎，不能唱歌。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "嗓子",
+        "gloss": "garganta"
+      },
+      {
+        "hanzi": "发炎",
+        "gloss": "estar inflamado"
+      },
+      {
+        "hanzi": "不",
+        "gloss": "não"
+      },
+      {
+        "hanzi": "能",
+        "gloss": "poder/conseguir"
+      },
+      {
+        "hanzi": "唱歌",
+        "gloss": "cantar"
+      }
+    ],
+    "structure": "Sujeito (minha garganta) + sintoma; negação + possibilidade + ação"
+  },
+  "daaa14ed-6eb4-4d0e-a6aa-c9b73331f904": {
+    "hanzi": "医生要化验我的血、大便和小便。",
+    "segments": [
+      {
+        "hanzi": "医生",
+        "gloss": "médico(a)"
+      },
+      {
+        "hanzi": "要",
+        "gloss": "querer/precisar"
+      },
+      {
+        "hanzi": "化验",
+        "gloss": "fazer exame laboratorial"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "的",
+        "gloss": "partícula de posse ou ligação"
+      },
+      {
+        "hanzi": "血",
+        "gloss": "sangue"
+      },
+      {
+        "hanzi": "大便",
+        "gloss": "fezes"
+      },
+      {
+        "hanzi": "和",
+        "gloss": "e/com"
+      },
+      {
+        "hanzi": "小便",
+        "gloss": "urina"
+      }
+    ],
+    "structure": "Sujeito + intenção/necessidade + verbo + posse + lista de objetos"
+  },
+  "bec3e518-f85e-4c4e-8638-c4c3efc60db9": {
+    "hanzi": "在中国生活很有意思。",
+    "segments": [
+      {
+        "hanzi": "在",
+        "gloss": "em/estar em"
+      },
+      {
+        "hanzi": "中国",
+        "gloss": "China"
+      },
+      {
+        "hanzi": "生活",
+        "gloss": "viver/vida"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "有意思",
+        "gloss": "interessante"
+      }
+    ],
+    "structure": "Lugar + ação como assunto + intensidade + adjetivo"
+  },
+  "30cc682b-c0f0-40fa-9ac7-6ad5c0c51395": {
+    "hanzi": "我每天中午睡觉。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "每",
+        "gloss": "cada"
+      },
+      {
+        "hanzi": "天",
+        "gloss": "dia"
+      },
+      {
+        "hanzi": "中午",
+        "gloss": "meio-dia"
+      },
+      {
+        "hanzi": "睡觉",
+        "gloss": "dormir"
+      }
+    ],
+    "structure": "Sujeito + frequência + tempo + ação"
+  },
+  "37c3aade-c473-4ae8-b23a-a2cd59b98cbe": {
+    "hanzi": "这个药有点儿贵。",
+    "segments": [
+      {
+        "hanzi": "这",
+        "gloss": "este/esta"
+      },
+      {
+        "hanzi": "个",
+        "gloss": "classificador geral"
+      },
+      {
+        "hanzi": "药",
+        "gloss": "remédio"
+      },
+      {
+        "hanzi": "有点儿",
+        "gloss": "um pouco (geralmente indesejável)"
+      },
+      {
+        "hanzi": "贵",
+        "gloss": "caro"
+      }
+    ],
+    "structure": "Sujeito (este remédio) + grau + adjetivo"
+  },
+  "49279fc6-82ee-465d-aa54-39feb261c3f8": {
+    "hanzi": "这个医院的医生全都很好。",
+    "segments": [
+      {
+        "hanzi": "这",
+        "gloss": "este/esta"
+      },
+      {
+        "hanzi": "个",
+        "gloss": "classificador geral"
+      },
+      {
+        "hanzi": "医院",
+        "gloss": "hospital"
+      },
+      {
+        "hanzi": "的",
+        "gloss": "partícula de posse ou ligação"
+      },
+      {
+        "hanzi": "医生",
+        "gloss": "médico(a)"
+      },
+      {
+        "hanzi": "全",
+        "gloss": "todos/inteiro"
+      },
+      {
+        "hanzi": "都",
+        "gloss": "todos/todas as vezes"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "好",
+        "gloss": "bom/bem"
+      }
+    ],
+    "structure": "Sujeito (médicos deste hospital) + totalidade + abrangência + intensidade + adjetivo"
+  },
+  "46966840-423d-4d8a-bce9-be30cdf71d42": {
+    "hanzi": "我每天都练习汉字。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "每",
+        "gloss": "cada"
+      },
+      {
+        "hanzi": "天",
+        "gloss": "dia"
+      },
+      {
+        "hanzi": "都",
+        "gloss": "todos/todas as vezes"
+      },
+      {
+        "hanzi": "练习",
+        "gloss": "praticar"
+      },
+      {
+        "hanzi": "汉字",
+        "gloss": "caracteres chineses"
+      }
+    ],
+    "structure": "Sujeito + frequência + abrangência + verbo + objeto"
+  },
+  "178c3624-7968-4aca-8cff-35fa1fb98daa": {
+    "hanzi": "我想去，可是我今天很忙。",
+    "segments": [
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "想",
+        "gloss": "querer/ter vontade"
+      },
+      {
+        "hanzi": "去",
+        "gloss": "ir"
+      },
+      {
+        "hanzi": "可是",
+        "gloss": "mas/porém"
+      },
+      {
+        "hanzi": "我",
+        "gloss": "eu"
+      },
+      {
+        "hanzi": "今天",
+        "gloss": "hoje"
+      },
+      {
+        "hanzi": "很",
+        "gloss": "muito (ou ligação antes de adjetivo)"
+      },
+      {
+        "hanzi": "忙",
+        "gloss": "ocupado"
+      }
+    ],
+    "structure": "Sujeito + vontade + ação; mas + sujeito + tempo + intensidade + adjetivo"
+  },
+  "7226a775-f6d0-4068-ac62-1d008288d670": {
+    "hanzi": "他十点钟才起床。",
+    "segments": [
+      {
+        "hanzi": "他",
+        "gloss": "ele"
+      },
+      {
+        "hanzi": "十",
+        "gloss": "dez"
+      },
+      {
+        "hanzi": "点钟",
+        "gloss": "horas (de relógio)"
+      },
+      {
+        "hanzi": "才",
+        "gloss": "só então (mais tarde que o esperado)"
+      },
+      {
+        "hanzi": "起床",
+        "gloss": "levantar da cama"
+      }
+    ],
+    "structure": "Sujeito + tempo + só então + ação"
+  }
+}
