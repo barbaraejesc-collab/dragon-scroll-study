@@ -17,10 +17,6 @@ export function PhraseLogicView({ id, hanzi }: { id: string; hanzi: string }) {
           ))}
         </ol>
       </section>
-      <section aria-label="Estrutura gramatical">
-        <h3 className="text-xs text-accent font-semibold mb-2">Estrutura gramatical</h3>
-        <p className="text-sm leading-relaxed text-cream/90 break-words">{logic.structure}</p>
-      </section>
     </div>
   );
 }
