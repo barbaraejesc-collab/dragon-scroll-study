@@ -391,7 +391,7 @@ function FlashcardsPage() {
   const finished = loaded && idx >= total;
 
   return (
-    <main className="h-dvh min-h-[620px] px-4 py-6 max-w-2xl mx-auto flex flex-col">
+    <main className={`${flipped && current?.card_type === "phrase" ? "min-h-dvh" : "h-dvh min-h-[620px]"} px-4 py-6 max-w-2xl mx-auto flex flex-col`}>
       <header className="flex items-center justify-between mb-4">
         <Button variant="ghost" size="sm" asChild>
           <Link to="/dashboard"><ArrowLeft className="w-4 h-4 mr-1" /> Voltar</Link>
@@ -462,18 +462,18 @@ function FlashcardView({
   hanziFont: { name: string; family: string };
 }) {
   return (
-    <div className="flex-1 flex flex-col">
+    <div className={`${flipped && card.card_type === "phrase" ? "flex-none" : "flex-1"} flex flex-col`}>
       <div
         role="button"
         tabIndex={0}
         aria-label={flipped ? "Frase revelada" : "Virar card"}
         onKeyDown={(event) => { if (event.key === "Enter" && !flipped) onFlip(); }}
-        className={`flip-card flex-1 min-h-[380px] cursor-pointer ${flipped ? "flipped" : ""}`}
+        className={`flip-card flex-1 min-h-[380px] ${flipped ? "flipped" : "cursor-pointer"} ${flipped && card.card_type === "phrase" ? "phrase-expanded" : ""}`}
         onClick={() => !flipped && onFlip()}
       >
         <div className="flip-card-inner">
           {/* Frente */}
-          <div className="flip-face bg-gradient-to-br from-card to-secondary border border-border rounded-3xl shadow-[var(--shadow-elegant)] flex flex-col relative overflow-hidden">
+          <div className="flip-face bg-gradient-to-br from-card to-secondary border border-border rounded-3xl shadow-[var(--shadow-elegant)] flex flex-col overflow-hidden" aria-hidden={flipped}>
             <div className="flex-1 flex items-center justify-center p-6 min-h-0">
               <span
                 className={`${card.card_type === "phrase" ? "text-[11vw] md:text-[72px] leading-tight" : "text-[20vw] md:text-[160px] leading-none"} text-cream drop-shadow-[0_0_40px_rgba(255,215,0,0.1)] break-all text-center`}
@@ -485,7 +485,7 @@ function FlashcardView({
             <div className="p-5 text-center text-xs text-muted-foreground italic">toque para virar</div>
           </div>
           {/* Verso */}
-          <div className="flip-face flip-back bg-gradient-to-br from-primary/90 to-primary/60 border border-accent/30 rounded-3xl shadow-[var(--shadow-gold)] flex flex-col overflow-hidden">
+          <div className="flip-face flip-back bg-gradient-to-br from-primary/90 to-primary/60 border border-accent/30 rounded-3xl shadow-[var(--shadow-gold)] flex flex-col overflow-hidden" aria-hidden={!flipped}>
             <div className="flex items-start justify-end p-3 shrink-0">
               <Button
                 variant="ghost"
@@ -498,7 +498,7 @@ function FlashcardView({
                 <Volume2 className="w-5 h-5" />
               </Button>
             </div>
-            <div className={`flex-1 min-h-0 overflow-y-auto overscroll-contain px-5 md:px-6 pb-6 text-center flex flex-col items-center gap-4 ${card.card_type === "phrase" ? "justify-start" : "justify-center"}`}>
+            <div className={`flex-1 min-h-0 px-5 md:px-6 pb-6 text-center flex flex-col items-center gap-4 ${card.card_type === "phrase" ? "justify-start [&>*]:shrink-0" : "overflow-y-auto overscroll-contain justify-center"}`}>
               <div className="text-accent text-xl md:text-3xl font-serif italic break-words max-w-full">{card.pinyin}</div>
               <div className="text-cream text-base md:text-2xl font-serif leading-snug break-words max-w-full">
                 {card.meaning}

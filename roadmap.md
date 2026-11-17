@@ -13,3 +13,7 @@
 - [x] Acrescentar tradução literal por palavras completas e estrutura gramatical às 116 frases.
 - [x] Mostrar as quatro camadas sempre no verso, com leitura confortável no celular.
 - [x] Testar os dados e conferir uma sessão real sem alterar o progresso.
+
+# Leitura completa das frases
+- [x] Fazer o verso crescer com a tradução literal e a estrutura, sem corte interno.
+- [x] Conferir a leitura até o fim no celular e no computador sem responder cards.

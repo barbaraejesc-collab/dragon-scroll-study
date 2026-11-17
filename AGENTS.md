@@ -4,3 +4,4 @@
 - Audit scripts run locally only and must not be imported into the application runtime.
 - Record separately learned senses and pronunciations in the local phrase audit; identical Hanzi can represent different learned vocabulary uses.
 - Keep reviewed phrase glosses and syntax in a browser-safe data module keyed by card ID and exact Hanzi; never import audit scripts at runtime or display explanations for changed text.
+- Revealed phrase cards use content-driven height and document scrolling; fixed-height nested scrollers hide longer explanations on mobile.

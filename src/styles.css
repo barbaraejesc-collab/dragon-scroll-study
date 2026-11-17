@@ -113,6 +113,19 @@
   transform: rotateY(180deg);
 }
 
+/* Revealed phrases grow with their explanations; the page scrolls as one surface. */
+.phrase-expanded .flip-card-inner {
+  position: relative;
+  height: auto;
+  min-height: 380px;
+}
+.phrase-expanded .flip-back {
+  position: relative;
+  inset: auto;
+  min-height: 380px;
+  overflow: visible;
+}
+
 @keyframes shimmer {
   0%, 100% { opacity: 0.6; }
   50% { opacity: 1; }
