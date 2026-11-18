@@ -115,24 +115,16 @@
         "gloss": "ao todo"
       },
       {
-        "hanzi": "多",
-        "gloss": "muito/mais"
-      },
-      {
-        "hanzi": "少",
-        "gloss": "pouco"
+        "hanzi": "多少",
+        "gloss": "quanto/quantos"
       },
       {
         "hanzi": "钱",
         "gloss": "dinheiro"
       },
       {
-        "hanzi": "五",
-        "gloss": "cinco"
-      },
-      {
-        "hanzi": "块钱",
-        "gloss": "yuan"
+        "hanzi": "五块钱",
+        "gloss": "cinco yuan"
       },
       {
         "hanzi": "不用找钱",
@@ -157,12 +149,8 @@
         "gloss": "maçã"
       },
       {
-        "hanzi": "多",
-        "gloss": "muito/mais"
-      },
-      {
-        "hanzi": "少",
-        "gloss": "pouco"
+        "hanzi": "多少",
+        "gloss": "quanto/quantos"
       },
       {
         "hanzi": "钱",
@@ -729,12 +717,8 @@
         "gloss": "você"
       },
       {
-        "hanzi": "多",
-        "gloss": "muito/mais"
-      },
-      {
-        "hanzi": "大",
-        "gloss": "grande"
+        "hanzi": "多大",
+        "gloss": "que idade"
       },
       {
         "hanzi": "岁数",
@@ -745,16 +729,8 @@
         "gloss": "eu"
       },
       {
-        "hanzi": "七",
-        "gloss": "sete"
-      },
-      {
-        "hanzi": "十",
-        "gloss": "dez"
-      },
-      {
-        "hanzi": "九",
-        "gloss": "nove"
+        "hanzi": "七十九",
+        "gloss": "79 / setenta e nove"
       },
       {
         "hanzi": "岁",
@@ -1295,20 +1271,8 @@
         "gloss": "eu"
       },
       {
-        "hanzi": "一",
-        "gloss": "um"
-      },
-      {
-        "hanzi": "九",
-        "gloss": "nove"
-      },
-      {
-        "hanzi": "九",
-        "gloss": "nove"
-      },
-      {
-        "hanzi": "八",
-        "gloss": "oito"
+        "hanzi": "一九九八",
+        "gloss": "1998"
       },
       {
         "hanzi": "年",
@@ -1319,12 +1283,8 @@
         "gloss": "março"
       },
       {
-        "hanzi": "十",
-        "gloss": "dez"
-      },
-      {
-        "hanzi": "四",
-        "gloss": "quatro"
+        "hanzi": "十四",
+        "gloss": "14 / quatorze"
       },
       {
         "hanzi": "号",
@@ -1365,12 +1325,8 @@
         "gloss": "meio-dia"
       },
       {
-        "hanzi": "十",
-        "gloss": "dez"
-      },
-      {
-        "hanzi": "二",
-        "gloss": "dois"
+        "hanzi": "十二",
+        "gloss": "12 / doze"
       },
       {
         "hanzi": "点钟",

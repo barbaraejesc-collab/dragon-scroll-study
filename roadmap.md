@@ -17,3 +17,8 @@
 # Leitura completa das frases
 - [x] Fazer o verso crescer com a tradução literal e a estrutura, sem corte interno.
 - [x] Conferir a leitura até o fim no celular e no computador sem responder cards.
+
+# Unidades de sentido na tradução literal
+- [x] Revisar as 116 explicações e juntar palavras e numerais indevidamente separados.
+- [x] Atualizar a auditoria e testar palavras completas e valores numéricos.
+- [x] Conferir o verso das frases em uma sessão real, sem alterar respostas ou fila salva.

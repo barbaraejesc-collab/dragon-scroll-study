@@ -3,6 +3,7 @@ import audit from './phrases.json';
 
 const hanziOnly = (text: string) => text.replace(/[^\u3400-\u9fff]/g, '');
 const learned = new Set(audit.learnedWords);
+const numerals = new Set(audit.numeralUnits.map((unit) => unit.hanzi));
 
 describe('Phrase vocabulary audit', () => {
   test('keeps the original 84 phrases and all additions distinct', () => {
@@ -43,7 +44,7 @@ describe('Phrase vocabulary audit', () => {
 
   for (const phrase of audit.phrases) {
     test(`uses complete learned words: ${phrase.id}`, () => {
-      expect(phrase.tokens.every((word) => learned.has(word))).toBe(true);
+      expect(phrase.tokens.every((word) => learned.has(word) || numerals.has(word))).toBe(true);
       expect(hanziOnly(phrase.tokens.join(''))).toBe(hanziOnly(phrase.hanzi));
       for (const word of audit.forbiddenLexicalCompounds) {
         expect(phrase.hanzi.includes(word)).toBe(false);
@@ -67,5 +68,15 @@ describe('Phrase vocabulary audit', () => {
   test('allows 教 and 教授 separately, and confirmed 学习', () => {
     for (const word of ['教', '教授', '学习']) expect(learned.has(word)).toBe(true);
     expect(audit.phrases.some((phrase) => phrase.tokens.includes('学习'))).toBe(true);
+  });
+
+  test('composed numerals use only learned components without expanding the vocabulary', () => {
+    expect(audit.numeralUnits.map((unit) => unit.hanzi)).toEqual(['十二', '七十九', '一九九八', '十四']);
+    for (const unit of audit.numeralUnits) {
+      expect(unit.components.join('')).toBe(unit.hanzi);
+      expect(unit.components.every((component) => learned.has(component))).toBe(true);
+      expect(learned.has(unit.hanzi)).toBe(false);
+    }
+    expect(numerals.has('大家')).toBe(false);
   });
 });
