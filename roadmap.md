@@ -22,3 +22,9 @@
 - [x] Revisar as 116 explicações e juntar palavras e numerais indevidamente separados.
 - [x] Atualizar a auditoria e testar palavras completas e valores numéricos.
 - [x] Conferir o verso das frases em uma sessão real, sem alterar respostas ou fila salva.
+
+# Vocabulário de moradia e revisão integral
+- [ ] Cadastrar as palavras e radicais novos e atualizar os sentidos confirmados.
+- [ ] Consolidar frases sem perder cobertura de palavras completas, classificadores ou sentidos.
+- [ ] Preservar histórico e posição ao reduzir as frases das novas sessões.
+- [ ] Validar cobertura, tradução literal e conferir o aplicativo.
