@@ -1,0 +1,2 @@
+ALTER TABLE public.cards ADD COLUMN IF NOT EXISTS is_active boolean NOT NULL DEFAULT true;
+COMMENT ON COLUMN public.cards.is_active IS 'False retires a phrase from new sessions while retaining the card, progress, and existing saved queues.';

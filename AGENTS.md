@@ -6,3 +6,5 @@
 - Keep reviewed phrase glosses and syntax in a browser-safe data module keyed by card ID and exact Hanzi; never import audit scripts at runtime or display explanations for changed text.
 - Revealed phrase cards use content-driven height and document scrolling; fixed-height nested scrollers hide longer explanations on mobile.
 - Keep reviewed numeral units with explicit learned components in the local phrase audit, separate from learned vocabulary; composed numbers must not authorize new lexical compounds.
+- Retire consolidated phrase rows with cards.is_active rather than deleting or rewriting them; fresh decks use active cards, while existing queues retain all original IDs, order, index and score.
+- Record bound-component and fixed-expression coverage separately from standalone word coverage in the local audit; substrings must never silently count as independently practiced words.

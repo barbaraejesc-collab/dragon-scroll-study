@@ -8,6 +8,7 @@ import { ArrowLeft, Check, X, RotateCw, Volume2, WifiOff } from "lucide-react";
 import { playCorrect, playWrong } from "@/lib/sounds";
 import { speakZh, prefetchSession } from "@/lib/tts";
 import { PhraseLogicView } from "@/components/phrase-logic";
+import { activeStudyCards, canResumeStudyQueue } from "@/lib/study-deck";
 import {
   isOnline,
   loadOfflineSession,
@@ -37,7 +38,7 @@ export const Route = createFileRoute("/flashcards")({
   component: FlashcardsPage,
 });
 
-type Card = { id: string; hanzi: string; pinyin: string; meaning: string; category: string; semester: number; card_type?: string };
+type Card = { id: string; hanzi: string; pinyin: string; meaning: string; category: string; semester: number; card_type?: string; is_active?: boolean };
 const TYPE_OPTS = [{ k: "phrase", l: "Frases" }, { k: "word", l: "Ideogramas" }, { k: "radical", l: "Radicais" }];
 type Progress = Record<string, { correct: number; wrong: number }>;
 
@@ -155,7 +156,7 @@ function FlashcardsPage() {
 
       if (errorsMode) {
         // Build session from cards with most wrongs (top 20, min 1 wrong)
-        const ranked = c
+        const ranked = activeStudyCards(c)
           .map((card) => ({ card, wrong: p[card.id]?.wrong ?? 0 }))
           .filter((x) => x.wrong > 0)
           .sort((a, b) => b.wrong - a.wrong)
@@ -169,11 +170,10 @@ function FlashcardsPage() {
         setQueue(ranked);
         setIdx(0);
       } else {
-        const cardIds = new Set(c.map((x) => x.id));
-        const savedQueue = (stateData?.queue ?? []).filter((id: string) => cardIds.has(id));
+        const savedQueue = stateData?.queue ?? [];
         const savedIdx = Math.min(stateData?.current_index ?? 0, savedQueue.length);
 
-        if (savedQueue.length === c.length && savedQueue.length > 0) {
+        if (canResumeStudyQueue(c, savedQueue)) {
           setQueue(savedQueue);
           setIdx(savedIdx > 0 ? savedIdx : 0);
 
@@ -186,7 +186,7 @@ function FlashcardsPage() {
             setScore(restored);
           }
         } else {
-          const fresh = buildSession(c);
+          const fresh = buildSession(activeStudyCards(c));
           setQueue(fresh);
           setIdx(0);
           await supabase.from("flashcard_session_state").upsert(
@@ -324,7 +324,7 @@ function FlashcardsPage() {
       navigate({ to: "/flashcards", search: { mode: undefined, sem } });
       return;
     }
-    const fresh = buildSession(cards);
+    const fresh = buildSession(activeStudyCards(cards));
     setQueue(fresh);
     setIdx(0);
     scoreRef.current = { correct: 0, wrong: 0 };

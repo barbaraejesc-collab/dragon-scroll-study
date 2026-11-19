@@ -45,7 +45,7 @@ function VocabularioPage() {
     if (!user) return;
     (async () => {
       const [{ data: cardsData }, { data: progressData }] = await Promise.all([
-        supabase.from("cards").select("*").order("category"),
+        supabase.from("cards").select("*").eq("is_active", true).order("category"),
         supabase.from("card_progress").select("card_id,correct_count,wrong_count").eq("user_id", user.id),
       ]);
       setCards(cardsData ?? []);

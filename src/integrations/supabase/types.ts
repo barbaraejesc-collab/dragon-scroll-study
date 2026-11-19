@@ -59,6 +59,7 @@ export type Database = {
           created_at: string
           hanzi: string
           id: string
+          is_active: boolean
           meaning: string
           pinyin: string
           semester: number
@@ -69,6 +70,7 @@ export type Database = {
           created_at?: string
           hanzi: string
           id?: string
+          is_active?: boolean
           meaning: string
           pinyin: string
           semester?: number
@@ -79,6 +81,7 @@ export type Database = {
           created_at?: string
           hanzi?: string
           id?: string
+          is_active?: boolean
           meaning?: string
           pinyin?: string
           semester?: number

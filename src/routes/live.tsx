@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Play, Pause, SkipForward, Square, ArrowLeft, RotateCw, Volume2, VolumeX, WifiOff } from "lucide-react";
 import { speakZh, unlockTts, prefetchSession, getTtsVolume, setTtsVolume } from "@/lib/tts";
 import { isOnline, loadOfflineSession, saveOfflineIndex, saveOfflineSession } from "@/lib/offline";
+import { activeStudyCards, canResumeStudyQueue } from "@/lib/study-deck";
 
 export const Route = createFileRoute("/live")({
   head: () => ({
@@ -21,7 +22,7 @@ export const Route = createFileRoute("/live")({
   component: LivePage,
 });
 
-type Card = { id: string; hanzi: string; pinyin: string; meaning: string; semester: number };
+type Card = { id: string; hanzi: string; pinyin: string; meaning: string; semester: number; is_active?: boolean };
 type SemChoice = "all" | 1 | 2;
 
 const SPEEDS = [10, 15, 30] as const;
@@ -138,7 +139,7 @@ function LivePage() {
 
       if (!failed) {
         try {
-          const query = supabase.from("cards").select("id,hanzi,pinyin,meaning,semester");
+          const query = supabase.from("cards").select("id,hanzi,pinyin,meaning,semester,is_active");
           const [cardsRes, stateRes] = await Promise.all([
             semester === "all" ? query : query.eq("semester", semester),
             user
@@ -179,16 +180,16 @@ function LivePage() {
       if (all.length === 0) return;
 
       const byId = new Map(all.map((c) => [c.id, c]));
-      const savedQueue = (state?.queue ?? []).filter((id: string) => byId.has(id));
+      const savedQueue = state?.queue ?? [];
       const savedIdx = state?.current_index ?? 0;
 
       let cards: Card[];
       let startIdx = 0;
-      if (!forceFresh && savedQueue.length === all.length && savedIdx > 0 && savedIdx < all.length) {
-        cards = savedQueue.map((id: string) => byId.get(id)!);
+      if (!forceFresh && canResumeStudyQueue(all, savedQueue) && savedIdx >= 0 && savedIdx < savedQueue.length) {
+        cards = savedQueue.flatMap((id: string) => { const card = byId.get(id); return card ? [card] : []; });
         startIdx = savedIdx;
       } else {
-        cards = shuffle(all);
+        cards = shuffle(activeStudyCards(all));
         void persist(cards.map((c) => c.id), 0);
       }
 

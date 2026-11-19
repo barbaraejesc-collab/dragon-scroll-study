@@ -49,7 +49,7 @@ function QuizPage() {
   useEffect(() => {
     if (!user) return;
     (async () => {
-      const { data } = await supabase.from("cards").select("*");
+      const { data } = await supabase.from("cards").select("*").eq("is_active", true);
       const c = data ?? [];
       setCards(c);
       setQuestions(shuffle(c).slice(0, Math.min(QUIZ_SIZE, c.length)));
